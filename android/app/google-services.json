@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "368002028471",
+    "project_id": "enviablerider",
+    "storage_bucket": "enviablerider.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368002028471:android:e22ba31f064c16cb878e32",
+        "android_client_info": {
+          "package_name": "com.enviablerider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "368002028471-o336hpaf55htvvsvkcor85njvbpshau8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfGAEU2-6mYkLCMt_4JKtvmL1gUld6hFo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "368002028471-o336hpaf55htvvsvkcor85njvbpshau8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
