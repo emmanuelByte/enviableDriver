@@ -148,7 +148,7 @@ export class Login extends Component {
                   if(res.user.role == "vendor"){
                     this.props.navigation.navigate('CompanyHome')
                   }else{
-                    if(res.user.vehicle_type_id == 13){
+                    if(res.user.vehicle_type_id == 13 || res.user.vehicle_type_id == 14 || res.user.vehicle_type_id == 15){
                       this.props.navigation.navigate('RideShareHome')
                     }else{
                     //this.props.navigation.navigate('Home')

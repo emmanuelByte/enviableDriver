@@ -31,7 +31,7 @@ export class Initial extends Component {
         }, ()=>{
           this.savePush(token);
           if(user.role == "rider"){
-            if(user.vehicle_type_id == 13){
+            if(user.vehicle_type_id == 13 || user.vehicle_type_id == 14 || user.vehicle_type_id == 15){
               this.props.navigation.navigate('RideShareHome')
             }else{
             //this.props.navigation.navigate('Home')

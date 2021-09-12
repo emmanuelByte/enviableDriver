@@ -332,7 +332,7 @@ export class Register extends Component {
             }, ()=> {
               AsyncStorage.setItem('user', JSON.stringify(res.user)).then(() => {
                 AsyncStorage.setItem('loginvalue', this.state.email).then(() => {
-                  if(res.user.vehicle_type_id == 13){
+                  if(res.user.vehicle_type_id == 13 || res.user.vehicle_type_id == 14 || res.user.vehicle_type_id == 15){
                     this.props.navigation.navigate('RideShareHome')
                   }else{
                   //this.props.navigation.push('Home')
