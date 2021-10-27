@@ -6,6 +6,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Modal from 'react-native-modal';
 import { SERVER_URL } from './config/server';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
+import TimeAgo from 'react-native-timeago';
 navigator.geolocation = require('@react-native-community/geolocation');
 
 const zeroPad = (num, places) => String(num).padStart(places, '0')
@@ -104,11 +105,13 @@ export class RideShareHome extends Component {
 
   getAvailableOrders(){
     this.showLoader();
-    fetch(`${SERVER_URL}/mobile/get_available_ride_share_orders/${this.state.user.vehicle_type_id}/${this.state.user.id}`, {
+    console.log(`${SERVER_URL}/mobile/order_within_driver_scope/${this.state.user.vehicle_type_id}/${this.state.user.id}`)
+    fetch(`${SERVER_URL}/mobile/order_within_driver_scope/${this.state.user.vehicle_type_id}/${this.state.user.id}`, {
       method: 'GET'
    })
    .then((response) => response.json())
    .then((res) => {
+     console.log(res.success,`${SERVER_URL}/mobile/get_available_ride_share_orders/${this.state.user.vehicle_type_id}/${this.state.user.id}`, "fyguhijol")
      this.hideLoader()
      if(res.success){
           this.setState({
@@ -123,7 +126,7 @@ export class RideShareHome extends Component {
    .catch((error) => {this.hideLoader();
       console.error(error);
       Alert.alert(
-       "Communictaion error",
+       "Communictaion1 error",
        "Ensure you have an active internet connection",
        [
          {
@@ -164,17 +167,19 @@ export class RideShareHome extends Component {
            this.setState({
               user: res.user
             }, ()=> {
-              if(res.user.online_status == "Online"){
+              if(res.user.online_status == "Online" || res.user.online_status == "Busy"){
                 this.setState({
                   onlineStatus: true
                 }, ()=>{
                   this.getAvailableOrders();
                 })
-              }else{
+              }
+              
+              else{
                 this.setState({
                   onlineStatus: false
                 }, ()=>{
-                  this.showAlert("Info", "You are presently offline. You will not be able to see new request")
+                  this.showAlert("Info", "You are presently offline. You will not be able to see new request");
                 })
               }
               if(this.state.user.riders_license == null){
@@ -413,24 +418,36 @@ export class RideShareHome extends Component {
     });
   }
 
+
+  viewDetails(order){
+    this.props.navigation.push('RideOrderDetails', {
+            orderId: order.id,
+    })
+  }
+
   accept(order){
     this.showLoader();
+    console.log(`${SERVER_URL}/mobile/rider_accept_ride_share/${order.id}/${this.state.user.id}`, "hfsnmkx");
     fetch(`${SERVER_URL}/mobile/rider_accept_ride_share/${order.id}/${this.state.user.id}`, {
       method: 'GET'
    })
-   .then((response) => response.json())
+   .then((response) =>{
+    // console.log(response.text()) 
+    return response.json()
+  })
    .then((res) => {
      
        console.log(res, "orders");
        this.hideLoader();
        if(res.success){
-         this.showAlert("Success", res.success);
+          this.showAlert("Success", res.success);
           this.gotoOrderDetails(order);
        }else{
          Alert.alert('Error', res.error);
        }
    })
-   .catch((error) => {this.hideLoader();
+   .catch((error) => {
+      this.hideLoader();
       console.error(error);
       this.showAlert("Error", "An unexpected error occured")
     });
@@ -458,9 +475,14 @@ export class RideShareHome extends Component {
       return(
         <Text style={{marginTop: 5, marginRight: 50,}}>Online</Text>
       )
-    }else {
+    }else if(this.state.user && this.state.user.online_status == "Offline") {
       return(
         <Text style={{marginTop: 5, marginRight: 50,}}>Offline</Text>
+      )
+    }
+    else {
+     return (
+        <Text style={{marginTop: 5, marginRight: 50,}}>Busy</Text>
       )
     }
   }
@@ -479,6 +501,7 @@ export class RideShareHome extends Component {
     }else{
       var newStatus = "Online";
     }
+    // if(status == 'Offline')
     
     this.showLoader();
     fetch(`${SERVER_URL}/mobile/rider/status/${this.state.user.id}/${newStatus}`, {
@@ -579,10 +602,13 @@ export class RideShareHome extends Component {
                 {this.state.orders &&
                    this.displayNoData()
                 }
-                {this.state.displayOrders && this.state.displayOrders.map((displayOrder, index) => (
+                {console.log(this.state.displayOrders, 'orders')}
+          
+                {this.state.displayOrders  && this.state.displayOrders.map((displayOrder, index) => (
                 <View  style = {styles.card} key={index} >
                   <View  style = {styles.cardRow}>
                     <View  style = {styles.col1}>
+                     <Text style={{fontSize:10, textTransform:'capitalize', color:index == 0? "red":""}}> <TimeAgo time={displayOrder.created_at} /> {index == 0?' (very recent)': null}</Text>
                       <Text style={styles.tHead}>New request</Text>
                       <Text style={styles.tText}>#{zeroPad(displayOrder.id, 6)} </Text>
                       <Text style={styles.tHead}>Pick up</Text>
@@ -600,6 +626,12 @@ export class RideShareHome extends Component {
                     <TouchableWithoutFeedback style={styles.addView} onPress={() => this.accept(displayOrder) }>
                       <LinearGradient start={{x: 0, y: 0}} end={{x:1, y: 0}}  colors={['#0B277F', '#0B277F']} style={styles.addGradient}>
                         <Text style={styles.addText}>Accept</Text>
+                      </LinearGradient>
+                    </TouchableWithoutFeedback>
+
+                    <TouchableWithoutFeedback style={[styles.addView, {backgroundColor:'grey'}]} onPress={() => this.viewDetails(displayOrder) }>
+                      <LinearGradient start={{x: 0, y: 0}} end={{x:1, y: 0}}  colors={['white', 'grey']} style={styles.addGradient}>
+                        <Text style={styles.addText2}>View Details</Text>
                       </LinearGradient>
                     </TouchableWithoutFeedback>
                   {/*</View>*/}
@@ -842,6 +874,11 @@ const styles = StyleSheet.create ({
     textAlign: 'center',
     fontSize: 16,
     color: '#fff',
+  },
+  addText2: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: '#0B277F',
   },
   addView: {
     width: '90%',

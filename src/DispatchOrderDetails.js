@@ -585,7 +585,9 @@ payWithCard(){
       <View style = {styles.body}>
         <StatusBar translucent={true}  backgroundColor={'#0B277F'}  />
         <LinearGradient start={{x: 0, y: 0}} end={{x:0, y: 1}}  colors={['#0B277F', '#0B277F']} style={styles.header}>
-        <TouchableOpacity  onPress={() => this.props.navigation.navigate('ActiveOrders') }>
+        {/* <TouchableOpacity  onPress={() => this.props.navigation.navigate('ActiveOrders') }> */}
+        <TouchableOpacity  onPress={() => this.props.navigation.pop() }>
+
         <Icon name="arrow-back" size={18} color="#fff"  style = {styles.menuImage}/>
         </TouchableOpacity>
           <Text style = {styles.headerText}>Dispatch summary</Text>

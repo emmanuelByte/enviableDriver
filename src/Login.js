@@ -161,7 +161,10 @@ export class Login extends Component {
             }else{
               this.showAlert("Error", res.error)
             }
-    }).done();
+    })
+    .catch(error=>{
+      console.log(error, 'error');
+    });
   }
 
   forgot(){
