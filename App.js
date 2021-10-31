@@ -182,7 +182,7 @@ export default class App extends Component {
       })
     }).then((response) => response.json())
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           if(res.success){
             // alert( origin_latitude+" "+origin_longitude);
 
