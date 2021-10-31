@@ -295,6 +295,7 @@ export class Home extends Component {
       );
       that.watchID = navigator.geolocation.watchPosition((position) => {
         //Will give you the location on location change
+        // alert("jidm")
           const currentLongitude = position.coords.longitude;
           const currentLatitude = position.coords.latitude;
           
@@ -458,9 +459,14 @@ export class Home extends Component {
       return(
         <Text style={{marginTop: 5, marginRight: 50,}}>Online</Text>
       )
-    }else {
+    }else if(this.state.user && this.state.user.online_status == "Offline") {
       return(
         <Text style={{marginTop: 5, marginRight: 50,}}>Offline</Text>
+      )
+    }
+    else {
+     return (
+        <Text style={{marginTop: 5, marginRight: 50,}}>Busy</Text>
       )
     }
   }

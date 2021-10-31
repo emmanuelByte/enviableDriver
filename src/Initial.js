@@ -70,6 +70,7 @@ export class Initial extends Component {
       importance: "max",
       vibrate: true,
       onRegister: (token) => {
+        console.log(token, "TOEKN REFRHED")
         AsyncStorage.setItem('pushToken', token.token, () => {
           this.getLoggedInUser(token.token); 
         })
@@ -83,7 +84,8 @@ export class Initial extends Component {
         console.error(err.message, err);
       },
   
-      senderID: "368002028471",
+      // senderID: "368002028471",
+      senderID:"315359821673",
   
       permissions: {
           alert: true,
@@ -95,7 +97,7 @@ export class Initial extends Component {
       requestPermissions: true,
     });
 
-    this.getLoggedInUser();    
+    // this.getLoggedInUser();    
   }
   _onRemoteNotification(notification) {
    
@@ -129,33 +131,34 @@ export class Initial extends Component {
           //   onPress: () => console.log("Cancel Pressed"),
           //   style: "cancel"
           // },
-          //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+          { text: "Close", onPress: () => this.props.navigation.navigate('ActiveOrders', {reload:true}) },
           { text: "Check order", onPress: () => this.props.navigation.push('DispatchOrderDetails', {
             orderId: JSON.parse(notification.data.message).orderId ,
           })
          }
         ],
-        //{ cancelable: false }
+        // { cancelable: true }
       );
     } 
     if(JSON.parse(notification.data.message).myId == "ride_share"){
-      Alert.alert(
-        JSON.parse(notification.data.message).title,
-        JSON.parse(notification.data.message).body,
-        [
-          // {
-          //   text: "Stay here",
-          //   onPress: () => console.log("Cancel Pressed"),
-          //   style: "cancel"
-          // },
-          //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
-          { text: "Check order", onPress: () => this.props.navigation.push('RideOrderDetails', {
-            orderId: JSON.parse(notification.data.message).orderId ,
-          })
-         }
-        ],
-        //{ cancelable: false }
-      );
+      // Alert.alert(
+      //   JSON.parse(notification.data.message).title,
+      //   JSON.parse(notification.data.message).body,
+      //   [
+      //     // {
+      //     //   text: "Stay here",
+      //     //   onPress: () => console.log("Cancel Pressed"),
+      //     //   style: "cancel"
+      //     // },
+      //     //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+      //     { text: "Check order", onPress: () => this.props.navigation.push('RideOrderDetails', {
+      //       orderId: JSON.parse(notification.data.message).orderId ,
+      //     })
+      //    }
+      //   ],
+      //   //{ cancelable: false }
+      // );
+      this.props.navigation.push('RideShareHome')
     } 
     try {
         // play the file tone.mp3
@@ -167,6 +170,7 @@ export class Initial extends Component {
 
   }
   savePush(token){
+    console.log(token,'123ERGJDKDFDFSFS');
     fetch(`${SERVER_URL}/mobile/save_push_token`, {
       method: 'POST',
       headers: {

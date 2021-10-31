@@ -49,6 +49,32 @@ export class ActiveOrders extends Component {
     await this.getLoggedInUser();
   }
 
+
+//   static getDerivedStateFromProps(nextProp, prevState){
+  
+//     if(nextProp.navigation.state.params && nextProp.navigation.state.params.reload == true ){
+//       // return true;
+//       alert("it works")
+//       // console.log("this works")
+//       // this.getActiveOrders();
+//       return null;
+
+//     }
+//     return null
+//  }
+ 
+componentWillReceiveProps(nextProp){
+
+    if(nextProp.navigation.state.params && nextProp.navigation.state.params.reload == true ){
+      // return true;
+      // alert("it works")
+      // console.log("this works")
+      this.getActiveOrders();
+      return null;
+
+    }
+}
+
   handleBackPress = () => {
     Alert.alert(
       "Confirm exit",
@@ -91,17 +117,18 @@ export class ActiveOrders extends Component {
 
   getActiveOrders(){
     this.showLoader();
-    console.log(this.state.user.id);
-    fetch(`${SERVER_URL}/mobile/get_active_orders/${this.state.user.id}`, {
+    console.log(this.state.user.vehicle_type_id, 'user vehicle ID');
+    fetch(`${SERVER_URL}/mobile/get_available_orders/${this.state.user.vehicle_type_id}/${this.state.user.id}`, {
       method: 'GET'
    })
    .then((response) => response.json())
    .then((res) => {
+     console.log(res, "response is importNTRNt")
      this.hideLoader();
      if(res.success){
           this.setState({
-            orders:  res.active_orders,
-            displayOrders: res.active_orders,
+            orders:  res.available_orders,
+            displayOrders: res.available_orders,
           });
        }else{
          Alert.alert('Error', res.error);

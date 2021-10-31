@@ -386,10 +386,10 @@ export class RegisterType extends Component {
                 <Text style = {styles.tText}>This category is best for people with only one vehicle.</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style = {styles.card2} onPress={() => this.props.navigation.navigate('RegisterCompany')}>
+              {/* <TouchableOpacity style = {styles.card2} onPress={() => this.props.navigation.navigate('RegisterCompany')}>
                 <Text style = {styles.hText2}>Fleet</Text>
-                <Text style = {styles.tText2}> This category is best for people with more than one vehicle.</Text>
-              </TouchableOpacity>
+                <Text style = {styles.tText2}>  is best for people with more than one vehicle.</Text>
+              </TouchableOpacity> */}
             
             </View>
 
