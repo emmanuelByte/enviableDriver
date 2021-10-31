@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, Dimensions } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import { Button, Platform, StyleSheet, Text, View, TouchableOpacity,AsyncStorage } from 'react-native';
+import { Button, Platform, StyleSheet, Text, View, TouchableOpacity,PermissionsAndroid,AsyncStorage } from 'react-native';
 import {name as appName} from './app.json';
 
 import Initial from './src/Initial';
@@ -44,8 +44,11 @@ import RideOrderDetails from './src/RideOrderDetails';
 import Guarantor from './src/Guarantor';
 import Riders from './src/Riders';
 import AddRider from './src/AddRider';
+navigator.geolocation = require('@react-native-community/geolocation');
+import { SERVER_URL } from './src/config/server';
 
 console.disableYellowBox = true;
+
 
 
 const MainNavigator = createStackNavigator({
@@ -97,6 +100,100 @@ const MainNavigator = createStackNavigator({
 const AppContainer = createAppContainer(MainNavigator);
 
 export default class App extends Component {
+  
+  state ={
+    id:null,
+  }
+  constructor(props){
+    super(props);
+    
+  }
+   getLocation(){
+    //this.showLoader();
+    var that =this;
+    //Checking for the permission just after component loaded
+    if(Platform.OS === 'ios'){
+      this.callLocation(that);
+    }else{
+        async function requestLocationPermission() {
+
+          try {
+            const granted = await PermissionsAndroid.request(
+              PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,{
+                'title': 'Location Access Required',
+                'message': 'This App needs to Access your location'
+              }
+            )
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+              //To Check, If Permission is granted
+              that.callLocation(that);
+            } else {
+              alert("Permission Denied");
+            }
+          } catch (err) {
+            alert("err",err);
+            console.log(err)
+          }
+        }
+        requestLocationPermission();
+      }
+    }
+  
+     callLocation(that){
+ 
+
+      navigator.geolocation.watchPosition(async (position) => {
+        //Will give you the location on location change
+
+        var currentLongitude = position.coords.longitude;
+          var currentLatitude = position.coords.latitude;
+          // alert("sack", currentLongitude) ;
+         await this.getLoggedInUser();
+         await this.saveLocation(currentLatitude, currentLongitude)
+      });
+      
+   }
+  
+  
+   async getLoggedInUser(){
+    await AsyncStorage.getItem('user').then((value) => {
+      if(value){
+        // alert("seen");
+        // console.log(JSON.parse(value).id, 'seen');
+        this.setState({id:JSON.parse(value).id})
+      }else{
+        // alert("not seen")
+      }
+    });
+  }
+
+     saveLocation(origin_latitude, origin_longitude){
+
+    fetch(`${SERVER_URL}/mobile/save_rider_location`, {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          latitude: origin_latitude,
+          longitude: origin_longitude,
+          user_id: this.state.id, 
+      })
+    }).then((response) => response.json())
+        .then((res) => {
+          console.log(res)
+          if(res.success){
+            // alert( origin_latitude+" "+origin_longitude);
+
+          }else{
+            
+          }
+  }).done();
+  }
+  componentDidMount(){
+    this.getLocation()
+  }
   render () {
     return (
         /*<Provider store={store}>*/

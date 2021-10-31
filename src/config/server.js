@@ -5,5 +5,5 @@ module.exports = {
        //'http://mobileapp.errand360.ng'
        //'http://192.168.43.36/errand360',
        //'http://192.168.10.101/rickreen',
-       'https://api-dev.ets.com.ng'
+       'https://api.ets.com.ng'
 };

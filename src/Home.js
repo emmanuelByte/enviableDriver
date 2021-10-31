@@ -295,6 +295,7 @@ export class Home extends Component {
       );
       that.watchID = navigator.geolocation.watchPosition((position) => {
         //Will give you the location on location change
+        // alert("jidm")
           const currentLongitude = position.coords.longitude;
           const currentLatitude = position.coords.latitude;
           
