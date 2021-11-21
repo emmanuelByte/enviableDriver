@@ -400,11 +400,9 @@ export class Register extends Component {
     });
   }
   prepareImage(){
-    if(
-      !this.state.image ||
+    if(!this.state.image ||
     this.state.firstName == "" || this.state.lastName == "" || this.state.phone == "" ||
-    this.state.email == "" || this.state.password == "" || this.state.cityId == "" 
-    ){
+    this.state.email == "" || this.state.password == "" || this.state.cityId == ""){
       this.showAlert("info", "All fields are compulsory. Also ensure you upload a valid profile photo");
       return;
     }
