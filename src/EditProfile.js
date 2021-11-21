@@ -486,10 +486,11 @@ export class EditProfile extends Component {
                                 placeholder="Email"
                                 onChangeText={(text) => this.setState({email: text})}
                                 underlineColorAndroid="transparent"
-                                placeholderTextColor="#ccc" 
+                                placeholderTextColor="#ccc"
                                 value={this.state.email}
                                 keyboardType={'email-address'}
                                 autoCapitalize = "none"
+                                editable={false}
                               />
               <Text style = {styles.label}>Bank</Text>
               <View style={styles.input}>

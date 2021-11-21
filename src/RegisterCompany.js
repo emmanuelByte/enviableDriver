@@ -363,6 +363,9 @@ export class RegisterCompany extends Component {
   }
 
   prepareImage(){
+
+   
+
     if(
     this.state.companyName == "" ||
     this.state.firstName == "" || this.state.lastName == "" || this.state.phone == "" ||
@@ -372,6 +375,10 @@ export class RegisterCompany extends Component {
       return;
     }
     
+    if (/@ets.com.ng\s*$/.test(this.state.email) != true) {
+      this.showAlert("info", "Only @ets.com.ng emails are allowed");
+      return;
+   }
     const data = new FormData();
 
     data.append("companyName", this.state.companyName);

@@ -335,8 +335,9 @@ export class Register extends Component {
                   if(res.user.vehicle_type_id == 13 || res.user.vehicle_type_id == 14 || res.user.vehicle_type_id == 15){
                     this.props.navigation.navigate('RideShareHome')
                   }else{
-                  //this.props.navigation.push('Home')
-                  this.props.navigation.navigate('ActiveOrders')
+                    // alert('fgcv')
+                  this.props.navigation.push('Home');
+                  // this.props.navigation.navigate('ActiveOrders')
                   }
                 });
               });
