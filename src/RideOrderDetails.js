@@ -1,5 +1,5 @@
 import React, { Component  } from 'react';
-import { AppState, View, PermissionsAndroid, Linking,  Text, Alert, Image, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
+import { AppState, View, PermissionsAndroid, Linking,  Text, Alert, Picker, Image, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import LinearGradient from 'react-native-linear-gradient';
 import Modal from 'react-native-modal';
@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps'; 
 navigator.geolocation = require('@react-native-community/geolocation');
 import MapViewDirections from 'react-native-maps-directions';
-import {Picker} from '@react-native-picker/picker';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { showLocation } from 'react-native-map-link';
 
 import { SERVER_URL } from './config/server';

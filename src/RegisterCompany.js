@@ -1,5 +1,5 @@
 import React, { Component  } from 'react';
-import { AppState, View, Text, Alert, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
+import { AppState, View, Text, Alert, Image, Platform, PermissionsAndroid, Picker, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -7,8 +7,7 @@ import Modal from 'react-native-modal';
 import { SERVER_URL } from './config/server';
 import ModalFilterPicker from 'react-native-modal-filter-picker';
 import ImagePicker from 'react-native-image-crop-picker';
-import {Picker} from '@react-native-picker/picker'
-
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 navigator.geolocation = require('@react-native-community/geolocation');
 
 export class RegisterCompany extends Component {
@@ -364,6 +363,9 @@ export class RegisterCompany extends Component {
   }
 
   prepareImage(){
+
+   
+
     if(
     this.state.companyName == "" ||
     this.state.firstName == "" || this.state.lastName == "" || this.state.phone == "" ||
@@ -373,6 +375,10 @@ export class RegisterCompany extends Component {
       return;
     }
     
+    if (/@ets.com.ng\s*$/.test(this.state.email) != true) {
+      this.showAlert("info", "Only @ets.com.ng emails are allowed");
+      return;
+   }
     const data = new FormData();
 
     data.append("companyName", this.state.companyName);

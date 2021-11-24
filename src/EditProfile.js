@@ -1,5 +1,9 @@
 import React, { Component  } from 'react';
+<<<<<<< HEAD
 import { AppState, View, Text, Alert, Image, Platform, TextInput, extInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
+=======
+import { AppState, View, Text, Alert, Image, Platform, PermissionsAndroid, Picker, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
+>>>>>>> d39fcbc9e4729d66cee47ac141eb52afc5cfcb70
 import {NavigationActions} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -7,9 +11,12 @@ import Modal from 'react-native-modal';
 import { SERVER_URL } from './config/server';
 import ModalFilterPicker from 'react-native-modal-filter-picker';
 import ImagePicker from 'react-native-image-crop-picker';
+<<<<<<< HEAD
 import {Picker} from '@react-native-picker/picker';
 import RNPicker from 'react-native-picker-select'
 
+=======
+>>>>>>> d39fcbc9e4729d66cee47ac141eb52afc5cfcb70
 
 export class EditProfile extends Component {
   constructor(props) {
@@ -489,6 +496,7 @@ export class EditProfile extends Component {
                                 placeholder="Email"
                                 onChangeText={(text) => this.setState({email: text})}
                                 underlineColorAndroid="transparent"
+<<<<<<< HEAD
                                 placeholderTextColor="#ccc" 
                                 value={this.state.email}
                                 keyboardType={'email-address'}
@@ -510,6 +518,29 @@ export class EditProfile extends Component {
 
               <Text style = {styles.label}>Account type</Text>
               {/* <View style={styles.input}>
+=======
+                                placeholderTextColor="#ccc"
+                                value={this.state.email}
+                                keyboardType={'email-address'}
+                                autoCapitalize = "none"
+                                editable={false}
+                              />
+              <Text style = {styles.label}>Bank</Text>
+              <View style={styles.input}>
+                <Picker
+                  //selectedValue={selectedValue}
+                  selectedValue={this.state.bankName}  
+                  style={styles.input5}
+                  onValueChange={(itemValue, itemIndex) => this.setBankSelectValue(itemValue)}
+                >
+                  {this.state.banks && this.state.banks.map(bank => (
+                <Picker.Item label={bank.name} value={bank.name} />
+                ))}
+                </Picker>
+              </View>
+              <Text style = {styles.label}>Account type</Text>
+              <View style={styles.input}>
+>>>>>>> d39fcbc9e4729d66cee47ac141eb52afc5cfcb70
                 <Picker
                   //selectedValue={selectedValue}
                   selectedValue={this.state.bankAccountType}  
@@ -520,6 +551,7 @@ export class EditProfile extends Component {
                   <Picker.Item label="Savings" value="Savings" />
                   
                 </Picker>
+<<<<<<< HEAD
               </View> */}
 
 <RNPicker
@@ -538,6 +570,9 @@ export class EditProfile extends Component {
         ]}          
         returnKeyType={'done'}
         />
+=======
+              </View>
+>>>>>>> d39fcbc9e4729d66cee47ac141eb52afc5cfcb70
               <Text style = {styles.label}>Account name.</Text>
               <TextInput
                                 style={styles.input}

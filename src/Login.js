@@ -135,11 +135,7 @@ export class Login extends Component {
             push_token: this.state.token,
             device: 'Android'
         })
-      })
-      .then((response) =>{ 
-        // console.log(response.text());
-        return response.json()
-      } )
+      }).then((response) => response.json())
           .then((res) => {
             this.hideLoader();
             console.log(res, 'ss')
