@@ -377,7 +377,7 @@ PODS:
   - RNVectorIcons (7.1.0):
     - React
   - TOCropViewController (2.6.0)
-  - toolbar-android (0.1.0-rc.2):
+  - toolbar-android (0.2.1):
     - React
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -629,7 +629,7 @@ SPEC CHECKSUMS:
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   RNVectorIcons: bc69e6a278b14842063605de32bec61f0b251a59
   TOCropViewController: 3105367e808b7d3d886a74ff59bf4804e7d3ab38
-  toolbar-android: 404f4450b203597e7b417f714ff417bed562a1be
+  toolbar-android: 7c528a58a3d79f03124cbb370f738280bf1114a6
   Yoga: 9a08effa851c1d8cc1647691895540bc168ea65f
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
