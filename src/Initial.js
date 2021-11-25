@@ -13,19 +13,12 @@ export class Initial extends Component {
     this.state = {
       user: false,
     }
-<<<<<<< HEAD
-=======
-    this.init();
->>>>>>> d39fcbc9e4729d66cee47ac141eb52afc5cfcb70
   }
 
   async componentDidMount() {
     //this.getLoggedInUser();
-<<<<<<< HEAD
     await this.init();
 
-=======
->>>>>>> d39fcbc9e4729d66cee47ac141eb52afc5cfcb70
   }
   
   async getLoggedInUser(token){
@@ -49,18 +42,7 @@ export class Initial extends Component {
             this.props.navigation.navigate('CompanyHome')
           }
         });
-<<<<<<< HEAD
        
-=======
-        // this.setState({
-        //   customer: JSON.parse(value)
-        // }, () => {
-        //   this.setState({
-        //     customer_id: this.state.customer.id
-        //   })
-        // });
-          
->>>>>>> d39fcbc9e4729d66cee47ac141eb52afc5cfcb70
       }else{
         AsyncStorage.getItem('loginvalue').then((value) => {
           if(value){
@@ -73,10 +55,7 @@ export class Initial extends Component {
     });
   }
   async init() {
-<<<<<<< HEAD
     // alert('init');
-=======
->>>>>>> d39fcbc9e4729d66cee47ac141eb52afc5cfcb70
     await PushNotification.configure({
       largeIcon: "ic_notification",
       smallIcon: "ic_notification",
@@ -113,11 +92,7 @@ export class Initial extends Component {
       requestPermissions: true,
     });
 
-<<<<<<< HEAD
     this.getLoggedInUser();    
-=======
-    // this.getLoggedInUser();    
->>>>>>> d39fcbc9e4729d66cee47ac141eb52afc5cfcb70
   }
   _onRemoteNotification(notification) {
    
@@ -161,27 +136,7 @@ export class Initial extends Component {
       );
     } 
     if(JSON.parse(notification.data.message).myId == "ride_share"){
-<<<<<<< HEAD
      
-=======
-      // Alert.alert(
-      //   JSON.parse(notification.data.message).title,
-      //   JSON.parse(notification.data.message).body,
-      //   [
-      //     // {
-      //     //   text: "Stay here",
-      //     //   onPress: () => console.log("Cancel Pressed"),
-      //     //   style: "cancel"
-      //     // },
-      //     //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
-      //     { text: "Check order", onPress: () => this.props.navigation.push('RideOrderDetails', {
-      //       orderId: JSON.parse(notification.data.message).orderId ,
-      //     })
-      //    }
-      //   ],
-      //   //{ cancelable: false }
-      // );
->>>>>>> d39fcbc9e4729d66cee47ac141eb52afc5cfcb70
       this.props.navigation.push('RideShareHome')
     } 
     try {
@@ -229,11 +184,7 @@ export class Initial extends Component {
   render() {
     return (
       <View>
-<<<<<<< HEAD
-        <Text>New tRY</Text>
-=======
-        
->>>>>>> d39fcbc9e4729d66cee47ac141eb52afc5cfcb70
+        {/* <Text>New tRY</Text> */}
       </View>
     )
   }
@@ -241,9 +192,3 @@ export class Initial extends Component {
 
 export default Initial
 
-<<<<<<< HEAD
-=======
-const styles = StyleSheet.create ({
-  
-})
->>>>>>> d39fcbc9e4729d66cee47ac141eb52afc5cfcb70

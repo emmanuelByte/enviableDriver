@@ -1,5 +1,5 @@
 import React, { Component  } from 'react';
-import { AppState, View, Text, Alert, Image, Platform, PermissionsAndroid, Picker, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
+import { AppState, View, Text, Alert, Image, Platform, PermissionsAndroid, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -8,6 +8,8 @@ import { SERVER_URL } from './config/server';
 import ModalFilterPicker from 'react-native-modal-filter-picker';
 import ImagePicker from 'react-native-image-crop-picker';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import RNPickerSelect from 'react-native-picker-select';
+
 navigator.geolocation = require('@react-native-community/geolocation');
 
 export class RegisterType extends Component {

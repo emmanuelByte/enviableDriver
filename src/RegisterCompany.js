@@ -1,5 +1,5 @@
 import React, { Component  } from 'react';
-import { AppState, View, Text, Alert, Image, Platform, PermissionsAndroid, Picker, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
+import { AppState, View, Text, Alert, Image, Platform, PermissionsAndroid, Picker, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage, Linking } from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -8,6 +8,9 @@ import { SERVER_URL } from './config/server';
 import ModalFilterPicker from 'react-native-modal-filter-picker';
 import ImagePicker from 'react-native-image-crop-picker';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+
+import RNPicker from 'react-native-picker-select';
+
 navigator.geolocation = require('@react-native-community/geolocation');
 
 export class RegisterCompany extends Component {
@@ -510,8 +513,8 @@ export class RegisterCompany extends Component {
                                 secureTextEntry={true} 
                               />
               <Text style = {styles.label}>Bank</Text>
-              <View style={styles.input}>
-                <Picker
+              {/* <View style={styles.input}> */}
+                {/* <Picker
                   //selectedValue={selectedValue}
                   selectedValue={this.state.bankName}  
                   style={styles.input5}
@@ -520,11 +523,22 @@ export class RegisterCompany extends Component {
                   {this.state.banks && this.state.banks.map(bank => (
                 <Picker.Item label={bank.name} value={bank.name} />
                 ))}
-                </Picker>
-              </View>
+                </Picker> */}
+                <RNPicker
+          placeholder="Bank Name"
+          value={this.state.bankName}
+          onValueChange={(itemValue, itemIndex) => this.setBankSelectValue(itemValue)}
+          style={{
+            inputIOSContainer:styles.input,
+            placeholder:{color:'black'}
+          }}  
+                    items={this.state.banks.map(bank => ( {label: bank.name, value:bank.name }))}
+          returnKeyType={'done'}
+        />
+              {/* </View> */}
               <Text style = {styles.label}>Account type</Text>
-              <View style={styles.input}>
-                <Picker
+              {/* <View style={styles.input}> */}
+                {/* <Picker
                   //selectedValue={selectedValue}
                   selectedValue={this.state.bankAccountType}  
                   style={styles.input5}
@@ -532,8 +546,25 @@ export class RegisterCompany extends Component {
                 >
                   <Picker.Item label="Savings" value="Savings" />
                   <Picker.Item label="Current" value="Current" />
-                </Picker>
-              </View>
+                </Picker> */}
+
+<RNPicker
+          placeholder="Account Type"
+          // style={{backgroundColor:'RED'}}
+          value={this.state.bankAccountType}
+          onValueChange={(itemValue, itemIndex) => {this.setTypeSelectValue(itemValue)}}
+
+          style={{
+            inputIOSContainer:styles.input,
+            placeholder:{color:'black'}
+          }}          
+          items={[
+            { label: 'Savings', value: 'Savings' },
+            { label: 'Current', value: 'Current' },
+        ]}          
+        returnKeyType={'done'}
+        />
+              {/* </View> */}
               <Text style = {styles.label}>Account name.</Text>
               <TextInput
                                 style={styles.input}
@@ -556,6 +587,7 @@ export class RegisterCompany extends Component {
                                 autoCapitalize = "none"
                               />
               <TouchableOpacity style = {styles.forgotView}  >
+                
                 <Text style = {styles.forgotText}>I agree to Enviable's <Text style = {styles.forgotText1}>Terms of Service</Text></Text>
               </TouchableOpacity>
               <TouchableOpacity  onPress={() => this.prepareImage()} style={styles.submitButton}>

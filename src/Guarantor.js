@@ -1,24 +1,12 @@
 import React, { Component  } from 'react';
-<<<<<<< HEAD
 import { AppState, View, Text, Alert, Image, Platform, PermissionsAndroid, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { SERVER_URL } from './config/server';
 import ModalFilterPicker from 'react-native-modal-filter-picker';
 import ImagePicker from 'react-native-image-crop-picker';
-import {Picker} from '@react-native-picker/picker';
+// import {Picker} from '@react-native-picker/picker';
 
-=======
-import { AppState, View, Text, Alert, Image, Platform, PermissionsAndroid, Picker, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
-import {NavigationActions} from 'react-navigation';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import LinearGradient from 'react-native-linear-gradient';
-import Modal from 'react-native-modal';
-import { SERVER_URL } from './config/server';
-import ModalFilterPicker from 'react-native-modal-filter-picker';
-import ImagePicker from 'react-native-image-crop-picker';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
->>>>>>> d39fcbc9e4729d66cee47ac141eb52afc5cfcb70
 navigator.geolocation = require('@react-native-community/geolocation');
 
 export class Guarantor extends Component {

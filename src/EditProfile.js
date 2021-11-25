@@ -1,9 +1,5 @@
 import React, { Component  } from 'react';
-<<<<<<< HEAD
 import { AppState, View, Text, Alert, Image, Platform, TextInput, extInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
-=======
-import { AppState, View, Text, Alert, Image, Platform, PermissionsAndroid, Picker, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
->>>>>>> d39fcbc9e4729d66cee47ac141eb52afc5cfcb70
 import {NavigationActions} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -11,12 +7,9 @@ import Modal from 'react-native-modal';
 import { SERVER_URL } from './config/server';
 import ModalFilterPicker from 'react-native-modal-filter-picker';
 import ImagePicker from 'react-native-image-crop-picker';
-<<<<<<< HEAD
-import {Picker} from '@react-native-picker/picker';
+// import {Picker} from '@react-native-picker/picker';
 import RNPicker from 'react-native-picker-select'
 
-=======
->>>>>>> d39fcbc9e4729d66cee47ac141eb52afc5cfcb70
 
 export class EditProfile extends Component {
   constructor(props) {
@@ -55,29 +48,29 @@ export class EditProfile extends Component {
       cities: false,
       bankAccountType: "Savings",
       banks: [
-        { id: "1", name: "Access Bank" , code:"044" },
-        { id: "2", name: "Citibank", code:"023" },
-        { id: "3", name: "Diamond Bank", code:"063" },
-        { id: "4", name: "Dynamic Standard Bank", code:"44" },
-        { id: "5", name: "Ecobank Nigeria", code:"050" },
-        { id: "6", name: "Fidelity Bank Nigeria", code:"070" },
-        { id: "7", name: "First Bank of Nigeria", code:"011" },
-        { id: "8", name: "First City Monument Bank", code:"214" },
-        { id: "9", name: "Guaranty Trust Bank", code:"058" },
-        { id: "10", name: "Heritage Bank Plc", code:"030" },
-        { id: "11", name: "Jaiz Bank", code:"301" },
-        { id: "12", name: "Keystone Bank Limited", code:"082" },
-        { id: "13", name: "Providus Bank Plc", code:"101" },
-        { id: "14", name: "Polaris Bank", code:"076" },
-        { id: "15", name: "Stanbic IBTC Bank Nigeria Limited", code:"221" },
-        { id: "16", name: "Standard Chartered Bank", code:"068" },
-        { id: "17", name: "Sterling Bank", code:"232" },
-        { id: "18", name: "Suntrust Bank Nigeria Limited", code:"100" },
-        { id: "19", name: "Union Bank of Nigeria", code:"032" },
-        { id: "20", name: "United Bank for Africa", code:"033" },
-        { id: "21", name: "Unity Bank Plc", code:"215" },
-        { id: "22", name: "Wema Bank", code:"035" },
-        { id: "23", name: "Zenith Bank", code:"057" }
+        { id: "1", value: "Access Bank", label: "Access Bank" , code:"044" },
+        { id: "2", value:"Citibank", label: "Citibank", code:"023" },
+        { id: "3", value:"Diamond Bank", label: "Diamond Bank", code:"063" },
+        { id: "4", value:"Dynamic Standard Bank", label: "Dynamic Standard Bank", code:"44" },
+        { id: "5", value:"Ecobank Nigeria", label: "Ecobank Nigeria", code:"050" },
+        { id: "6", value:"Fidelity Bank Nigeria",label: "Fidelity Bank Nigeria", code:"070" },
+        { id: "7", value:'First Bank of Nigeria', label: "First Bank of Nigeria", code:"011" },
+        { id: "8", value:'First City Monument Bank', label: "First City Monument Bank", code:"214" },
+        { id: "9", value:"Guaranty Trust Bank", label: "Guaranty Trust Bank", code:"058" },
+        { id: "10", value:"Heritage Bank Plc",label: "Heritage Bank Plc", code:"030" },
+        { id: "11", value:'Jaiz Bank',label: "Jaiz Bank", code:"301" },
+        { id: "12", value:'Keystone Bank Limited"',label: "Keystone Bank Limited", code:"082" },
+        { id: "13", value:'Providus Bank Plc', label: "Providus Bank Plc", code:"101" },
+        { id: "14", value:'Polaris Bank', label: "Polaris Bank", code:"076" },
+        { id: "15", value:'Stanbic IBTC Bank Nigeria Limited', label: "Stanbic IBTC Bank Nigeria Limited", code:"221" },
+        { id: "16", value:'Standard Chartered Bank', label: "Standard Chartered Bank", code:"068" },
+        { id: "17", value:'Sterling Bank', label: "Sterling Bank", code:"232" },
+        { id: "18", value:'Suntrust Bank Nigeria Limited', label: "Suntrust Bank Nigeria Limited", code:"100" },
+        { id: "19", value: "Union Bank of Nigeria", label: "Union Bank of Nigeria", code:"032" },
+        { id: "20", value: "United Bank for Africa", label: "United Bank for Africa", code:"033" },
+        { id: "21", value: "Unity Bank Plc",  label: "Unity Bank Plc", code:"215" },
+        { id: "22", value: "Wema Bank", label: "Wema Bank", code:"035" },
+        { id: "23", value: "Zenith Bank", label: "Zenith Bank", code:"057" }
     ],
       bankName: '',
       accountName: '',
@@ -449,6 +442,8 @@ export class EditProfile extends Component {
                                     underlineColorAndroid="transparent"
                                     placeholderTextColor="#ccc" 
                                     value={this.state.firstName}
+
+
                                     //keyboardType={'email-address'}
                                   />
                 </View>
@@ -496,51 +491,27 @@ export class EditProfile extends Component {
                                 placeholder="Email"
                                 onChangeText={(text) => this.setState({email: text})}
                                 underlineColorAndroid="transparent"
-<<<<<<< HEAD
                                 placeholderTextColor="#ccc" 
-                                value={this.state.email}
-                                keyboardType={'email-address'}
-                                autoCapitalize = "none"
-                              />
-              <Text style = {styles.label}>Bank</Text>
-              <RNPicker
-          placeholder="Bank Name"
-          // style={{backgroundColor:'RED'}}
-          selectedValue={this.state.bankName}  
-          onValueChange={(itemValue, itemIndex) => this.setBankSelectValue(itemValue)}
-          style={{
-            inputIOSContainer:styles.input,
-            placeholder:{color:'black'}
-          }}
-          items={this.state.banks && this.state.banks.map(bank => ( {label: bank.name, value:bank.id }))}
-          returnKeyType={'done'}
-        />
-
-              <Text style = {styles.label}>Account type</Text>
-              {/* <View style={styles.input}>
-=======
-                                placeholderTextColor="#ccc"
                                 value={this.state.email}
                                 keyboardType={'email-address'}
                                 autoCapitalize = "none"
                                 editable={false}
                               />
               <Text style = {styles.label}>Bank</Text>
-              <View style={styles.input}>
-                <Picker
-                  //selectedValue={selectedValue}
-                  selectedValue={this.state.bankName}  
-                  style={styles.input5}
-                  onValueChange={(itemValue, itemIndex) => this.setBankSelectValue(itemValue)}
-                >
-                  {this.state.banks && this.state.banks.map(bank => (
-                <Picker.Item label={bank.name} value={bank.name} />
-                ))}
-                </Picker>
-              </View>
+              <RNPicker
+          placeholder="Bank Name"
+          value={this.state.bankName}
+          onValueChange={(itemValue, itemIndex) => {this.setBankSelectValue(itemValue)}}
+          style={{
+            inputIOSContainer:styles.input,
+            placeholder:{color:'black'}
+          }}
+          items={this.state.banks.map(bank => ( {label: bank.label, value:bank.value }))}
+          returnKeyType={'done'}
+        />
+
               <Text style = {styles.label}>Account type</Text>
-              <View style={styles.input}>
->>>>>>> d39fcbc9e4729d66cee47ac141eb52afc5cfcb70
+              {/* <View style={styles.input}>
                 <Picker
                   //selectedValue={selectedValue}
                   selectedValue={this.state.bankAccountType}  
@@ -551,14 +522,13 @@ export class EditProfile extends Component {
                   <Picker.Item label="Savings" value="Savings" />
                   
                 </Picker>
-<<<<<<< HEAD
               </View> */}
 
 <RNPicker
           placeholder="Account Type"
           // style={{backgroundColor:'RED'}}
-          // selectedValue={'Single'}
-          onValueChange={(itemValue, itemIndex) => this.setTypeSelectValue(itemValue)}
+          value={this.state.bankAccountType}
+          onValueChange={(itemValue, itemIndex) => {this.setTypeSelectValue(itemValue)}}
 
           style={{
             inputIOSContainer:styles.input,
@@ -570,9 +540,6 @@ export class EditProfile extends Component {
         ]}          
         returnKeyType={'done'}
         />
-=======
-              </View>
->>>>>>> d39fcbc9e4729d66cee47ac141eb52afc5cfcb70
               <Text style = {styles.label}>Account name.</Text>
               <TextInput
                                 style={styles.input}
