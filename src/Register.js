@@ -396,10 +396,9 @@ export class Register extends Component {
       // Response data
       console.log(response, 'rre')
       //return;
+      if(response.didCancel === true) return;
       this.setState({
         image: response.assets[0]
-      }, ()=>{
-        //this.prepareImage();
       }) 
     });
   }
