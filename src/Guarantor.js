@@ -6,6 +6,7 @@ import { SERVER_URL } from './config/server';
 import ModalFilterPicker from 'react-native-modal-filter-picker';
 import ImagePicker from 'react-native-image-crop-picker';
 // import {Picker} from '@react-native-picker/picker';
+import RNPicker from 'react-native-picker-select';
 
 navigator.geolocation = require('@react-native-community/geolocation');
 
@@ -292,7 +293,7 @@ export class Guarantor extends Component {
               <Text style={styles.locSelect}>{this.state.locationPlaceholder}</Text>
             </TouchableOpacity>
             <Text style = {styles.label}>Marital status</Text>
-              <TouchableOpacity style={[styles.input]}>
+              {/* <TouchableOpacity style={[styles.input]}>
               <Picker
                 //selectedValue={selectedValue}
                 selectedValue={this.state.marital_status}  
@@ -303,7 +304,27 @@ export class Guarantor extends Component {
                 <Picker.Item color="#444" label={"Single"} value={"Single"} />
                 <Picker.Item color="#444" label={"Married"} value={"Married"} />
               </Picker>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
+
+<RNPicker
+          placeholder="Marital status"
+          // style={{backgroundColor:'RED'}}
+          selectedValue={this.state.marital_status}  
+          onValueChange={(itemValue, itemIndex) => this.setState({marital_status: itemValue})}
+
+          style={{
+            inputIOSContainer:styles.input,
+            inputAndroid: styles.input,
+
+            placeholder:{color:'black'}
+          }}          
+          items={[
+            { label: 'Single', value: 'Single' },
+            { label: 'Married', value: 'Married' },
+        ]}          
+        returnKeyType={'done'}
+        />
+        
               <Text style = {styles.label}>Email</Text>
               <TextInput
                                 style={styles.input}

@@ -593,6 +593,7 @@ export class Register extends Component {
           }
           style={{
             inputIOSContainer:styles.input,
+            inputAndroid: styles.input,
             placeholder:{color:'black'}
           }}
           items={[
@@ -626,6 +627,7 @@ export class Register extends Component {
           }
           style={{
             inputIOSContainer:styles.input,
+            inputAndroid: styles.input,
             placeholder:{color:'black'}
           }}
           items={this.state.vehicleTypes && this.state.vehicleTypes.map(vehicleType => ( {label: vehicleType.name, value:vehicleType.id }))}
@@ -693,7 +695,9 @@ export class Register extends Component {
           onValueChange={(itemValue, itemIndex) => this.setBankSelectValue(itemValue)}
           style={{
             inputIOSContainer:styles.input,
-            placeholder:{color:'black'}
+            placeholder:{color:'black'},
+            inputAndroid: styles.input,
+
           }}
           items={this.state.banks && this.state.banks.map(bank => ( {label: bank.name, value:bank.id }))}
           returnKeyType={'done'}
@@ -710,13 +714,17 @@ export class Register extends Component {
                   <Picker.Item label="Current" value="Current" />
                 </Picker> */}
                  <RNPickerSelect
-          placeholder="Marital Status"
-          // style={{backgroundColor:'RED'}}
+          placeholder="Account Type"
+          style={{backgroundColor:'RED'}}
           selectedValue={this.state.bankAccountType}  
           onValueChange={(itemValue, itemIndex) => this.setTypeSelectValue(itemValue)}
 
           style={{
             inputIOSContainer:styles.input,
+            
+           
+            inputAndroid: styles.input,
+
             placeholder:{color:'black'}
           }}
           items={[

@@ -504,7 +504,9 @@ export class EditProfile extends Component {
           onValueChange={(itemValue, itemIndex) => {this.setBankSelectValue(itemValue)}}
           style={{
             inputIOSContainer:styles.input,
-            placeholder:{color:'black'}
+            placeholder:{color:'black'},
+            inputAndroid: styles.input,
+
           }}
           items={this.state.banks.map(bank => ( {label: bank.label, value:bank.value }))}
           returnKeyType={'done'}
@@ -532,7 +534,9 @@ export class EditProfile extends Component {
 
           style={{
             inputIOSContainer:styles.input,
-            placeholder:{color:'black'}
+            placeholder:{color:'black'},
+            inputAndroid: styles.input,
+
           }}
           items={[
             { label: 'Savings', value: 'Savings' },

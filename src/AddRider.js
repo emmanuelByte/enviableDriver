@@ -10,6 +10,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import {Picker} from '@react-native-picker/picker'; 
 navigator.geolocation = require('@react-native-community/geolocation');
+import RNPicker from 'react-native-picker-select';
 
 export class AddRider extends Component {
   constructor(props) {
@@ -429,8 +430,8 @@ export class AddRider extends Component {
               <Text style={styles.locSelect}>{this.state.locationPlaceholder}</Text>
             </TouchableOpacity>
             <Text style = {styles.label}>Marital status</Text>
-              <TouchableOpacity style={[styles.input]}>
-              <Picker
+              {/* <TouchableOpacity style={[styles.input]}> */}
+              {/* <Picker
                 //selectedValue={selectedValue}
                 selectedValue={this.state.marital_status}  
                 //style={{ height: 100, width: 200 }}
@@ -439,10 +440,31 @@ export class AddRider extends Component {
               >
                 <Picker.Item color="#444" label={"Single"} value={"Single"} />
                 <Picker.Item color="#444" label={"Married"} value={"Married"} />
-              </Picker>
-              </TouchableOpacity>
+              </Picker> */}
+
+              
+  <RNPicker
+          placeholder="Marital status"
+          // style={{backgroundColor:'RED'}}
+          selectedValue={this.state.marital_status}  
+          onValueChange={(itemValue, itemIndex) => this.setState({marital_status: itemValue})}
+
+          style={{
+            inputIOSContainer:styles.input,
+            inputAndroid: styles.input,
+
+            placeholder:{color:'black'}
+          }}          
+          items={[
+            { label: 'Single', value: 'Single' },
+            { label: 'Married', value: 'Married' },
+        ]}          
+        returnKeyType={'done'}
+        />
+        
+              {/* </TouchableOpacity> */}
               <Text style = {styles.label}>Vehicle type</Text>
-              <TouchableOpacity style={[styles.input]}>
+              {/* <TouchableOpacity style={[styles.input]}>
               <Picker
                 //selectedValue={selectedValue}
                 selectedValue={this.state.vehicleTypeId}  
@@ -454,7 +476,26 @@ export class AddRider extends Component {
                 <Picker.Item color="#444" label={vehicleType.name} value={vehicleType.id} />
                 ))}
               </Picker>
-              </TouchableOpacity>
+
+              </TouchableOpacity> */}
+
+              
+<RNPickerSelect
+          placeholder="Vehicle type"
+          // style={{backgroundColor:'RED'}}
+          selectedValue={this.state.vehicleTypeId}  
+          onValueChange={(itemValue, itemIndex) => this.setState({vehicleTypeId: itemValue})}
+          style={{
+            inputIOSContainer:styles.input,
+            placeholder:{color:'black'},
+            inputAndroid: styles.input,
+
+          }}
+          items={this.state.vehicleTypes && this.state.vehicleTypes.map(vehicleType => ( {label: vehicleType.name, value:vehicleType.id }))}
+          returnKeyType={'done'}
+        />
+
+
               <Text style = {styles.label}>Plate no.</Text>
               <TextInput
                                 style={styles.input}

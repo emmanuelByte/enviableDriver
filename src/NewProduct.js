@@ -7,7 +7,8 @@ import Modal from 'react-native-modal';
 import { SERVER_URL } from './config/server';
 import ModalFilterPicker from 'react-native-modal-filter-picker';
 import ImagePicker from 'react-native-image-crop-picker';
-import {Picker} from '@react-native-picker/picker';
+// import {Picker} from '@react-native-picker/picker';
+import RNPicker from 'react-native-picker-select';
 
 navigator.geolocation = require('@react-native-community/geolocation');
 
@@ -415,7 +416,7 @@ export class NewProduct extends Component {
                                 value={this.state.name}
                               />
               <Text style = {styles.label}>Product Category</Text>
-              <TouchableOpacity style={[styles.input]}>
+              {/* <TouchableOpacity style={[styles.input]}>
               <Picker
                 //selectedValue={selectedValue}
                 selectedValue={this.state.productCategoryId}  
@@ -427,7 +428,22 @@ export class NewProduct extends Component {
                 <Picker.Item color="#444" label={category.name} value={category.id} />
                 ))}
               </Picker>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
+
+<RNPicker
+          placeholder="Product Category"
+          value={this.state.bankName}
+          onValueChange={(itemValue, itemIndex) => this.setState({productCategoryId: itemValue})}
+          style={{
+            inputIOSContainer:styles.input,
+            placeholder:{color:'black'},
+            inputAndroid: styles.input,
+
+          }}
+          items={this.state.categories && this.state.categories.map(category => ( {label: category.name, value:category.id }))}
+          returnKeyType={'done'}
+        />
+
               <Text style = {styles.label}>Product description</Text>
               <TextInput
                                 style={styles.input}

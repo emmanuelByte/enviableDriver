@@ -1,5 +1,5 @@
 import React, { Component  } from 'react';
-import { AppState, View, Text, Alert, Image, Platform, PermissionsAndroid, Picker, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
+import { AppState, View, Text, Alert, Image, Platform, PermissionsAndroid, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -7,6 +7,7 @@ import Modal from 'react-native-modal';
 import { SERVER_URL } from './config/server';
 import ModalFilterPicker from 'react-native-modal-filter-picker';
 import ImagePicker from 'react-native-image-crop-picker';
+import RNPickerSelect from 'react-native-picker-select'
 
 export class CompanyEditProfile extends Component {
   constructor(props) {
@@ -471,7 +472,7 @@ export class CompanyEditProfile extends Component {
                                 autoCapitalize = "none"
                               />
               <Text style = {styles.label}>Bank</Text>
-              <View style={styles.input}>
+              {/* <View style={styles.input}>
                 <Picker
                   //selectedValue={selectedValue}
                   selectedValue={this.state.bankName}  
@@ -482,9 +483,25 @@ export class CompanyEditProfile extends Component {
                 <Picker.Item label={bank.name} value={bank.name} />
                 ))}
                 </Picker>
-              </View>
+              </View> */}
+                            
+<RNPickerSelect
+          placeholder="Bank name"
+          // style={{backgroundColor:'RED'}}
+          selectedValue={this.state.bankName}  
+          onValueChange={(itemValue, itemIndex) => this.setBankSelectValue(itemValue)}
+          style={{
+            inputIOSContainer:styles.input,
+            placeholder:{color:'black'},
+            inputAndroid: styles.input,
+
+          }}
+          items={this.state.banks && this.state.banks.map(bank => ( {label: bank.name, value:bank.name }))}
+          returnKeyType={'done'}
+        />
+
               <Text style = {styles.label}>Account type</Text>
-              <View style={styles.input}>
+              {/* <View style={styles.input}>
                 <Picker
                   //selectedValue={selectedValue}
                   selectedValue={this.state.bankAccountType}  
@@ -495,7 +512,28 @@ export class CompanyEditProfile extends Component {
                   <Picker.Item label="Savings" value="Savings" />
                   
                 </Picker>
-              </View>
+              </View> */}
+
+                            
+  <RNPicker
+          placeholder="Account type"
+          // style={{backgroundColor:'RED'}}
+          selectedValue={this.state.bankAccountType}  
+          onValueChange={(itemValue, itemIndex) => this.setTypeSelectValue(itemValue)}
+
+          style={{
+            inputIOSContainer:styles.input,
+            inputAndroid: styles.input,
+
+            placeholder:{color:'black'}
+          }}          
+          items={[
+            { label: 'Current', value: 'Current' },
+            { label: 'Savings', value: 'Savings' },
+        ]}          
+        returnKeyType={'done'}
+        />
+        
               <Text style = {styles.label}>Account name.</Text>
               <TextInput
                                 style={styles.input}

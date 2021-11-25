@@ -1,5 +1,5 @@
 import React, { Component  } from 'react';
-import { AppState, View, Text, Alert, Image, Platform, PermissionsAndroid, Picker, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage, Linking } from 'react-native';
+import { AppState, View, Text, Alert, Image, Platform, PermissionsAndroid, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage, Linking } from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -530,6 +530,8 @@ export class RegisterCompany extends Component {
           onValueChange={(itemValue, itemIndex) => this.setBankSelectValue(itemValue)}
           style={{
             inputIOSContainer:styles.input,
+            inputAndroid: styles.input,
+
             placeholder:{color:'black'}
           }}  
                     items={this.state.banks.map(bank => ( {label: bank.name, value:bank.name }))}
@@ -556,6 +558,8 @@ export class RegisterCompany extends Component {
 
           style={{
             inputIOSContainer:styles.input,
+            inputAndroid: styles.input,
+
             placeholder:{color:'black'}
           }}          
           items={[
