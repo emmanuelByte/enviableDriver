@@ -9,7 +9,7 @@ navigator.geolocation = require('@react-native-community/geolocation');
 import MapViewDirections from 'react-native-maps-directions';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { showLocation } from 'react-native-map-link';
-
+import RNPicker from 'react-native-picker-select';
 import { SERVER_URL } from './config/server';
 
 export class RideOrderDetails extends Component {
@@ -384,10 +384,17 @@ export class RideOrderDetails extends Component {
                   <View style= {styles.col1}>
                   <Image source = {require('./imgs/round-profile.png')} style = {styles.carImage} />
                   </View>
+                  {this.state.customer ?
+                  
                   <View style= {styles.col2}>
                   < Text style = {styles.price}>{this.state.customer.first_name} {this.state.customer.last_name}</Text>
                   < Text style = {styles.plate}>{this.state.customer.email}</Text>
                   </View>
+                
+                :
+                null
+                }
+                  
                 </View>
                 
 
