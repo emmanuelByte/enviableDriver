@@ -384,14 +384,16 @@ export class RideOrderDetails extends Component {
                   <View style= {styles.col1}>
                   <Image source = {require('./imgs/round-profile.png')} style = {styles.carImage} />
                   </View>
-                  {this.state.customer?
+                  {this.state.customer ?
+                  
                   <View style= {styles.col2}>
                   < Text style = {styles.price}>{this.state.customer.first_name} {this.state.customer.last_name}</Text>
                   < Text style = {styles.plate}>{this.state.customer.email}</Text>
                   </View>
                 
                 :
-                null}
+                null
+                }
                   
                 </View>
                 
