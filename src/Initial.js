@@ -1,10 +1,13 @@
 import React, { Component  } from 'react';
-import { AppState, View, Text, Alert, Image, Button, TextInput, StyleSheet, ImageBackground, TouchableOpacity, AsyncStorage } from 'react-native';
+import { AppState, View, Text, Platform, Alert, Image, Button, TextInput, StyleSheet, ImageBackground, TouchableOpacity, AsyncStorage } from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-var PushNotification = require('react-native-push-notification');
+// var PushNotification = Platform.OS === 'ios'? require('@react-native-community/push-notification-ios'): require('react-native-push-notification');
 import SoundPlayer from 'react-native-sound-player'
 import { SERVER_URL } from './config/server';
+var PushNotification = require('react-native-push-notification');
+
+// import PushNotificationIOS from '@react-native-community/push-notification-ios';
 
 export class Initial extends Component {
   constructor(props) {
@@ -22,6 +25,7 @@ export class Initial extends Component {
   }
   
   async getLoggedInUser(token){
+    // alert(token+"token here")
     await AsyncStorage.getItem('user').then((value) => {
       if(value){
         console.log(value, 's');
@@ -65,17 +69,22 @@ export class Initial extends Component {
       importance: "max",
       vibrate: true,
       onRegister: (token) => {
+        alert(token.token)
         console.log(token, "TOEKN REFRHED")
         AsyncStorage.setItem('pushToken', token.token, () => {
+          alert(token.token)
           this.getLoggedInUser(token.token); 
         })
       },
       onNotification: (notification) => {
+        alert("dfdfdf");
           this._onRemoteNotification(notification);
           
       },
       
       onRegistrationError: function(err) {
+        Alert.alert('Unable to register notifications', err.message);
+        
         console.error(err.message, err);
       },
   
@@ -97,6 +106,7 @@ export class Initial extends Component {
   _onRemoteNotification(notification) {
    
     console.log(JSON.parse(notification.data.message).myId);
+    alert('received remote notifications')
     if(JSON.parse(notification.data.message).myId == "merchant"){
       Alert.alert(
         JSON.parse(notification.data.message).title,
@@ -137,7 +147,7 @@ export class Initial extends Component {
     } 
     if(JSON.parse(notification.data.message).myId == "ride_share"){
      
-      this.props.navigation.push('RideShareHome')
+      this.props.navigation.push('RideShareHome');
     } 
     try {
         // play the file tone.mp3
@@ -148,6 +158,7 @@ export class Initial extends Component {
 
 
   }
+
   savePush(token){
     console.log(token,'123ERGJDKDFDFSFS');
     fetch(`${SERVER_URL}/mobile/save_push_token`, {
