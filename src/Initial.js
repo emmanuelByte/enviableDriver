@@ -33,7 +33,7 @@ export class Initial extends Component {
           this.savePush(token);
           if(user.role == "rider"){
             if(user.vehicle_type_id == 13 || user.vehicle_type_id == 14 || user.vehicle_type_id == 15){
-              this.props.navigation.navigate('RideShareHome')
+              this.props.navigation.navigate('RideShareHome');
             }else{
             //this.props.navigation.navigate('Home')
             this.props.navigation.navigate('ActiveOrders')
@@ -54,8 +54,11 @@ export class Initial extends Component {
       }
     });
   }
+
+
   async init() {
     // alert('init');
+    
     await PushNotification.configure({
       largeIcon: "ic_notification",
       smallIcon: "ic_notification",

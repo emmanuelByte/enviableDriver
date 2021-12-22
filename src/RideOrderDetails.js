@@ -11,6 +11,7 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import { showLocation } from 'react-native-map-link';
 import RNPicker from 'react-native-picker-select';
 import { SERVER_URL } from './config/server';
+import { OpenMapDirections } from 'react-native-navigation-directions';
 
 export class RideOrderDetails extends Component {
   constructor(props) {
@@ -237,43 +238,63 @@ export class RideOrderDetails extends Component {
     }
   }
   use(){
-    if(this.state.order.status == "Rider accepted"){
-      showLocation({
-        latitude: this.state.order.pickup_latitude,
-        longitude: this.state.order.pickup_longitude,
-        //sourceLatitude: this.state.origin.latitude,  // optionally specify starting location for directions
-        //sourceLongitude: this.state.origin.longitude,  // not optional if sourceLatitude is specified
-        title: this.state.order.pickup_address,  // optional
-        //googleForceLatLon: false,  // optionally force GoogleMaps to use the latlon for the query instead of the title
-        //googlePlaceId: 'ChIJGVtI4by3t4kRr51d_Qm_x58',  // optionally specify the google-place-id
-        //alwaysIncludeGoogle: true, // optional, true will always add Google Maps to iOS and open in Safari, even if app is not installed (default: false)
-        dialogTitle: 'Change map', // optional (default: 'Open in Maps')
-        dialogMessage: 'Open in google map', // optional (default: 'What app would you like to use?')
-        cancelText: 'Cancel', // optional (default: 'Cancel')
-        appsWhiteList: ['google-maps'], // optionally you can set which apps to show (default: will show all supported apps installed on device)
-        naverCallerName: 'com.Enviable',  // to link into Naver Map You should provide your appname which is the bundle ID in iOS and applicationId in android.
-        appTitles: { 'google-maps': "Direction to client pickup location" } // optionally you can override default app titles
-        // app: 'uber'  // optionally specify specific app to use
-      })
-    }else{
-      showLocation({
-        latitude: this.state.order.delivery_latitude,
-        longitude: this.state.order.delivery_longitude,
-        //sourceLatitude: this.state.origin.latitude,  // optionally specify starting location for directions
-        //sourceLongitude: this.state.origin.longitude,  // not optional if sourceLatitude is specified
-        title: this.state.order.delivery_address,  // optional
-        //googleForceLatLon: false,  // optionally force GoogleMaps to use the latlon for the query instead of the title
-        //googlePlaceId: 'ChIJGVtI4by3t4kRr51d_Qm_x58',  // optionally specify the google-place-id
-        //alwaysIncludeGoogle: true, // optional, true will always add Google Maps to iOS and open in Safari, even if app is not installed (default: false)
-        dialogTitle: 'Change map', // optional (default: 'Open in Maps')
-        dialogMessage: 'Open in google map', // optional (default: 'What app would you like to use?')
-        cancelText: 'Cancel', // optional (default: 'Cancel')
-        // appsWhiteList: ['google-maps'], // optionally you can set which apps to show (default: will show all supported apps installed on device)
-        naverCallerName: 'com.Enviable',  // to link into Naver Map You should provide your appname which is the bundle ID in iOS and applicationId in android.
-        appTitles: { 'google-maps': "Direction to your destination" } // optionally you can override default app titles
-        // app: 'uber'  // optionally specify specific app to use
-      })
+    const startPoint = {
+      latitude: parseFloat(this.state.order.pickup_latitude),
+      longitude: parseFloat(this.state.order.pickup_longitude),
+    } 
+
+    const endPoint = {
+      latitude: parseFloat(this.state.order.delivery_latitude),
+      longitude: parseFloat(this.state.order.delivery_longitude),
     }
+
+		const transportPlan = 'w';
+    if(this.state.order.status == "Rider accepted"){
+    OpenMapDirections(startPoint, endPoint, transportPlan).then(res => {
+      console.log(res)
+    });
+  }
+  else {
+    
+  }
+    
+    // if(this.state.order.status == "Rider accepted"){
+    //   showLocation({
+    //     latitude: this.state.order.pickup_latitude,
+    //     longitude: this.state.order.pickup_longitude,
+    //     //sourceLatitude: this.state.origin.latitude,  // optionally specify starting location for directions
+    //     //sourceLongitude: this.state.origin.longitude,  // not optional if sourceLatitude is specified
+    //     title: this.state.order.pickup_address,  // optional
+    //     //googleForceLatLon: false,  // optionally force GoogleMaps to use the latlon for the query instead of the title
+    //     //googlePlaceId: 'ChIJGVtI4by3t4kRr51d_Qm_x58',  // optionally specify the google-place-id
+    //     //alwaysIncludeGoogle: true, // optional, true will always add Google Maps to iOS and open in Safari, even if app is not installed (default: false)
+    //     dialogTitle: 'Change map', // optional (default: 'Open in Maps')
+    //     dialogMessage: 'Open in google map', // optional (default: 'What app would you like to use?')
+    //     cancelText: 'Cancel', // optional (default: 'Cancel')
+    //     appsWhiteList: ['google-maps'], // optionally you can set which apps to show (default: will show all supported apps installed on device)
+    //     naverCallerName: 'com.Enviable',  // to link into Naver Map You should provide your appname which is the bundle ID in iOS and applicationId in android.
+    //     appTitles: { 'google-maps': "Direction to client pickup location" } // optionally you can override default app titles
+    //     // app: 'uber'  // optionally specify specific app to use
+    //   })
+    // }else{
+    //   showLocation({
+    //     latitude: this.state.order.delivery_latitude,
+    //     longitude: this.state.order.delivery_longitude,
+    //     //sourceLatitude: this.state.origin.latitude,  // optionally specify starting location for directions
+    //     //sourceLongitude: this.state.origin.longitude,  // not optional if sourceLatitude is specified
+    //     title: this.state.order.delivery_address,  // optional
+    //     //googleForceLatLon: false,  // optionally force GoogleMaps to use the latlon for the query instead of the title
+    //     //googlePlaceId: 'ChIJGVtI4by3t4kRr51d_Qm_x58',  // optionally specify the google-place-id
+    //     //alwaysIncludeGoogle: true, // optional, true will always add Google Maps to iOS and open in Safari, even if app is not installed (default: false)
+    //     dialogTitle: 'Change map', // optional (default: 'Open in Maps')
+    //     dialogMessage: 'Open in google map', // optional (default: 'What app would you like to use?')
+    //     cancelText: 'Cancel', // optional (default: 'Cancel')
+    //     // appsWhiteList: ['google-maps'], // optionally you can set which apps to show (default: will show all supported apps installed on device)
+    //     naverCallerName: 'com.Enviable',  // to link into Naver Map You should provide your appname which is the bundle ID in iOS and applicationId in android.
+    //     appTitles: { 'google-maps': "Direction to your destination" } // optionally you can override default app titles
+    //     // app: 'uber'  // optionally specify specific app to use
+    //   })
+    // }
       
   }
   displayRatingButton(){
@@ -376,7 +397,7 @@ export class RideOrderDetails extends Component {
           <View style= {styles.infoView}>
             <ScrollView showsVerticalScrollIndicator={false}>
               <TouchableOpacity  onPress={() => this.use()}>
-                < Text style = {styles.use}>Use google map </Text>
+                < Text style = {styles.use}>Use google navigations </Text>
               </TouchableOpacity>
               {this.state.order &&
               <View>

@@ -44,6 +44,8 @@ import Guarantor from './src/Guarantor';
 import Riders from './src/Riders';
 import AddRider from './src/AddRider';
 navigator.geolocation = require('@react-native-community/geolocation');
+import Geolocation from '@react-native-community/geolocation';
+
 import { SERVER_URL } from './src/config/server';
 
 console.disableYellowBox = true;
@@ -140,16 +142,39 @@ export default class App extends Component {
   
      callLocation(that){
  
+      // alert("im at tghat")
+      setInterval(()=>{
 
-      navigator.geolocation.watchPosition(async (position) => {
-        //Will give you the location on location change
-
-        var currentLongitude = position.coords.longitude;
+        Geolocation.getCurrentPosition(async (position)=>{
+          var currentLongitude = position.coords.longitude;
           var currentLatitude = position.coords.latitude;
-          // alert("sack", currentLongitude) ;
-         await this.getLoggedInUser();
-         await this.saveLocation(currentLatitude, currentLongitude)
-      });
+          // alert("Location chenaged - "+ currentLatitude);
+          await this.getLoggedInUser();
+          await this.saveLocation(currentLatitude, currentLongitude)
+        })
+        }, 10000)
+      
+      
+      // Geolocation.watchPosition(async (position) => {
+
+      // // navigator.geolocation.watchPosition(async (position) => {
+      //   //Will give you the location on location change
+      //   var currentLongitude = position.coords.longitude;
+      //     var currentLatitude = position.coords.latitude;
+      //     alert("Location chenaged 2 "+ currentLatitude);
+
+      //     // alert("sack", currentLongitude) ;
+      //    await this.getLoggedInUser();
+      //    await this.saveLocation(currentLatitude, currentLongitude)
+      // }, (error)=>{
+      //   alert('Unable to set location. Please enable location'+error);
+      // },
+      // {
+      //   enableHighAccuracy: false,
+      //   timeout: 5000,
+      //   maximumAge: 30000
+      // }
+      // );
       
    }
   
@@ -186,8 +211,9 @@ export default class App extends Component {
     }
 
   }
-  componentDidMount(){
-    this.getLocation()
+  async componentDidMount(){
+    // alert("lemme run this")
+    await this.getLocation()
   }
   render () {
     return (
