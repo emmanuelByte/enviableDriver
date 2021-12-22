@@ -32,6 +32,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* enviableRiderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = enviableRiderTests.m; sourceTree = "<group>"; };
 		042DA03427365A0300996B67 /* Log 01 - 3 (1) 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Log 01 - 3 (1) 1.png"; path = "../../../Downloads/Log 01 - 3 (1) 1.png"; sourceTree = "<group>"; };
+		049FA4A1275A2E86004FF283 /* enviableRider.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = enviableRider.entitlements; path = enviableRider/enviableRider.entitlements; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* enviableRider.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = enviableRider.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = enviableRider/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = enviableRider/AppDelegate.m; sourceTree = "<group>"; };
@@ -127,6 +128,7 @@
 		13B07FAE1A68108700A75B9A /* enviableRider */ = {
 			isa = PBXGroup;
 			children = (
+				049FA4A1275A2E86004FF283 /* enviableRider.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				042DA03427365A0300996B67 /* Log 01 - 3 (1) 1.png */,
@@ -527,7 +529,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 6;
+				CODE_SIGN_ENTITLEMENTS = enviableRider/enviableRider.entitlements;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 35FX3LGRRA;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = enviableRider/Info.plist;
@@ -536,7 +539,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.5;
+				MARKETING_VERSION = 1.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -556,7 +559,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 6;
+				CODE_SIGN_ENTITLEMENTS = enviableRider/enviableRider.entitlements;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 35FX3LGRRA;
 				INFOPLIST_FILE = enviableRider/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -564,7 +568,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.5;
+				MARKETING_VERSION = 1.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

@@ -246,7 +246,9 @@ export class CompanyProfile extends Component {
                   <Text style = {styles.desc}> </Text>
                   */}
                     <View style={{flexDirection: 'row', paddingTop: 5}}>
-                      <Text style = {styles.date3}>{this.state.user.company_name}</Text> 
+                      {/* <Text style = {styles.date3}>{this.state.user.company_name || 'Enviable Riders'}</Text>  */}
+                      <Text style = {styles.date3}>{'Enviable Riders'}</Text> 
+
                     </View>
                   </View>
                 </View>
@@ -267,7 +269,7 @@ export class CompanyProfile extends Component {
                   <Icon name="mail" size={18} color="#000"  style = {styles.infoIcon}/>
                   </View>
                   <View style={styles.contentCol31}> 
-                    <Text style = {styles.address}> {this.state.user.email}</Text>
+                    <Text editable={false} selectTextOnFocus={false} style = {styles.address}> {this.state.user.email}</Text>
                   </View>
                 </View>
                 <View style={styles.item11}>

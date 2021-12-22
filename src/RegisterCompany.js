@@ -431,7 +431,7 @@ export class RegisterCompany extends Component {
           </TouchableOpacity>
           <Text style = {styles.headerText}>Become an Enviable Partner</Text>
             <View style = {styles.bottomView}>
-            <Text style = {styles.label1}>Company name</Text>
+            {/* <Text style = {styles.label1}>Company name</Text>
             <TextInput
                     style={styles.input}
                     placeholder="Company name"
@@ -439,7 +439,7 @@ export class RegisterCompany extends Component {
                     underlineColorAndroid="transparent"
                     placeholderTextColor="#ccc" 
                     value={this.state.companyName}
-                  />
+                  /> */}
               <View style= {styles.row}>
                 <View style= {styles.col50}>
                   <Text style = {styles.label1}>First name</Text>
@@ -512,18 +512,9 @@ export class RegisterCompany extends Component {
                                 autoCapitalize = "none"
                                 secureTextEntry={true} 
                               />
+{/*                               
               <Text style = {styles.label}>Bank</Text>
-              {/* <View style={styles.input}> */}
-                {/* <Picker
-                  //selectedValue={selectedValue}
-                  selectedValue={this.state.bankName}  
-                  style={styles.input5}
-                  onValueChange={(itemValue, itemIndex) => this.setBankSelectValue(itemValue)}
-                >
-                  {this.state.banks && this.state.banks.map(bank => (
-                <Picker.Item label={bank.name} value={bank.name} />
-                ))}
-                </Picker> */}
+         
                 <RNPicker
           placeholder="Bank Name"
           value={this.state.bankName}
@@ -537,18 +528,8 @@ export class RegisterCompany extends Component {
                     items={this.state.banks.map(bank => ( {label: bank.name, value:bank.name }))}
           returnKeyType={'done'}
         />
-              {/* </View> */}
               <Text style = {styles.label}>Account type</Text>
-              {/* <View style={styles.input}> */}
-                {/* <Picker
-                  //selectedValue={selectedValue}
-                  selectedValue={this.state.bankAccountType}  
-                  style={styles.input5}
-                  onValueChange={(itemValue, itemIndex) => this.setTypeSelectValue(itemValue)}
-                >
-                  <Picker.Item label="Savings" value="Savings" />
-                  <Picker.Item label="Current" value="Current" />
-                </Picker> */}
+            
 
 <RNPicker
           placeholder="Account Type"
@@ -568,7 +549,6 @@ export class RegisterCompany extends Component {
         ]}          
         returnKeyType={'done'}
         />
-              {/* </View> */}
               <Text style = {styles.label}>Account name.</Text>
               <TextInput
                                 style={styles.input}
@@ -589,7 +569,7 @@ export class RegisterCompany extends Component {
                                 value={this.state.bankAccountNumber}
                                 keyboardType={'numeric'}
                                 autoCapitalize = "none"
-                              />
+                              /> */}
               <TouchableOpacity style = {styles.forgotView}  >
                 
                 <Text style = {styles.forgotText}>I agree to Enviable's <Text style = {styles.forgotText1}>Terms of Service</Text></Text>

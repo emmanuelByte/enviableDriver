@@ -568,20 +568,8 @@ export class Register extends Component {
             <TouchableOpacity onPress={() => this.setState({visible: true})}  >
               <Text style={styles.locSelect}>{this.state.locationPlaceholder}</Text>
             </TouchableOpacity>
-            <Text style = {styles.label}>Marital status</Text>
-            {/* <View style={[styles.input]}> */}
-              {/* {this.checkIfIOS()} */}
-
-              {/* <Picker
-                selectedValue={"Single"}
-                selectedValue={this.state.marital_status}  
-                style={{ height: 100, width: 200 }}
-                style={styles.input}
-                onValueChange={(itemValue, itemIndex) => this.setState({marital_status: itemValue})}
-              >
-                <Picker.Item key={1} color="#444" label={"Single"} value={"Single"} />
-                <Picker.Item key={2} color="#444" label={"Married"} value={"Married"} />
-              </Picker> */}
+            {/* <Text style = {styles.label}>Marital status</Text>
+            Hide this here by Abdulmalik to solve store issues          
 
         <RNPickerSelect
           placeholder="Marital Status"
@@ -600,7 +588,7 @@ export class Register extends Component {
             { label: 'Married', value: 'Married' },
         ]}
           returnKeyType={'done'}
-        />
+        /> */}
 
               {/* </View> */}
               <Text style = {styles.label}>Vehicle type</Text>
@@ -674,18 +662,9 @@ export class Register extends Component {
                                 autoCapitalize = "none"
                                 secureTextEntry={true} 
                               />
-              <Text style = {styles.label}>Bank</Text>
-                {/* <Picker
-                  //selectedValue={selectedValue}
-                  selectedValue={this.state.bankName}  
-                  style={styles.input5}
-                  onValueChange={(itemValue, itemIndex) => this.setBankSelectValue(itemValue)}
-                >
-                  {this.state.banks && this.state.banks.map(bank => (
-                <Picker.Item label={bank.name} value={bank.name} />
-                ))}
-                </Picker> */}
-
+              {/* <Text style = {styles.label}>Bank</Text>
+              Commented out by Abdulmalik based on feedback from iOS Store
+           
 
 <RNPickerSelect
           placeholder="Bank Name"
@@ -703,15 +682,7 @@ export class Register extends Component {
         />
 
               <Text style = {styles.label}>Account type</Text>
-                {/* <Picker
-                  //selectedValue={selectedValue}
-                  selectedValue={this.state.bankAccountType}  
-                  style={styles.input5}
-                  onValueChange={(itemValue, itemIndex) => this.setTypeSelectValue(itemValue)}
-                >
-                  <Picker.Item label="Savings" value="Savings" />
-                  <Picker.Item label="Current" value="Current" />
-                </Picker> */}
+                
                  <RNPickerSelect
           placeholder="Account Type"
           style={{backgroundColor:'RED'}}
@@ -753,7 +724,7 @@ export class Register extends Component {
                                 value={this.state.bankAccountNumber}
                                 keyboardType={'numeric'}
                                 autoCapitalize = "none"
-                              />
+                              /> */}
               <TouchableOpacity style = {styles.forgotView}  >
                 <Text style = {styles.forgotText}>By tapping continue, you agree to Enviable's{`\n`}<Text style = {styles.forgotText1}>Terms of Service</Text></Text>
               </TouchableOpacity>

@@ -470,6 +470,7 @@ export class CompanyEditProfile extends Component {
                                 value={this.state.email}
                                 keyboardType={'email-address'}
                                 autoCapitalize = "none"
+                                editable={false} selectTextOnFocus={false} 
                               />
               <Text style = {styles.label}>Bank</Text>
               {/* <View style={styles.input}>
@@ -515,7 +516,7 @@ export class CompanyEditProfile extends Component {
               </View> */}
 
                             
-  <RNPicker
+  <RNPickerSelect
           placeholder="Account type"
           // style={{backgroundColor:'RED'}}
           selectedValue={this.state.bankAccountType}  
