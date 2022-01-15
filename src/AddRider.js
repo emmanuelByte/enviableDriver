@@ -71,16 +71,16 @@ export class AddRider extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "Leave", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
     return true
   }
 
   componentDidMount() {
-    //this.getLocation();
+    
     this.getLoggedInUser();
     this.getCategories();
     this.getCities();
@@ -159,7 +159,7 @@ export class AddRider extends Component {
          },
          { text: "Refresh", onPress: () => this.getCategories() }
        ],
-       //{ cancelable: false }
+       
      );
     });
     
@@ -194,7 +194,7 @@ export class AddRider extends Component {
          },
          { text: "Refresh", onPress: () => this.getCities() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -232,7 +232,7 @@ export class AddRider extends Component {
          },
          { text: "Refresh", onPress: () => this.getVehicleType() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -242,10 +242,10 @@ export class AddRider extends Component {
     
     fetch(`${SERVER_URL}/mobile/vendor_add_rider`, {
       method: 'POST', 
-      // headers: {
-      //     'Accept': 'application/json',
-      //     'Content-Type': 'application/json'
-      // },
+      
+      
+      
+      
       body: data
     }).then((response) => response.json())
         .then((res) => {
@@ -297,7 +297,7 @@ export class AddRider extends Component {
           imageUri: this.state.image.path
         })
       });
-      //this.prepareImage();
+      
     });
   }
 
@@ -372,7 +372,7 @@ export class AddRider extends Component {
             <View style = {styles.bottomView}>
             <TouchableOpacity  onPress={() => this.openImagePicker()}>
               {!this.state.imageUri && 
-            <Image source = {require('./imgs/img-bg.png')} style = {styles.imgBg} />
+            <Image source = {require('@images/img-bg.png')} style = {styles.imgBg} />
               }
               {this.state.imageUri && 
             <Image source = {{uri: this.state.imageUri}} style = {styles.imgBg1} />
@@ -390,7 +390,7 @@ export class AddRider extends Component {
                                     underlineColorAndroid="transparent"
                                     placeholderTextColor="#ccc" 
                                     value={this.state.firstName}
-                                    //keyboardType={'email-address'}
+                                    
                                   />
                 </View>
                 <View style= {styles.col50}>
@@ -402,7 +402,7 @@ export class AddRider extends Component {
                                     underlineColorAndroid="transparent"
                                     placeholderTextColor="#ccc" 
                                     value={this.state.lastName}
-                                    //keyboardType={'email-address'}
+                                    
                                   />
                 </View>
               </View>
@@ -432,9 +432,9 @@ export class AddRider extends Component {
             <Text style = {styles.label}>Marital status</Text>
               {/* <TouchableOpacity style={[styles.input]}> */}
               {/* <Picker
-                //selectedValue={selectedValue}
+                
                 selectedValue={this.state.marital_status}  
-                //style={{ height: 100, width: 200 }}
+                
                 style={styles.input}
                 onValueChange={(itemValue, itemIndex) => this.setState({marital_status: itemValue})}
               >
@@ -445,7 +445,7 @@ export class AddRider extends Component {
               
   <RNPicker
           placeholder="Marital status"
-          // style={{backgroundColor:'RED'}}
+          
           selectedValue={this.state.marital_status}  
           onValueChange={(itemValue, itemIndex) => this.setState({marital_status: itemValue})}
 
@@ -466,9 +466,9 @@ export class AddRider extends Component {
               <Text style = {styles.label}>Vehicle type</Text>
               {/* <TouchableOpacity style={[styles.input]}>
               <Picker
-                //selectedValue={selectedValue}
+                
                 selectedValue={this.state.vehicleTypeId}  
-                //style={{ height: 100, width: 200 }}
+                
                 style={styles.input}
                 onValueChange={(itemValue, itemIndex) => this.setState({vehicleTypeId: itemValue})}
               >
@@ -482,7 +482,7 @@ export class AddRider extends Component {
               
 <RNPickerSelect
           placeholder="Vehicle type"
-          // style={{backgroundColor:'RED'}}
+          
           selectedValue={this.state.vehicleTypeId}  
           onValueChange={(itemValue, itemIndex) => this.setState({vehicleTypeId: itemValue})}
           style={{
@@ -560,8 +560,8 @@ const styles = StyleSheet.create ({
     marginBottom: 50,
   },
   backImage: {
-    // width: 18,
-    // height: 12,
+    
+    
     marginLeft: 20,
     marginTop: 40,
   },
@@ -638,14 +638,14 @@ const styles = StyleSheet.create ({
   },
   forgotText: {
     textAlign: 'center',
-    //marginRight: 30,
+    
     color: '#5B5B5B',
     fontSize: 12,
     marginTop: 10,
   },
   forgotText1: {
     textAlign: 'center',
-    //marginRight: 30,
+    
     color: '#0B277F',
     fontSize: 12,
   },
@@ -711,9 +711,9 @@ modal: {
   padding: 0
 },
 modalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 50,
   width: 100,
@@ -723,9 +723,9 @@ modalView: {
 
 
 forgotModalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 280,
   width: '90%',
@@ -738,7 +738,7 @@ loading: {
   right: 0,
   top: 0,
   bottom: 0,
-  //height: '100vh',
+  
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'rgba(0,0,0,0.5)'

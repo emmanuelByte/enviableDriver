@@ -2,30 +2,30 @@ import React, { Component  } from 'react';
 import { AppState, View, Text, Platform, Alert, Image, Button, TextInput, StyleSheet, ImageBackground, TouchableOpacity, AsyncStorage } from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-// var PushNotification = Platform.OS === 'ios'? require('@react-native-community/push-notification-ios'): require('react-native-push-notification');
+
 import SoundPlayer from 'react-native-sound-player'
 import { SERVER_URL } from './config/server';
 var PushNotification = require('react-native-push-notification');
 
-// import PushNotificationIOS from '@react-native-community/push-notification-ios';
+
 
 export class Initial extends Component {
   constructor(props) {
     super();
-    //AsyncStorage.clear();
+    
     this.state = {
       user: false,
     }
   }
 
   async componentDidMount() {
-    //this.getLoggedInUser();
+    
     await this.init();
 
   }
   
   async getLoggedInUser(token){
-    // alert(token+"token here")
+    
     await AsyncStorage.getItem('user').then((value) => {
       if(value){
         console.log(value, 's');
@@ -39,7 +39,7 @@ export class Initial extends Component {
             if(user.vehicle_type_id == 13 || user.vehicle_type_id == 14 || user.vehicle_type_id == 15){
               this.props.navigation.navigate('RideShareHome');
             }else{
-            //this.props.navigation.navigate('Home')
+            
             this.props.navigation.navigate('ActiveOrders')
             }
           }else{
@@ -61,7 +61,7 @@ export class Initial extends Component {
 
 
   async init() {
-    // alert('init');
+    
     
     await PushNotification.configure({
       largeIcon: "ic_notification",
@@ -72,15 +72,15 @@ export class Initial extends Component {
       importance: "max",
       vibrate: true,
       onRegister: (token) => {
-        alert(token.token)
+        
         console.log(token, "TOEKN REFRHED")
         AsyncStorage.setItem('pushToken', token.token, () => {
-          alert(token.token)
+          
           this.getLoggedInUser(token.token); 
         })
       },
       onNotification: (notification) => {
-        alert("dfdfdf");
+        
           this._onRemoteNotification(notification);
           
       },
@@ -91,7 +91,7 @@ export class Initial extends Component {
         console.error(err.message, err);
       },
   
-      // senderID: "368002028471",
+      
       senderID:"315359821673",
   
       permissions: {
@@ -109,24 +109,24 @@ export class Initial extends Component {
   _onRemoteNotification(notification) {
    
     console.log(JSON.parse(notification.data.message).myId);
-    alert('received remote notifications')
+    
     if(JSON.parse(notification.data.message).myId == "merchant"){
       Alert.alert(
         JSON.parse(notification.data.message).title,
         JSON.parse(notification.data.message).body,
         [
-          // {
-          //   text: "Stay here",
-          //   onPress: () => console.log("Cancel Pressed"),
-          //   style: "cancel"
-          // },
-          //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+          
+          
+          
+          
+          
+          
           { text: "Check order", onPress: () => this.props.navigation.push('MerchantOrderDetails', {
             orderId: JSON.parse(notification.data.message).orderId ,
           })
          }
         ],
-        //{ cancelable: false }
+        
       );
     }
     if(JSON.parse(notification.data.message).myId == "dispatch"){
@@ -134,18 +134,18 @@ export class Initial extends Component {
         JSON.parse(notification.data.message).title,
         JSON.parse(notification.data.message).body,
         [
-          // {
-          //   text: "Stay here",
-          //   onPress: () => console.log("Cancel Pressed"),
-          //   style: "cancel"
-          // },
+          
+          
+          
+          
+          
           { text: "Close", onPress: () => this.props.navigation.navigate('ActiveOrders', {reload:true}) },
           { text: "Check order", onPress: () => this.props.navigation.push('DispatchOrderDetails', {
             orderId: JSON.parse(notification.data.message).orderId ,
           })
          }
         ],
-        // { cancelable: true }
+        
       );
     } 
     if(JSON.parse(notification.data.message).myId == "ride_share"){
@@ -153,7 +153,7 @@ export class Initial extends Component {
       this.props.navigation.push('RideShareHome');
     } 
     try {
-        // play the file tone.mp3
+        
         SoundPlayer.playSoundFile('rush', 'mp3')
     } catch (e) {
         console.log(`cannot play the sound file`, e)

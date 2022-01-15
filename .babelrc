@@ -1,0 +1,11 @@
+{
+    "plugins": [
+      ["module-resolver", {
+        "root": ["."],
+        "alias": {
+          "@images": "./src/imgs"
+        //   "underscore": "lodash"
+        }
+      }]
+    ]
+  }

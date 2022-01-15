@@ -13,12 +13,12 @@ const SideMenu = (props) => {
             width= {'100%'}
             style={styles.sideMenuModal}
             >
-            <ImageBackground source = {require('./imgs/lbg.png')} style = {styles.modalContainer} >
+            <ImageBackground source = {require('@images/lbg.png')} style = {styles.modalContainer} >
             <ScrollView>
             <View>
                 <View style={styles.topRow}>
                 <View style = {styles.topImageView}>
-                    <Image source = {require('./imgs/user.png')} style = {styles.userImage} />
+                    <Image source = {require('@images/user.png')} style = {styles.userImage} />
                 </View>
                 <View style = {styles.topTextView}>
                     <Text style = {styles.topTextName}>

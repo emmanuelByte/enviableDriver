@@ -77,7 +77,7 @@ export class CompanyEditProfile extends Component {
     this.getLoggedInUser();
     this.getCategories();
     this.getCities();
-    //this.setBanks();
+    
   }
 
   async componentDidMount() {
@@ -98,10 +98,10 @@ export class CompanyEditProfile extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "Leave", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
     return true
   }
@@ -147,9 +147,9 @@ export class CompanyEditProfile extends Component {
             bankAccountName: this.state.user.bank_account_name,
             bankAccountNumber: this.state.user.bank_account_number,
             bankAccountType: this.state.user.bank_account_type,
-            // latitude: this.state.user.latitude,
-            // longitude: this.state.user.longitude,
-            // address: this.state.user.address
+            
+            
+            
           })
         })
         AsyncStorage.getItem('loginvalue').then((value) => {
@@ -194,7 +194,7 @@ export class CompanyEditProfile extends Component {
    })
    .then((response) => response.json())
    .then((res) => {
-       //console.log(res, "res");
+       
        this.hideLoader();
        if(res.success){
           this.setState({
@@ -217,7 +217,7 @@ export class CompanyEditProfile extends Component {
          },
          { text: "Refresh", onPress: () => this.getCategories() }
        ],
-       //{ cancelable: false }
+       
      );
     });
     
@@ -233,7 +233,7 @@ export class CompanyEditProfile extends Component {
    .then((res) => {
      
        console.log(res, "cities");
-       //this.hideLoader();
+       
        if(res.success){
           this.setState({
             cities:  res.cities
@@ -255,7 +255,7 @@ export class CompanyEditProfile extends Component {
          },
          { text: "Refresh", onPress: () => this.getCities() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -265,10 +265,10 @@ export class CompanyEditProfile extends Component {
     
     fetch(`${SERVER_URL}/mobile/vendorEditProfile`, {
       method: 'POST',
-      // headers: {
-      //     'Accept': 'application/json',
-      //     'Content-Type': 'application/json'
-      // },
+      
+      
+      
+      
       body: data
     }).then((response) => response.json())
         .then((res) => {
@@ -281,7 +281,7 @@ export class CompanyEditProfile extends Component {
             }, ()=> {
               AsyncStorage.setItem('user', JSON.stringify(res.user)).then(() => {
                 AsyncStorage.setItem('loginvalue', this.state.email).then(() => {
-                  //this.props.navigation.navigate('Home')
+                  
                 });
               });
             });
@@ -325,7 +325,7 @@ export class CompanyEditProfile extends Component {
           imageUri: this.state.image.path
         })
       });
-      //this.prepareImage();
+      
     });
   }
 
@@ -419,7 +419,7 @@ export class CompanyEditProfile extends Component {
                                     underlineColorAndroid="transparent"
                                     placeholderTextColor="#ccc" 
                                     value={this.state.firstName}
-                                    //keyboardType={'email-address'}
+                                    
                                   />
                 </View>
                 <View style= {styles.col50}>
@@ -431,7 +431,7 @@ export class CompanyEditProfile extends Component {
                                     underlineColorAndroid="transparent"
                                     placeholderTextColor="#ccc" 
                                     value={this.state.lastName}
-                                    //keyboardType={'email-address'}
+                                    
                                   />
                 </View>
               </View>
@@ -475,7 +475,7 @@ export class CompanyEditProfile extends Component {
               <Text style = {styles.label}>Bank</Text>
               {/* <View style={styles.input}>
                 <Picker
-                  //selectedValue={selectedValue}
+                  
                   selectedValue={this.state.bankName}  
                   style={styles.input5}
                   onValueChange={(itemValue, itemIndex) => this.setBankSelectValue(itemValue)}
@@ -488,7 +488,7 @@ export class CompanyEditProfile extends Component {
                             
 <RNPickerSelect
           placeholder="Bank name"
-          // style={{backgroundColor:'RED'}}
+          
           selectedValue={this.state.bankName}  
           onValueChange={(itemValue, itemIndex) => this.setBankSelectValue(itemValue)}
           style={{
@@ -504,7 +504,7 @@ export class CompanyEditProfile extends Component {
               <Text style = {styles.label}>Account type</Text>
               {/* <View style={styles.input}>
                 <Picker
-                  //selectedValue={selectedValue}
+                  
                   selectedValue={this.state.bankAccountType}  
                   style={styles.input5}
                   onValueChange={(itemValue, itemIndex) => this.setTypeSelectValue(itemValue)}
@@ -518,7 +518,7 @@ export class CompanyEditProfile extends Component {
                             
   <RNPickerSelect
           placeholder="Account type"
-          // style={{backgroundColor:'RED'}}
+          
           selectedValue={this.state.bankAccountType}  
           onValueChange={(itemValue, itemIndex) => this.setTypeSelectValue(itemValue)}
 
@@ -584,8 +584,8 @@ const styles = StyleSheet.create ({
     marginBottom: 50,
   },
   backImage: {
-    // width: 18,
-    // height: 12,
+    
+    
     marginLeft: 20,
     marginTop: 40,
   },
@@ -662,14 +662,14 @@ const styles = StyleSheet.create ({
   },
   forgotText: {
     textAlign: 'center',
-    //marginRight: 30,
+    
     color: '#5B5B5B',
     fontSize: 12,
     marginTop: 10,
   },
   forgotText1: {
     textAlign: 'center',
-    //marginRight: 30,
+    
     color: '#0B277F',
     fontSize: 12,
   },
@@ -735,9 +735,9 @@ modal: {
   padding: 0
 },
 modalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 50,
   width: 100,
@@ -747,9 +747,9 @@ modalView: {
 
 
 forgotModalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 280,
   width: '90%',
@@ -762,7 +762,7 @@ loading: {
   right: 0,
   top: 0,
   bottom: 0,
-  //height: '100vh',
+  
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'rgba(0,0,0,0.5)'

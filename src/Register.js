@@ -7,7 +7,7 @@ import Modal from 'react-native-modal';
 import { SERVER_URL } from './config/server';
 import ModalFilterPicker from 'react-native-modal-filter-picker';
 import ImagePicker from 'react-native-image-crop-picker';
-// import {Picker} from '@react-native-picker/picker';
+
 import RNPickerSelect from 'react-native-picker-select';
 
 navigator.geolocation = require('@react-native-community/geolocation');
@@ -19,7 +19,7 @@ export class Register extends Component {
     this.handleBackPress = this.handleBackPress.bind(this);
     this.state = {
       pickerOpacity: 0,
-    opacityOfOtherItems: 1, //THIS IS THE OPACITY OF ALL OTHER ITEMS, WHICH COLLIDES WITH YOUR PICKER.
+    opacityOfOtherItems: 1, 
     label: 'Firstvalue',
       radioButtons: ['Option1', 'Option2', 'Option3'],
       checked: 0,
@@ -108,16 +108,16 @@ export class Register extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "Leave", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
     return true
   }
 
   componentDidMount() {
-    //this.getLocation();
+    
     this.getLoggedInUser();
     this.getCategories();
     this.getCities();
@@ -216,7 +216,7 @@ export class Register extends Component {
          },
          { text: "Refresh", onPress: () => this.getCategories() }
        ],
-       //{ cancelable: false }
+       
      );
     });
     
@@ -253,7 +253,7 @@ export class Register extends Component {
          },
          { text: "Refresh", onPress: () => this.getCities() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -292,7 +292,7 @@ export class Register extends Component {
          },
          { text: "Refresh", onPress: () => this.getVehicleType() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -319,10 +319,10 @@ export class Register extends Component {
     
     fetch(`${SERVER_URL}/mobile/riderRegister`, {
       method: 'POST',
-      // headers: {
-      //     'Accept': 'application/json',
-      //     'Content-Type': 'application/json'
-      // },
+      
+      
+      
+      
       body: data
     }).then((response) => response.json())
         .then((res) => {
@@ -338,7 +338,7 @@ export class Register extends Component {
                   if(res.user.vehicle_type_id == 13 || res.user.vehicle_type_id == 14 || res.user.vehicle_type_id == 15){
                     this.props.navigation.navigate('RideShareHome')
                   }else{
-                  //this.props.navigation.push('Home')
+                  
                   this.props.navigation.navigate('ActiveOrders')
                   }
                 });
@@ -373,29 +373,29 @@ export class Register extends Component {
   }
 
   openImagePicker(){
-    // ImagePicker.openPicker({
-    //    width: 400,
-    //    height: 400,
-    //    cropping: true
-    // }).then(image => {
-    //   this.setState({ image: image }, ()=> {
-    //     this.setState({
-    //       imageUri: this.state.image.path
-    //     })
-    //   });
-    //   //this.prepareImage();
-    // });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     var options = {
       mediaType: 'photo',
-      //includeBase64: true,
+      
       quality: 0.5,
       cameraType: 'front' 
     }
 
     launchImageLibrary(options, (response)  => {
-      // Response data
+      
       console.log(response, 'rre')
-      //return;
+      
       if(response.didCancel === true) return;
       this.setState({
         image: response.assets[0]
@@ -443,35 +443,35 @@ export class Register extends Component {
   
 
 
-//  checkIfIOS(){
-//         if(Platform.OS === 'ios'){ // check if ios
-//             console.log("IOS!!!");
-//             //this button will (onpress) set our picker visible
-//             return (<Button buttonStyle={{backgroundColor:'#D1D1D1', opacity: this.state.opacityOfOtherItems}} onPress={this.toggle()} color="#101010" title={this.state.label} onPress={this.changeOpacity}/>); 
-//         }else if(Platform.OS === 'android'){ //check if android
-//             this.setState({
-//                 pickerOpacity: 1 //set picker opacity:1 -> picker is visible.
-//             });
-//             console.log("ANDROID!!!");
-//         }
-//     }
 
-//  toggle(){
-//     if(Platform.OS === 'ios'){
 
-//         if(this.state.pickerOpacity == 0){
-//             this.setState({
-//                 pickerOpacity: 1,
-//                 opacityOfOtherItems: 0 // THIS WILL HIDE YOUR BUTTON!
-//             });
-//          }else{
-//              this.setState({
-//                  pickerOpacity: 0,
-//                  opacityOfOtherItems: 1
-//              });
-//           }
-//      }
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   onCancel = () => {
     this.setState({
@@ -511,7 +511,7 @@ export class Register extends Component {
             <View style = {styles.bottomView}>
             <TouchableOpacity  onPress={() => this.openImagePicker()}>
               {!this.state.image.uri && 
-            <Image source = {require('./imgs/img-bg.png')} style = {styles.imgBg} />
+            <Image source = {require('@images/img-bg.png')} style = {styles.imgBg} />
               }
               {this.state.image && 
                 <Image source = {{uri: this.state.image.uri}} style = {styles.imgBg1} />
@@ -529,7 +529,7 @@ export class Register extends Component {
                                     underlineColorAndroid="transparent"
                                     placeholderTextColor="#ccc" 
                                     value={this.state.firstName}
-                                    //keyboardType={'email-address'}
+                                    
                                   />
                 </View>
                 <View style= {styles.col50}>
@@ -541,7 +541,7 @@ export class Register extends Component {
                                     underlineColorAndroid="transparent"
                                     placeholderTextColor="#ccc" 
                                     value={this.state.lastName}
-                                    //keyboardType={'email-address'}
+                                    
                                   />
                 </View>
               </View>
@@ -573,7 +573,7 @@ export class Register extends Component {
 
         <RNPickerSelect
           placeholder="Marital Status"
-          // style={{backgroundColor:'RED'}}
+          
           selectedValue={'Single'}
           onValueChange={(itemValue, itemIndex) =>
             this.setState({marital_status: itemValue})
@@ -594,9 +594,9 @@ export class Register extends Component {
               <Text style = {styles.label}>Vehicle type</Text>
               {/* <TouchableOpacity style={[styles.input]}> */}
               {/* <Picker
-                //selectedValue={selectedValue}
+                
                 selectedValue={this.state.vehicleTypeId}  
-                //style={{ height: 100, width: 200 }}
+                
                 style={styles.input}
                 onValueChange={(itemValue, itemIndex) => this.setState({vehicleTypeId: itemValue})}
               >
@@ -607,8 +607,8 @@ export class Register extends Component {
 
 <RNPickerSelect
           placeholder="Vehicle Type"
-          // style={{backgroundColor:'RED'}}
-          // selectedValue={'Single'}
+          
+          
           onValueChange={(itemValue, itemIndex) =>
             this.setState({vehicleTypeId: itemValue})
           }
@@ -668,7 +668,7 @@ export class Register extends Component {
 
 <RNPickerSelect
           placeholder="Bank Name"
-          // style={{backgroundColor:'RED'}}
+          
           selectedValue={this.state.bankName}  
           onValueChange={(itemValue, itemIndex) => this.setBankSelectValue(itemValue)}
           style={{
@@ -761,8 +761,8 @@ const styles = StyleSheet.create ({
     marginBottom: 50,
   },
   backImage: {
-    // width: 18,
-    // height: 12,
+    
+    
     marginLeft: 20,
     marginTop: 40,
   },
@@ -842,14 +842,14 @@ const styles = StyleSheet.create ({
      paddingLeft: 20,
     paddingRight: 20,
     marginTop: 10,
-    //marginRight: 30,
+    
     color: '#5B5B5B',
     fontSize: 12,
     marginTop: 10,
   },
   forgotText1: {
     textAlign: 'center',
-    //marginRight: 30,
+    
     color: '#0B277F',
     fontSize: 12,
   },
@@ -914,9 +914,9 @@ modal: {
   padding: 0
 },
 modalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 50,
   width: 100,
@@ -926,9 +926,9 @@ modalView: {
 
 
 forgotModalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 280,
   width: '90%',
@@ -941,7 +941,7 @@ loading: {
   right: 0,
   top: 0,
   bottom: 0,
-  //height: '100vh',
+  
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'rgba(0,0,0,0.5)'

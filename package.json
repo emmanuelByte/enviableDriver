@@ -17,6 +17,7 @@
     "@react-native-community/push-notification-ios": "^1.10.1",
     "@react-native-community/toolbar-android": "^0.2.1",
     "@react-native-picker/picker": "^2.2.0",
+    "babel-plugin-module-resolver": "^4.1.0",
     "moment": "^2.27.0",
     "react": "17.0.1",
     "react-native": "^0.66.2",

@@ -7,7 +7,7 @@ import Modal from 'react-native-modal';
 import { SERVER_URL } from './config/server';
 import ModalFilterPicker from 'react-native-modal-filter-picker';
 import ImagePicker from 'react-native-image-crop-picker';
-// import {Picker} from '@react-native-picker/picker';
+
 import RNPicker from 'react-native-picker-select';
 
 navigator.geolocation = require('@react-native-community/geolocation');
@@ -66,18 +66,18 @@ export class NewProduct extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "Leave", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
     return true
   }
 
   getLocation(){
-    //this.showLoader();
+    
     var that =this;
-    //Checking for the permission just after component loaded
+    
     if(Platform.OS === 'ios'){
       this.callLocation(that);
     }else{
@@ -90,8 +90,8 @@ export class NewProduct extends Component {
               }
             )
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-              //To Check, If Permission is granted
-              //that.callLocation(that);
+              
+              
             } else {
               alert("Location Permission Denied");
             }
@@ -105,41 +105,41 @@ export class NewProduct extends Component {
     }
 
     callLocation(that){
-      //alert("callLocation Called");
+      
         navigator.geolocation.getCurrentPosition(
-          //Will give you the current location
+          
            (position) => {
               const currentLongitude = JSON.stringify(position.coords.longitude);
-              //console.log(currentLongitude);
-              //getting the Longitude from the location json
+              
+              
               const currentLatitude = JSON.stringify(position.coords.latitude);
-              //getting the Latitude from the location json
+              
               that.setState({ longitude:currentLongitude });
-              //Setting state Longitude to re re-render the Longitude Text
+              
               that.setState({ latitude:currentLatitude });
-              //Setting state Latitude to re re-render the Longitude Text
-              //this.getUsers();
-              //this.hideLoader();
+              
+              
+              
            },
            (error) => console.log(error)
         );
         that.watchID = navigator.geolocation.watchPosition((position) => {
-          //Will give you the location on location change
+          
             const currentLongitude = JSON.stringify(position.coords.longitude);
-            //console.log(currentLongitude);
-            //getting the Longitude from the location json
+            
+            
             const currentLatitude = JSON.stringify(position.coords.latitude);
-            //getting the Latitude from the location json
+            
            that.setState({ longitude1:currentLongitude });
-           //Setting state Longitude to re re-render the Longitude Text
+           
            that.setState({ latitude1:currentLatitude });
-           //Setting state Latitude to re re-render the Longitude Text
-           //this.getUsers();
-           //this.hideLoader();
+           
+           
+           
         });
-        // this.subs = [
-        //   this.props.navigation.addListener('didFocus', (payload) => this.componentDidFocus(payload)),
-        // ];
+        
+        
+        
      }
   componentDidMount() {
     this.getLocation();
@@ -170,7 +170,7 @@ export class NewProduct extends Component {
         this.setState({
           user: JSON.parse(value)
         }, () => {
-          //this.getCategories();
+          
           this.setState({
             user_id: this.state.user.id
           })
@@ -232,7 +232,7 @@ export class NewProduct extends Component {
          },
          { text: "Refresh", onPress: () => this.getCategories() }
        ],
-       //{ cancelable: false }
+       
      );
     });
     
@@ -246,7 +246,7 @@ export class NewProduct extends Component {
    .then((res) => {
      
        console.log(res, "cities");
-       //this.hideLoader();
+       
        if(res.success){
           this.setState({
             cities:  res.cities
@@ -268,7 +268,7 @@ export class NewProduct extends Component {
          },
          { text: "Refresh", onPress: () => this.getCities() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -279,10 +279,10 @@ export class NewProduct extends Component {
     
     fetch(`${SERVER_URL}/mobile/add_product`, {
       method: 'POST',
-      // headers: {
-      //     'Accept': 'application/json',
-      //     'Content-Type': 'application/json'
-      // },
+      
+      
+      
+      
       body: data
     }).then((response) => response.json())
         .then((res) => {
@@ -331,7 +331,7 @@ export class NewProduct extends Component {
           imageUri: this.state.image.path
         })
       });
-      //this.prepareImage();
+      
     });
   }
 
@@ -399,7 +399,7 @@ export class NewProduct extends Component {
             <View style = {styles.bottomView}>
             <TouchableOpacity  onPress={() => this.openImagePicker()}>
               {!this.state.imageUri && 
-            <Image source = {require('./imgs/img-bg.png')} style = {styles.imgBg} />
+            <Image source = {require('@images/img-bg.png')} style = {styles.imgBg} />
               }
               {this.state.imageUri && 
             <Image source = {{uri: this.state.imageUri}} style = {styles.imgBg1} />
@@ -418,9 +418,9 @@ export class NewProduct extends Component {
               <Text style = {styles.label}>Product Category</Text>
               {/* <TouchableOpacity style={[styles.input]}>
               <Picker
-                //selectedValue={selectedValue}
+                
                 selectedValue={this.state.productCategoryId}  
-                //style={{ height: 100, width: 200 }}
+                
                 style={styles.input}
                 onValueChange={(itemValue, itemIndex) => this.setState({productCategoryId: itemValue})}
               >
@@ -510,8 +510,8 @@ const styles = StyleSheet.create ({
     marginBottom: 50,
   },
   backImage: {
-    // width: 18,
-    // height: 12,
+    
+    
     marginLeft: 20,
     marginTop: 40,
   },
@@ -588,14 +588,14 @@ const styles = StyleSheet.create ({
   },
   forgotText: {
     textAlign: 'center',
-    //marginRight: 30,
+    
     color: '#5B5B5B',
     fontSize: 12,
     marginTop: 10,
   },
   forgotText1: {
     textAlign: 'center',
-    //marginRight: 30,
+    
     color: '#0B277F',
     fontSize: 12,
   },
@@ -660,9 +660,9 @@ modal: {
   padding: 0
 },
 modalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 50,
   width: 100,
@@ -672,9 +672,9 @@ modalView: {
 
 
 forgotModalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 280,
   width: '90%',
@@ -687,7 +687,7 @@ loading: {
   right: 0,
   top: 0,
   bottom: 0,
-  //height: '100vh',
+  
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'rgba(0,0,0,0.5)'

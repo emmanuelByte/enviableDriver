@@ -48,10 +48,10 @@ export class CompanyProfile extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "Leave", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
     return true
   }
@@ -74,7 +74,7 @@ export class CompanyProfile extends Component {
    .then((res) => {
      
        console.log(res, "orders");
-       //this.hideLoader();
+       
        if(res.success){
           this.setState({
             orders:  res.orders
@@ -96,7 +96,7 @@ export class CompanyProfile extends Component {
          },
          { text: "Refresh", onPress: () => this.getOrders() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -145,7 +145,7 @@ export class CompanyProfile extends Component {
    })
    .then((response) => response.json())
    .then((res) => {
-       //console.log(res, "res");
+       
        this.hideLoader();
        if(res.success){
         AsyncStorage.setItem('user', JSON.stringify(res.user)).then(() => {
@@ -167,9 +167,9 @@ export class CompanyProfile extends Component {
                 bankAccountName: this.state.user.bank_account_name,
                 bankAccountNumber: this.state.user.bank_account_number,
                 bankAccountType: this.state.user.bank_account_type,
-                // latitude: this.state.user.latitude,
-                // longitude: this.state.user.longitude,
-                // address: this.state.user.address
+                
+                
+                
               })
             })
         })
@@ -190,7 +190,7 @@ export class CompanyProfile extends Component {
          },
          { text: "Refresh", onPress: () => this.getProfile() }
        ],
-       //{ cancelable: false }
+       
      );
     });
     
@@ -238,7 +238,7 @@ export class CompanyProfile extends Component {
               <View style={styles.itemView}>
                 <View style={styles.item1}>
                   <View style={styles.contentCol2}>
-                  <Image source = {require('./imgs/round-profile.png')}  style = {styles.userImage} />
+                  <Image source = {require('@images/round-profile.png')}  style = {styles.userImage} />
                   </View>
                   <View style={styles.contentCol3}> 
                     <Text style = {styles.pName}> {this.state.user.first_name} {this.state.user.last_name}</Text>
@@ -374,8 +374,8 @@ const styles = StyleSheet.create ({
     backgroundColor: '#fff',
     alignContent: 'center',
     alignSelf: 'center',
-    //marginRight: 20,
-    //flexDirection: 'row',
+    
+    
   },
   itemView4: {
     width: '90%',
@@ -393,7 +393,7 @@ const styles = StyleSheet.create ({
     alignSelf: 'center',
     marginRight: 25,
     marginLeft: 30,
-    //flexDirection: 'row',
+    
   },
   orderNumber: {
     color: '#000',
@@ -409,23 +409,23 @@ const styles = StyleSheet.create ({
     color: '#000',
     fontWeight: 'bold',
     width: '100%',
-    //marginTop: 15,
+    
   },
   date3: {
-    //width: '20%',
+    
     color: '#000',
-    //paddingTop: 10,
+    
     
   },
   date: {
     width: '20%',
     color: '#000',
-    //paddingTop: 10,
+    
     
   },
   desc: {
     color: '#999',
-    //paddingTop: 10,
+    
   },
   price: {
     fontWeight: 'bold',
@@ -458,8 +458,8 @@ const styles = StyleSheet.create ({
     height: 60,
     borderRadius: 30,
     marginTop: 8,
-    //borderColor: '#9c77b1',
-    //borderWidth: 6,
+    
+    
   },
   addText: {
     textAlign: 'center',
@@ -511,7 +511,7 @@ const styles = StyleSheet.create ({
     fontWeight: 'bold',
   },
   itemPriceText: {
-    //paddingTop: 4,
+    
     fontWeight: 'bold',
     color: '#585757',
   },
@@ -533,7 +533,7 @@ const styles = StyleSheet.create ({
   itemImage: {
     width: 80,
     height: 80,
-    //alignSelf: 'center',
+    
   },
   row: {
     width: '100%',
@@ -543,23 +543,23 @@ const styles = StyleSheet.create ({
     marginTop: 20,
   },
   col1: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   },
   col2: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   
   },
   col3: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   },
   col4: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   },
@@ -569,7 +569,7 @@ const styles = StyleSheet.create ({
   bImage1: {
     width: '100%',
     height: 220,
-    //opacity: 0.6,
+    
     overflow: 'hidden',
     borderBottomEndRadius: 20, 
     borderBottomStartRadius: 20, 
@@ -642,7 +642,7 @@ const styles = StyleSheet.create ({
 
   },
   card: {
-    //flexDirection: 'row',
+    
     width: '100%',
     marginBottom: 4,
     
@@ -673,7 +673,7 @@ const styles = StyleSheet.create ({
     marginTop: 5,
   },
   segmentText: {
-    //textAlign: 'center',
+    
     paddingRight: 10,
     marginRight: 10,
   },
@@ -690,7 +690,7 @@ const styles = StyleSheet.create ({
     marginTop: 1,
     fontSize: 12,
     width: '40%',
-    //textAlign: 'right'
+    
   },
   labelZ:{
     color: '#454A65',
@@ -757,7 +757,7 @@ const styles = StyleSheet.create ({
     marginTop: -14,
   },
   locImage: {
-    //marginTop: -7,
+    
     width: 10,
     height: 10,
     width: 10,
@@ -798,9 +798,9 @@ modal: {
   padding: 0
 },
 modalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 50,
   width: 100,
@@ -814,9 +814,9 @@ label1: {
   paddingLeft: 20,
 },
 forgotModalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 280,
   width: '90%',
@@ -831,7 +831,7 @@ loading: {
   top: 0,
   bottom: 0,
   zIndex: 9999999999999999999999999,
-  //height: '100vh',
+  
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'rgba(0,0,0,0.5)'

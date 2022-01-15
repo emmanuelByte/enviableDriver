@@ -57,10 +57,10 @@ export class RiderBalance extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "Leave", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
     return true
   }
@@ -106,26 +106,26 @@ export class RiderBalance extends Component {
          },
          { text: "Refresh", onPress: () => this.getTransactions() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
   cashout(){
-    // // if(this.state.user.bankName == null){
-    // //   Alert.alert(
-    // //     "Incomplete profile",
-    // //     "You must complete your profile before you can cashout",
-    // //     [
-    // //       {
-    // //         text: "Not now",
-    // //         onPress: () => console.log("Cancel Pressed"),
-    // //         style: "cancel"
-    // //       },
-    // //       { text: "Complete profile", onPress: () => this.props.navigation.navigate('Profile') }
-    // //     ],
-    // //     //{ cancelable: false }
-    // //   );
-    // }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     this.showLoader();
     fetch(`${SERVER_URL}/mobile/request_cashout/${this.state.user.id}`, {
       method: 'GET'
@@ -154,7 +154,7 @@ export class RiderBalance extends Component {
          },
          { text: "Refresh", onPress: () => this.cashout() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -195,7 +195,7 @@ export class RiderBalance extends Component {
          },
          { text: "Refresh", onPress: () => this.getTransactions() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -223,7 +223,7 @@ export class RiderBalance extends Component {
     if(data < 1){
       return(
           <View  style={styles.noView}> 
-                  <Image source = {require('./imgs/no.png')} style = {styles.noImage} ></Image>
+                  <Image source = {require('@images/no.png')} style = {styles.noImage} ></Image>
                   <Text style = {styles.ndt}>You have no cashout at the moment...</Text>
           </View>
       )
@@ -380,7 +380,7 @@ this.setState({
         <Modal
             isVisible={this.state.visible}
             onTouchOutside={() => {
-              //this.setState({ visible: false });
+              
             }}
             height= {'100%'}
             width= {'100%'}
@@ -436,8 +436,8 @@ const styles = StyleSheet.create ({
     backgroundColor: '#fff',
     alignContent: 'center',
     alignSelf: 'center',
-    //marginRight: 20,
-    //flexDirection: 'row',
+    
+    
   },
   itemView4: {
     width: '90%',
@@ -455,7 +455,7 @@ const styles = StyleSheet.create ({
     alignSelf: 'center',
     marginRight: 25,
     marginLeft: 30,
-    //flexDirection: 'row',
+    
   },
   orderNumber: {
     color: '#000',
@@ -474,12 +474,12 @@ const styles = StyleSheet.create ({
   date: {
     width: '50%',
     color: '#e21515',
-    //paddingTop: 10,
+    
     
   },
   desc: {
     color: '#999',
-    //paddingTop: 10,
+    
   },
   price: {
     fontWeight: 'bold',
@@ -570,7 +570,7 @@ const styles = StyleSheet.create ({
     fontWeight: 'bold',
   },
   itemPriceText: {
-    //paddingTop: 4,
+    
     fontWeight: 'bold',
     color: '#585757',
   },
@@ -592,7 +592,7 @@ const styles = StyleSheet.create ({
   itemImage: {
     width: 80,
     height: 80,
-    //alignSelf: 'center',
+    
   },
   row: {
     width: '100%',
@@ -610,23 +610,23 @@ const styles = StyleSheet.create ({
     marginTop: 10,
   },
   col1: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   },
   col2: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   
   },
   col3: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   },
   col4: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   },
@@ -636,7 +636,7 @@ const styles = StyleSheet.create ({
   bImage1: {
     width: '100%',
     height: 220,
-    //opacity: 0.6,
+    
     overflow: 'hidden',
     borderBottomEndRadius: 20, 
     borderBottomStartRadius: 20, 
@@ -683,7 +683,7 @@ const styles = StyleSheet.create ({
     width: '95%',
     alignSelf: 'center',
     marginTop: 15,
-    //height: 50,
+    
     
   },
   linkCol1: {
@@ -730,7 +730,7 @@ const styles = StyleSheet.create ({
 
   },
   card: {
-    //flexDirection: 'row',
+    
     width: '100%',
     marginBottom: 4,
     
@@ -770,7 +770,7 @@ const styles = StyleSheet.create ({
     marginTop: 5,
   },
   segmentText: {
-    //textAlign: 'center',
+    
     paddingRight: 10,
     marginRight: 10,
     color: '#000',
@@ -859,7 +859,7 @@ const styles = StyleSheet.create ({
     marginTop: -14,
   },
   locImage: {
-    //marginTop: -7,
+    
     width: 10,
     height: 10,
     width: 10,
@@ -900,9 +900,9 @@ modal: {
   padding: 0
 },
 modalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 50,
   width: 100,
@@ -916,9 +916,9 @@ label1: {
   paddingLeft: 20,
 },
 forgotModalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 280,
   width: '90%',
@@ -933,7 +933,7 @@ loading: {
   top: 0,
   bottom: 0,
   zIndex: 9999999999999999999999999,
-  //height: '100vh',
+  
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'rgba(0,0,0,0.5)'

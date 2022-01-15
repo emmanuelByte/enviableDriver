@@ -54,10 +54,10 @@ export class CompanyMerchantOrderDetails extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "Leave", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
     return true
   }
@@ -74,7 +74,7 @@ export class CompanyMerchantOrderDetails extends Component {
    .then((res) => {
      
        console.log(res, "orderDetails");
-       //this.hideLoader();
+       
        if(res.success){
           this.setState({
             orderDetails:  res.order_details
@@ -96,7 +96,7 @@ export class CompanyMerchantOrderDetails extends Component {
          },
          { text: "Refresh", onPress: () => this.getOrders() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -144,7 +144,7 @@ export class CompanyMerchantOrderDetails extends Component {
             this.showAlert("success", res.success);
             this.setState(prevState => ({
               orderParam: {
-                ...prevState.orderParam,           // copy all other key-value pairs of food object
+                ...prevState.orderParam,           
                 payment_status: "Completed",
                 payment_method: "Pay with wallet",
               }
@@ -179,7 +179,7 @@ payWithCard(){
           this.showAlert("success", res.success);
           this.setState(prevState => ({
             orderParam: {
-              ...prevState.orderParam,           // copy all other key-value pairs of food object
+              ...prevState.orderParam,           
               payment_status: "Completed",
               payment_method: "Pay with card",
             }
@@ -215,11 +215,11 @@ payWithCard(){
            refNumber={this.state.trn_ref}
           ActivityIndicatorColor="green"
           handleWebViewMessage={(e) => {
-            // handle the message
+            
             console.log(e);
           }}
           onCancel={(e) => {
-            // handle response here
+            
             console.log(e);
           }}
           onSuccess={(e) => {
@@ -349,7 +349,7 @@ payWithCard(){
         <Icon name="arrow-back" size={18} color="#fff"  style = {styles.menuImage}/>
         </TouchableOpacity>
           <Text style = {styles.headerText}>Order summary</Text>
-          <Image source = {require('./imgs/cart.png')} style = {styles.cartImage} />
+          <Image source = {require('@images/cart.png')} style = {styles.cartImage} />
         </LinearGradient>
          
         <ScrollView style={styles.sView} showsVerticalScrollIndicator={false}>
@@ -525,8 +525,8 @@ const styles = StyleSheet.create ({
     alignContent: 'center',
     alignSelf: 'center', 
     padding: 10,
-    //marginRight: 20,
-    //flexDirection: 'row',
+    
+    
     backgroundColor: '#fff',
   },
   itemView4: {
@@ -538,7 +538,7 @@ const styles = StyleSheet.create ({
     alignSelf: 'center',
     marginRight: 25,
     marginLeft: 30,
-    //flexDirection: 'row',
+    
   },
   itemView1: {
     width: '95%',
@@ -547,10 +547,10 @@ const styles = StyleSheet.create ({
     alignSelf: 'center',
     backgroundColor: '#fff',
     padding: 10,
-    //marginRight: 25,
-    //marginLeft: 30,
     
-    //flexDirection: 'row',
+    
+    
+    
   },
   addText: {
     textAlign: 'center',
@@ -591,7 +591,7 @@ const styles = StyleSheet.create ({
     borderWidth: 1,
     borderColor: '#0B277F',
     borderRadius: 8,
-    //backgroundColor: 'green',
+    
     paddingTop: 7,
     marginTop: 40,
   },
@@ -604,8 +604,8 @@ const styles = StyleSheet.create ({
     marginLeft: 30,
     alignSelf: 'center',
     marginBottom: 10,
-    //padding: 10,
-    //flexDirection: 'row'
+    
+    
   },
   item22: {
     flexDirection: 'row',
@@ -651,7 +651,7 @@ const styles = StyleSheet.create ({
     fontWeight: 'bold',
   },
   itemPriceText: {
-    //paddingTop: 4,
+    
     fontWeight: 'bold',
     color: '#585757',
   },
@@ -678,23 +678,23 @@ const styles = StyleSheet.create ({
     marginTop: 20,
   },
   col1: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   },
   col2: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   
   },
   col3: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   },
   col4: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   },
@@ -704,7 +704,7 @@ const styles = StyleSheet.create ({
   bImage1: {
     width: '100%',
     height: 220,
-    //opacity: 0.6,
+    
     overflow: 'hidden',
     borderBottomEndRadius: 20, 
     borderBottomStartRadius: 20, 
@@ -768,7 +768,7 @@ const styles = StyleSheet.create ({
 
   },
   card: {
-    //flexDirection: 'row',
+    
     width: '100%',
     marginBottom: 4,
     
@@ -799,7 +799,7 @@ const styles = StyleSheet.create ({
     marginTop: 5,
   },
   segmentText: {
-    //textAlign: 'center',
+    
     paddingRight: 10,
     marginRight: 10,
   },
@@ -827,7 +827,7 @@ const styles = StyleSheet.create ({
     marginTop: 1,
     fontSize: 14,
     paddingBottom: 3,
-    //fontWeight: 'bold',
+    
   },
   label50:{
     color: '#454A65',
@@ -846,7 +846,7 @@ const styles = StyleSheet.create ({
     width: '40%',
   },
   label88:{
-    //color: '#454A65',
+    
     fontWeight: 'bold',
     marginTop: 1,
     fontSize: 12,
@@ -861,7 +861,7 @@ const styles = StyleSheet.create ({
   labelZ:{
     color: '#454A65',
     width: '50%',
-    //fontWeight: 'bold',
+    
     marginTop: 1,
     fontSize: 13,
   },
@@ -949,7 +949,7 @@ const styles = StyleSheet.create ({
     marginTop: -14,
   },
   locImage: {
-    //marginTop: -7,
+    
     width: 10,
     height: 10,
     width: 10,
@@ -990,9 +990,9 @@ modal: {
   padding: 0
 },
 modalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 50,
   width: 100,
@@ -1006,9 +1006,9 @@ label1: {
   paddingLeft: 20,
 },
 forgotModalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 280,
   width: '90%',
@@ -1023,7 +1023,7 @@ loading: {
   top: 0,
   bottom: 0,
   zIndex: 9999999999999999999999999,
-  //height: '100vh',
+  
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'rgba(0,0,0,0.5)'
