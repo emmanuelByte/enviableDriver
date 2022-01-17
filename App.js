@@ -110,7 +110,7 @@ export default class App extends Component {
     
   }
    getLocation(){
-    //this.showLoader();
+
     var that =this;
     //Checking for the permission just after component loaded
     if(Platform.OS === 'ios'){
@@ -126,7 +126,7 @@ export default class App extends Component {
               }
             )
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-              //To Check, If Permission is granted
+               
               that.callLocation(that);
             } else {
               alert("Permission Denied");
@@ -142,39 +142,39 @@ export default class App extends Component {
   
      callLocation(that){
  
-      // alert("im at tghat")
+       
       setInterval(()=>{
 
         Geolocation.getCurrentPosition(async (position)=>{
           var currentLongitude = position.coords.longitude;
           var currentLatitude = position.coords.latitude;
-          // alert("Location chenaged - "+ currentLatitude);
+           
           await this.getLoggedInUser();
           await this.saveLocation(currentLatitude, currentLongitude)
         })
         }, 10000)
       
       
-      // Geolocation.watchPosition(async (position) => {
+       
 
-      // // navigator.geolocation.watchPosition(async (position) => {
-      //   //Will give you the location on location change
-      //   var currentLongitude = position.coords.longitude;
-      //     var currentLatitude = position.coords.latitude;
-      //     alert("Location chenaged 2 "+ currentLatitude);
+       
+       
+       
+       
+       
 
-      //     // alert("sack", currentLongitude) ;
-      //    await this.getLoggedInUser();
-      //    await this.saveLocation(currentLatitude, currentLongitude)
-      // }, (error)=>{
-      //   alert('Unable to set location. Please enable location'+error);
-      // },
-      // {
-      //   enableHighAccuracy: false,
-      //   timeout: 5000,
-      //   maximumAge: 30000
-      // }
-      // );
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
       
    }
   
@@ -182,11 +182,11 @@ export default class App extends Component {
    async getLoggedInUser(){
     await AsyncStorage.getItem('user').then((value) => {
       if(value){
-        // alert("seen");
-        // console.log(JSON.parse(value).id, 'seen');
+         
+         
         this.setState({id:JSON.parse(value).id})
       }else{
-        // alert("not seen")
+         
       }
     });
   }
@@ -212,7 +212,7 @@ export default class App extends Component {
 
   }
   async componentDidMount(){
-    // alert("lemme run this")
+     
     await this.getLocation()
   }
   render () {
