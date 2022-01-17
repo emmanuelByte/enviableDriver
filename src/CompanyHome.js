@@ -27,7 +27,7 @@ export class CompanyHome extends Component {
       orderDetailsPendingCount:  0,
       reviewsCount:  0,
     }
-    //AsyncStorage.clear();
+    
   }
 
   async componentWillMount() {
@@ -54,10 +54,10 @@ export class CompanyHome extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "Leave", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
     return true
   }
@@ -88,7 +88,7 @@ export class CompanyHome extends Component {
     await AsyncStorage.getItem('user').then((value) => {
       if(value){
         console.log(value, 'vv')
-        //this.props.navigation.navigate('Home')
+        
         this.setState({
           user: JSON.parse(value)
         }, () => {
@@ -122,7 +122,7 @@ export class CompanyHome extends Component {
    .then((res) => {
      
        console.log(res, "orders");
-       //this.hideLoader();
+       
        if(res.success){
           this.setState({
             ridersCount:  res.riders,
@@ -147,7 +147,7 @@ export class CompanyHome extends Component {
          },
          { text: "Refresh", onPress: () => this.getDashboardInfo() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -242,7 +242,7 @@ export class CompanyHome extends Component {
             <TouchableOpacity onPress={this.navigateToScreen('CompanyProfile')}  style={styles.topRow}>
               <View style = {styles.topImageView}>
                 <TouchableOpacity  onPress={this.navigateToScreen('CompanyProfile')}>
-                <Image source = {require('./imgs/round-profile.png')}  style = {styles.userImage} />
+                <Image source = {require('@images/round-profile.png')}  style = {styles.userImage} />
                 </TouchableOpacity>
               </View>
               <View style = {styles.topTextView}>
@@ -365,7 +365,7 @@ const styles = StyleSheet.create ({
     width: '100%',
     height: 220,
     zIndex:0,
-    //opacity: 0.6,
+    
     overflow: 'hidden',
     borderBottomEndRadius: 30, 
     borderBottomStartRadius: 30, 
@@ -379,32 +379,32 @@ const styles = StyleSheet.create ({
   menuImage: {
     width: 40,
 
-    //marginLeft: 20,
-    //marginTop: 59,
+    
+    
   },
   menuImageView: {
     zIndex: 999999999999999,
     width: '100%',
     flexDirection: 'row',
     paddingLeft: 20,
-    //backgroundColor: '#000',
+    
     height: 55,
-    //paddingLeft: 20,
-    //paddingRight: 20,
-    //marginLeft: 20,
+    
+    
+    
     marginTop: 50,
-    //elevation: 2,
+    
   },
   bottomView: {
     width: '90%',
     alignSelf: 'center',
     marginTop: 10,
-    //paddingLeft: 20,
-    //paddingRight: 20,
+    
+    
   },
   headerText: {
     fontSize: 17,
-    //paddingLeft: 20,
+    
     color: '#000',
     width: '50%',
     marginTop: 5,
@@ -417,7 +417,7 @@ const styles = StyleSheet.create ({
 
   },
   card1: {
-    //flexDirection: 'row',
+    
     width: '50%',
     height: 100,
     marginBottom: 13,
@@ -446,13 +446,13 @@ const styles = StyleSheet.create ({
     marginTop: 5,
   },
   card2: {
-    //flexDirection: 'row',
+    
     width: '50%',
     height: 100,
     marginBottom: 13,
     
     borderRadius: 10,
-    //marginLeft: 5,
+    
     backgroundColor: '#F59159',
     padding: 15,
   },
@@ -470,7 +470,7 @@ const styles = StyleSheet.create ({
   },
 
   card3: {
-    //flexDirection: 'row',
+    
     width: '50%',
     height: 100,
     marginBottom: 13,
@@ -493,13 +493,13 @@ const styles = StyleSheet.create ({
     marginTop: 5,
   },
   card4: {
-    //flexDirection: 'row',
+    
     width: '50%',
     height: 100,
     marginBottom: 13,
     
     borderRadius: 10,
-    //marginLeft: 5,
+    
     backgroundColor: '#FFCD3A',
     padding: 15,
   },
@@ -614,9 +614,9 @@ modal: {
   padding: 0
 },
 modalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 50,
   width: 100,
@@ -630,9 +630,9 @@ label1: {
   paddingLeft: 20,
 },
 forgotModalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 280,
   width: '90%',
@@ -657,8 +657,8 @@ userImage: {
   width: 60,
   height: 60,
   borderRadius: 30,
-  //borderColor: '#9c77b1',
-  //borderWidth: 6,
+  
+  
 },
 topTextView: {
   paddingLeft: 20,
@@ -684,7 +684,7 @@ linkBodyBottom: {
 },
 linkItemBottom: {
   width: '100%',
-  //paddingLeft: 20,
+  
   flexDirection: 'row',
   marginBottom: 5,
 },
@@ -716,7 +716,7 @@ textView: {
 linkIcon: {
   width: 20,
   height: 20,
-  //paddingRi: 20,
+  
 },
 
 profilePix: {

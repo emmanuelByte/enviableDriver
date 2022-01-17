@@ -3,7 +3,6 @@ import { AppRegistry, Dimensions } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { Button, Platform, StyleSheet, Text, View, TouchableOpacity,PermissionsAndroid,AsyncStorage } from 'react-native';
-import {name as appName} from './app.json';
 
 import Initial from './src/Initial';
 import Login from './src/Login';
@@ -45,6 +44,8 @@ import Guarantor from './src/Guarantor';
 import Riders from './src/Riders';
 import AddRider from './src/AddRider';
 navigator.geolocation = require('@react-native-community/geolocation');
+import Geolocation from '@react-native-community/geolocation';
+
 import { SERVER_URL } from './src/config/server';
 
 console.disableYellowBox = true;
@@ -141,16 +142,39 @@ export default class App extends Component {
   
      callLocation(that){
  
+      // alert("im at tghat")
+      setInterval(()=>{
 
-      navigator.geolocation.watchPosition(async (position) => {
-        //Will give you the location on location change
-
-        var currentLongitude = position.coords.longitude;
+        Geolocation.getCurrentPosition(async (position)=>{
+          var currentLongitude = position.coords.longitude;
           var currentLatitude = position.coords.latitude;
-          // alert("sack", currentLongitude) ;
-         await this.getLoggedInUser();
-         await this.saveLocation(currentLatitude, currentLongitude)
-      });
+          // alert("Location chenaged - "+ currentLatitude);
+          await this.getLoggedInUser();
+          await this.saveLocation(currentLatitude, currentLongitude)
+        })
+        }, 10000)
+      
+      
+      // Geolocation.watchPosition(async (position) => {
+
+      // // navigator.geolocation.watchPosition(async (position) => {
+      //   //Will give you the location on location change
+      //   var currentLongitude = position.coords.longitude;
+      //     var currentLatitude = position.coords.latitude;
+      //     alert("Location chenaged 2 "+ currentLatitude);
+
+      //     // alert("sack", currentLongitude) ;
+      //    await this.getLoggedInUser();
+      //    await this.saveLocation(currentLatitude, currentLongitude)
+      // }, (error)=>{
+      //   alert('Unable to set location. Please enable location'+error);
+      // },
+      // {
+      //   enableHighAccuracy: false,
+      //   timeout: 5000,
+      //   maximumAge: 30000
+      // }
+      // );
       
    }
   
@@ -168,31 +192,28 @@ export default class App extends Component {
   }
 
      saveLocation(origin_latitude, origin_longitude){
+    console.log(origin_latitude, origin_longitude);
+    if(this.state.id){
+      fetch(`${SERVER_URL}/mobile/save_rider_location`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            latitude: origin_latitude,
+            longitude: origin_longitude,
+            user_id: this.state.id, 
+        })
+      }).then((response) => response.json())
+          .then((res) => res)
+          .catch(e=> alert('This is a startup error'));
+    }
 
-    fetch(`${SERVER_URL}/mobile/save_rider_location`, {
-      method: 'POST',
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-          latitude: origin_latitude,
-          longitude: origin_longitude,
-          user_id: this.state.id, 
-      })
-    }).then((response) => response.json())
-        .then((res) => {
-          // console.log(res)
-          if(res.success){
-            // alert( origin_latitude+" "+origin_longitude);
-
-          }else{
-            
-          }
-  }).done();
   }
-  componentDidMount(){
-    this.getLocation()
+  async componentDidMount(){
+    // alert("lemme run this")
+    await this.getLocation()
   }
   render () {
     return (

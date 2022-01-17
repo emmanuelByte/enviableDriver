@@ -1,13 +1,13 @@
 import React, { Component  } from 'react';
-import { AppState, View, Text, Alert, Image, Platform, PermissionsAndroid, Picker, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
+import { AppState, View, Text, Alert, Image, Platform, PermissionsAndroid, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import LinearGradient from 'react-native-linear-gradient';
-import Modal from 'react-native-modal';
 import { SERVER_URL } from './config/server';
 import ModalFilterPicker from 'react-native-modal-filter-picker';
 import ImagePicker from 'react-native-image-crop-picker';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+
+import RNPicker from 'react-native-picker-select';
+
 navigator.geolocation = require('@react-native-community/geolocation');
 
 export class Guarantor extends Component {
@@ -62,16 +62,16 @@ export class Guarantor extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "Leave", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
     return true
   }
 
   componentDidMount() {
-    //this.getLocation();
+    
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
   }
 
@@ -134,7 +134,7 @@ export class Guarantor extends Component {
    .then((res) => {
      
        console.log(res, "cities");
-       //this.hideLoader();
+       
        if(res.success){
           this.setState({
             cities:  res.cities
@@ -156,7 +156,7 @@ export class Guarantor extends Component {
          },
          { text: "Refresh", onPress: () => this.getCities() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -166,10 +166,10 @@ export class Guarantor extends Component {
     
     fetch(`${SERVER_URL}/mobile/riderGuarantor`, {
       method: 'POST',
-      // headers: {
-      //     'Accept': 'application/json',
-      //     'Content-Type': 'application/json'
-      // },
+      
+      
+      
+      
       body: data
     }).then((response) => response.json())
         .then((res) => {
@@ -253,7 +253,7 @@ export class Guarantor extends Component {
                                     underlineColorAndroid="transparent"
                                     placeholderTextColor="#ccc" 
                                     value={this.state.firstName}
-                                    //keyboardType={'email-address'}
+                                    
                                   />
                 </View>
                 <View style= {styles.col50}>
@@ -265,7 +265,7 @@ export class Guarantor extends Component {
                                     underlineColorAndroid="transparent"
                                     placeholderTextColor="#ccc" 
                                     value={this.state.lastName}
-                                    //keyboardType={'email-address'}
+                                    
                                   />
                 </View>
               </View>
@@ -293,18 +293,38 @@ export class Guarantor extends Component {
               <Text style={styles.locSelect}>{this.state.locationPlaceholder}</Text>
             </TouchableOpacity>
             <Text style = {styles.label}>Marital status</Text>
-              <TouchableOpacity style={[styles.input]}>
+              {/* <TouchableOpacity style={[styles.input]}>
               <Picker
-                //selectedValue={selectedValue}
+                
                 selectedValue={this.state.marital_status}  
-                //style={{ height: 100, width: 200 }}
+                
                 style={styles.input}
                 onValueChange={(itemValue, itemIndex) => this.setState({marital_status: itemValue})}
               >
                 <Picker.Item color="#444" label={"Single"} value={"Single"} />
                 <Picker.Item color="#444" label={"Married"} value={"Married"} />
               </Picker>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
+
+<RNPicker
+          placeholder="Marital status"
+          
+          selectedValue={this.state.marital_status}  
+          onValueChange={(itemValue, itemIndex) => this.setState({marital_status: itemValue})}
+
+          style={{
+            inputIOSContainer:styles.input,
+            inputAndroid: styles.input,
+
+            placeholder:{color:'black'}
+          }}          
+          items={[
+            { label: 'Single', value: 'Single' },
+            { label: 'Married', value: 'Married' },
+        ]}          
+        returnKeyType={'done'}
+        />
+        
               <Text style = {styles.label}>Email</Text>
               <TextInput
                                 style={styles.input}
@@ -350,8 +370,8 @@ const styles = StyleSheet.create ({
     marginBottom: 50,
   },
   backImage: {
-    // width: 18,
-    // height: 12,
+    
+    
     marginLeft: 20,
     marginTop: 40,
   },
@@ -428,14 +448,14 @@ const styles = StyleSheet.create ({
   },
   forgotText: {
     textAlign: 'center',
-    //marginRight: 30,
+    
     color: '#5B5B5B',
     fontSize: 12,
     marginTop: 10,
   },
   forgotText1: {
     textAlign: 'center',
-    //marginRight: 30,
+    
     color: '#0B277F',
     fontSize: 12,
   },
@@ -500,9 +520,9 @@ modal: {
   padding: 0
 },
 modalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 50,
   width: 100,
@@ -512,9 +532,9 @@ modalView: {
 
 
 forgotModalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 280,
   width: '90%',
@@ -527,7 +547,7 @@ loading: {
   right: 0,
   top: 0,
   bottom: 0,
-  //height: '100vh',
+  
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'rgba(0,0,0,0.5)'

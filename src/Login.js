@@ -41,10 +41,10 @@ export class Login extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "Leave", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
     return true
   }
@@ -151,12 +151,12 @@ export class Login extends Component {
                     if(res.user.vehicle_type_id == 13 || res.user.vehicle_type_id == 14 || res.user.vehicle_type_id == 15){
                       this.props.navigation.navigate('RideShareHome')
                     }else{
-                    //this.props.navigation.navigate('Home')
+                    
                     this.props.navigation.navigate('ActiveOrders')
                     }
                   }
                 });
-                //this.showAlert("error", res.error)
+                
               });
             }else{
               this.showAlert("Error", res.error)
@@ -211,7 +211,7 @@ export class Login extends Component {
                           onChangeText={(text) => this.setState({email: text})}
                           underlineColorAndroid="transparent"
                           value={this.state.email}
-                          //keyboardType={'email-address'}
+                          
                           autoCapitalize = "none"
                         />
         <Text style = {styles.label}>Password</Text>
@@ -382,7 +382,7 @@ const styles = StyleSheet.create ({
 submitButton: {
   marginTop: 20,
   backgroundColor: '#0B277F',
-  //opacity: 0.7,
+  
   borderRadius: 7,
   width: '85%',
   alignSelf: 'center',
@@ -414,9 +414,9 @@ modal: {
   padding: 0
 },
 modalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 50,
   width: 100,
@@ -434,9 +434,9 @@ label1: {
   paddingLeft: 20,
 },
 forgotModalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 280,
   width: '90%',
@@ -451,7 +451,7 @@ loading: {
   top: 0,
   bottom: 0,
   zIndex: 9999999999999999999999999,
-  //height: '100vh',
+  
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'rgba(0,0,0,0.5)'
