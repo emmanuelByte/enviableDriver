@@ -258,6 +258,45 @@ export class Profile extends Component {
   }
   
 
+  updatePassword() {
+    if (this.state.password != this.state.cpassword) {
+      this.showAlert('Info', 'Provided passwords do not match');
+      return;
+    }
+    if (this.state.password.length < 6) {
+      this.showAlert(
+        'Info',
+        'Provided passwords must have at least 6 characters',
+      );
+      return;
+    }
+    this.showLoader();
+
+    fetch(`${SERVER_URL}/mobile/update_password`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_id: this.state.customer.id,
+        password: this.state.password,
+      }),
+    })
+      .then(response => response.json())
+      .then(res => {
+         
+        this.hideLoader();
+        if (res.success) {
+          this.showAlert('success', res.success);
+        } else {
+          this.showAlert('Error', res.error);
+        }
+      })
+      .done();
+  }
+  
+
   render() {
     const { visible } = this.state;
     return (
@@ -364,6 +403,9 @@ export class Profile extends Component {
                   </View>
                 </View>
               </View>
+              <TouchableOpacity onPress={()=> this.props.navigation.push('EditPassword')} style={{marginVertical:20, paddingVertical:10, borderRadius:5, backgroundColor:"#0B277F"}}>
+                <Text style={{textAlign:'center', color:'white'}}>Change Password</Text>
+              </TouchableOpacity>
           </View>
         </ScrollView>
         <Modal
