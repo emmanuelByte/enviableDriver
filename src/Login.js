@@ -120,8 +120,8 @@ export class Login extends Component {
   }
 
   login(){
-    console.log(this.state.email, 'email');
-    console.log(this.state.password, 'password');
+
+    
       this.showLoader();
       fetch(`${SERVER_URL}/mobile/riderLogin`, {
         method: 'POST',
@@ -138,7 +138,9 @@ export class Login extends Component {
       }).then((response) => response.json())
           .then((res) => {
             this.hideLoader();
-            console.log(res, 'ss')
+
+            console.log(res, 'ss sscore board');
+
             if(res.success){
               AsyncStorage.setItem('user', JSON.stringify(res.user)).then(() => {
                 AsyncStorage.setItem('loginvalue', this.state.email).then(() => {
@@ -168,6 +170,8 @@ export class Login extends Component {
   }
 
   forgot(){
+    this.setState({ forgotVisible: false });
+
       this.showLoader();
       fetch(`${SERVER_URL}/mobile/forgot_password_post`, {
         method: 'POST',

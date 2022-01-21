@@ -1,4 +1,3 @@
-import { Platform } from 'react-native';
 module.exports = {
   SERVER_URL:
   

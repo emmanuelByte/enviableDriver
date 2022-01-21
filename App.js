@@ -47,6 +47,7 @@ navigator.geolocation = require('@react-native-community/geolocation');
 import Geolocation from '@react-native-community/geolocation';
 
 import { SERVER_URL } from './src/config/server';
+import { EditPassword } from './src/EditPassword';
 
 console.disableYellowBox = true;
 
@@ -92,7 +93,8 @@ const MainNavigator = createStackNavigator({
   RiderRegisterType: {screen: RiderRegisterType},
   RideShareHome: {screen: RideShareHome},
   RideOrderDetails: {screen: RideOrderDetails},
-  RideOrders: {screen: RideOrders}
+  RideOrders: {screen: RideOrders},
+  EditPassword:{screen:EditPassword}
   
   
    
