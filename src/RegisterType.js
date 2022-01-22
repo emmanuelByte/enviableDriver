@@ -24,7 +24,7 @@ export class RegisterType extends Component {
       sideMenuModalVisible: false,
       balance: false,
     }
-    //AsyncStorage.clear();
+    
   }
 
   async componentWillMount() {
@@ -117,7 +117,7 @@ export class RegisterType extends Component {
                   <TouchableWithoutFeedback onPress={() => this.gotoRegister("Haulage")}>
                     <View style = {styles.card}>
                       <View style = {styles.colImage}>
-                        <Image source = {require('./imgs/ha.png')} style = {styles.cImage} />
+                        <Image source = {require('@images/ha.png')} style = {styles.cImage} />
                       </View>
                       <View style = {styles.colContent}>
                         <Text style = {styles.contentText1}>Haulage service</Text>
@@ -131,7 +131,7 @@ export class RegisterType extends Component {
                   <TouchableWithoutFeedback  onPress={() => this.gotoRegister("Courier")}>
                     <View style = {styles.card1}>
                       <View style = {styles.colImage}>
-                        <Image source = {require('./imgs/hb.png')} style = {styles.cImage1} />
+                        <Image source = {require('@images/hb.png')} style = {styles.cImage1} />
                       </View>
                       <View style = {styles.colContent}>
                         <Text style = {styles.contentText2}>Courier service</Text>
@@ -145,7 +145,7 @@ export class RegisterType extends Component {
                   <TouchableWithoutFeedback  onPress={() => this.gotoRegister("Ride Share")} >
                     <View style = {styles.card}>
                       <View style = {styles.colImage}>
-                        <Image source = {require('./imgs/hc.png')} style = {styles.cImage2} />
+                        <Image source = {require('@images/hc.png')} style = {styles.cImage2} />
                       </View>
                       <View style = {styles.colContent}>
                         <Text style = {styles.contentText3}>Ride share</Text>
@@ -159,7 +159,7 @@ export class RegisterType extends Component {
                   <TouchableWithoutFeedback  onPress={() => this.gotoRegister("Courier")} >
                     <View style = {styles.card1}>
                       <View style = {styles.colImage}>
-                        <Image source = {require('./imgs/hd.png')} style = {styles.cImage3} />
+                        <Image source = {require('@images/hd.png')} style = {styles.cImage3} />
                       </View>
                       <View style = {styles.colContent}>
                         <Text style = {styles.contentText4}>Food delivery</Text>
@@ -209,7 +209,7 @@ const styles = StyleSheet.create ({
     width: '100%',
     height: '100%',
     zIndex:0,
-    //opacity: 0.6,
+    
     overflow: 'hidden',
   },
   logoImage: {
@@ -219,8 +219,8 @@ const styles = StyleSheet.create ({
     height: 78,
   },
   menuImage: {
-    //marginLeft: 20,
-    //marginTop: 69,
+    
+    
     width: 30,
     height: 19,
   },
@@ -240,35 +240,35 @@ const styles = StyleSheet.create ({
   menuImageView: {
     zIndex: 999999999999999,
     width: '100%',
-    //backgroundColor: '#000',
+    
     height: 15,
     paddingLeft: 20,
     paddingRight: 40,
     paddingBottom: 20,
-    //marginLeft: 20,
+    
     paddingTop: 80,
-    //elevation: 2,
+    
   },
   bottomView: {
     width: '100%',
     alignSelf: 'center',
-    //position: 'absolute',
-    //bottom: 0,
+    
+    
     marginTop: 30,
-    //paddingLeft: 20,
-    //paddingRight: 20,
+    
+    
   },
   backImage: {
     marginTop: 20,
     marginLeft: 20,
   },
   tButton: {
-    //marginTop: 20,
+    
     borderColor: '#fff',
     borderWidth: 1,
     borderRadius: 6,
     width: '50%',
-    //alignSelf: 'flex-end',
+    
     marginRight: 5,
     paddingTop: 7,
     paddingBottom: 8,
@@ -302,9 +302,9 @@ const styles = StyleSheet.create ({
     flexDirection: 'row',
     width: '90%',
     alignSelf: 'center',
-    //height: 150,
+    
     marginBottom: 13,
-    //marginRight: '10%',
+    
     backgroundColor: '#fff',
     borderRadius: 20,
     padding: 15,
@@ -312,7 +312,7 @@ const styles = StyleSheet.create ({
   card1: {
     flexDirection: 'row',
     alignSelf: 'center',
-    //height: 150,
+    
     width: '90%',
     marginBottom: 13,
     
@@ -329,7 +329,7 @@ const styles = StyleSheet.create ({
     flexDirection: 'column',
   },
   cImage: {
-    //alignSelf: 'center',
+    
     marginTop: 20,
     marginBottom: 20,
     width: 60,
@@ -337,21 +337,21 @@ const styles = StyleSheet.create ({
   },
   cImage1: {
 
-    //alignSelf: 'center',
+    
     marginTop: 10,
     marginBottom: 10,
     width: 60,
     height: 48,
   },
   cImage2: {
-    //alignSelf: 'center',
-    // marginTop: 20,
-    // marginBottom: 20,
+    
+    
+    
     width: 80,
     height: 70,
   },
   cImage3: {
-    //alignSelf: 'center',
+    
     marginLeft: 14,
     marginTop: 10,
     marginBottom: 10,
@@ -366,28 +366,28 @@ const styles = StyleSheet.create ({
     marginTop: 5,
     fontSize: 13,
     fontWeight: 'bold',
-    //textAlign: 'center',
+    
   },
   contentText2: {
     color: '#000',
     marginTop: 5,
     fontSize: 13,
     fontWeight: 'bold',
-    //textAlign: 'center',
+    
   },
   contentText3: {
     color: '#000',
-    //marginTop: 20,
+    
     fontSize: 13,
     fontWeight: 'bold',
-    //textAlign: 'center',
+    
   },
   contentText4: {
     color: '#000',
     marginTop: 5,
     fontSize: 13,
     fontWeight: 'bold',
-    //textAlign: 'center',
+    
   },
   contentTextBody: {
     color: '#313131'
@@ -473,9 +473,9 @@ modal: {
   padding: 0
 },
 modalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 50,
   width: 100,
@@ -489,9 +489,9 @@ label1: {
   paddingLeft: 20,
 },
 forgotModalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 280,
   width: '90%',
@@ -500,21 +500,21 @@ forgotModalView: {
 },
 
 top: {
-  //marginBottom: 60,
+  
   width: '100%',
-  //height: '100%'
+  
 },
 
 row: {
   width: '100%',
-  //alignSelf: 'center',
+  
   marginTop: 10,
   
 },
 
 row1: {
   width: '100%',
-  //position: 'absolute',
+  
   bottom: 0,
   
 },
@@ -525,7 +525,7 @@ bCol1: {
 }, 
 lText1: {
   color: '#fff',
-  //width: '50%',
+  
   fontSize: 16,
   textAlign: 'center',
   fontWeight: '700',
@@ -539,7 +539,7 @@ bCol2: {
 }, 
 lText2: {
   color: '#0B277F',
-  //width: '50%',
+  
   fontSize: 16,
   textAlign: 'center',
   fontWeight: '700', 
@@ -559,8 +559,8 @@ userImage: {
   width: 60,
   height: 60,
   borderRadius: 30,
-  //borderColor: '#9c77b1',
-  //borderWidth: 6,
+  
+  
 },
 topTextView: {
   paddingLeft: 20,
@@ -586,7 +586,7 @@ linkBodyBottom: {
 },
 linkItemBottom: {
   width: '100%',
-  //paddingLeft: 20,
+  
   flexDirection: 'row',
   marginBottom: 5,
 },
@@ -618,7 +618,7 @@ textView: {
 linkIcon: {
   width: 20,
   height: 20,
-  //paddingRi: 20,
+  
 },
 
 profilePix: {

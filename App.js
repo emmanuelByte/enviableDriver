@@ -3,7 +3,6 @@ import { AppRegistry, Dimensions } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { Button, Platform, StyleSheet, Text, View, TouchableOpacity,PermissionsAndroid,AsyncStorage } from 'react-native';
-import {name as appName} from './app.json';
 
 import Initial from './src/Initial';
 import Login from './src/Login';
@@ -45,7 +44,10 @@ import Guarantor from './src/Guarantor';
 import Riders from './src/Riders';
 import AddRider from './src/AddRider';
 navigator.geolocation = require('@react-native-community/geolocation');
+import Geolocation from '@react-native-community/geolocation';
+
 import { SERVER_URL } from './src/config/server';
+import { EditPassword } from './src/EditPassword';
 
 console.disableYellowBox = true;
 
@@ -91,7 +93,8 @@ const MainNavigator = createStackNavigator({
   RiderRegisterType: {screen: RiderRegisterType},
   RideShareHome: {screen: RideShareHome},
   RideOrderDetails: {screen: RideOrderDetails},
-  RideOrders: {screen: RideOrders}
+  RideOrders: {screen: RideOrders},
+  EditPassword:{screen:EditPassword}
   
   
    
@@ -109,7 +112,7 @@ export default class App extends Component {
     
   }
    getLocation(){
-    //this.showLoader();
+
     var that =this;
     //Checking for the permission just after component loaded
     if(Platform.OS === 'ios'){
@@ -125,7 +128,7 @@ export default class App extends Component {
               }
             )
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-              //To Check, If Permission is granted
+               
               that.callLocation(that);
             } else {
               alert("Permission Denied");
@@ -141,16 +144,39 @@ export default class App extends Component {
   
      callLocation(that){
  
+       
+      setInterval(()=>{
 
-      navigator.geolocation.watchPosition(async (position) => {
-        //Will give you the location on location change
-
-        var currentLongitude = position.coords.longitude;
+        Geolocation.getCurrentPosition(async (position)=>{
+          var currentLongitude = position.coords.longitude;
           var currentLatitude = position.coords.latitude;
-          // alert("sack", currentLongitude) ;
-         await this.getLoggedInUser();
-         await this.saveLocation(currentLatitude, currentLongitude)
-      });
+           
+          await this.getLoggedInUser();
+          await this.saveLocation(currentLatitude, currentLongitude)
+        })
+        }, 10000)
+      
+      
+       
+
+       
+       
+       
+       
+       
+
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
       
    }
   
@@ -158,41 +184,38 @@ export default class App extends Component {
    async getLoggedInUser(){
     await AsyncStorage.getItem('user').then((value) => {
       if(value){
-        // alert("seen");
-        // console.log(JSON.parse(value).id, 'seen');
+         
+         
         this.setState({id:JSON.parse(value).id})
       }else{
-        // alert("not seen")
+         
       }
     });
   }
 
      saveLocation(origin_latitude, origin_longitude){
+    console.log(origin_latitude, origin_longitude);
+    if(this.state.id){
+      fetch(`${SERVER_URL}/mobile/save_rider_location`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            latitude: origin_latitude,
+            longitude: origin_longitude,
+            user_id: this.state.id, 
+        })
+      }).then((response) => response.json())
+          .then((res) => res)
+          .catch(e=> alert('This is a startup error'));
+    }
 
-    fetch(`${SERVER_URL}/mobile/save_rider_location`, {
-      method: 'POST',
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-          latitude: origin_latitude,
-          longitude: origin_longitude,
-          user_id: this.state.id, 
-      })
-    }).then((response) => response.json())
-        .then((res) => {
-          // console.log(res)
-          if(res.success){
-            // alert( origin_latitude+" "+origin_longitude);
-
-          }else{
-            
-          }
-  }).done();
   }
-  componentDidMount(){
-    this.getLocation()
+  async componentDidMount(){
+     
+    await this.getLocation()
   }
   render () {
     return (

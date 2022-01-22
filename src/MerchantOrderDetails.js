@@ -41,9 +41,9 @@ export class MerchantOrderDetails extends Component {
     this.setState({
       orderId: this.props.navigation.state.params.orderId,
     }, () => {
-      // this.setState({
-      //   trn_ref: this.state.orderParam.order_number+Math.floor(1000 + Math.random() * 9000)
-      // })
+      
+      
+      
       this.getOrderDetails(this.state.orderId);
     })
   }
@@ -62,10 +62,10 @@ export class MerchantOrderDetails extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "Leave", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
     return true
   }
@@ -84,28 +84,28 @@ export class MerchantOrderDetails extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "OK, Open map", onPress: () => {
           showLocation({
             latitude: this.state.orderDetails[0].merchant_latitude,
             longitude: this.state.orderDetails[0].merchant_longitude,
-            //sourceLatitude: this.state.origin.latitude,  // optionally specify starting location for directions
-            //sourceLongitude: this.state.origin.longitude,  // not optional if sourceLatitude is specified
-            //title: 'The White House',  // optional
-            //googleForceLatLon: false,  // optionally force GoogleMaps to use the latlon for the query instead of the title
-            //googlePlaceId: 'ChIJGVtI4by3t4kRr51d_Qm_x58',  // optionally specify the google-place-id
-            //alwaysIncludeGoogle: true, // optional, true will always add Google Maps to iOS and open in Safari, even if app is not installed (default: false)
-            dialogTitle: 'Change map', // optional (default: 'Open in Maps')
-            dialogMessage: 'Open in google map', // optional (default: 'What app would you like to use?')
-            cancelText: 'Cancel', // optional (default: 'Cancel')
-            // appsWhiteList: ['google-maps'], // optionally you can set which apps to show (default: will show all supported apps installed on device)
-            naverCallerName: 'com.EnviableRider',  // to link into Naver Map You should provide your appname which is the bundle ID in iOS and applicationId in android.
-            appTitles: { 'google-maps': "Merchant location" } // optionally you can override default app titles
-            // app: 'uber'  // optionally specify specific app to use
+            
+            
+            
+            
+            
+            
+            dialogTitle: 'Change map', 
+            dialogMessage: 'Open in google map', 
+            cancelText: 'Cancel', 
+            
+            naverCallerName: 'com.EnviableRider',  
+            appTitles: { 'google-maps': "Merchant location" } 
+            
         })
         } }
       ],
-      //{ cancelable: false }
+      
     );
     return true
     
@@ -120,28 +120,28 @@ export class MerchantOrderDetails extends Component {
             onPress: () => console.log("Cancel Pressed"),
             style: "cancel"
           },
-          //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+          
           { text: "OK, Open map", onPress: () => {
             showLocation({
               latitude: this.state.orderParam.latitude,
               longitude: this.state.orderParam.longitude,
-              //sourceLatitude: this.state.origin.latitude,  // optionally specify starting location for directions
-              //sourceLongitude: this.state.origin.longitude,  // not optional if sourceLatitude is specified
-              //title: 'The White House',  // optional
-              //googleForceLatLon: false,  // optionally force GoogleMaps to use the latlon for the query instead of the title
-              //googlePlaceId: 'ChIJGVtI4by3t4kRr51d_Qm_x58',  // optionally specify the google-place-id
-              //alwaysIncludeGoogle: true, // optional, true will always add Google Maps to iOS and open in Safari, even if app is not installed (default: false)
-              dialogTitle: 'Change map', // optional (default: 'Open in Maps')
-              dialogMessage: 'Open in google map', // optional (default: 'What app would you like to use?')
-              cancelText: 'Cancel', // optional (default: 'Cancel')
-              // appsWhiteList: ['google-maps'], // optionally you can set which apps to show (default: will show all supported apps installed on device)
-              naverCallerName: 'com.EnviableRider',  // to link into Naver Map You should provide your appname which is the bundle ID in iOS and applicationId in android.
-              appTitles: { 'google-maps': "Delivery location" } // optionally you can override default app titles
-              // app: 'uber'  // optionally specify specific app to use
+              
+              
+              
+              
+              
+              
+              dialogTitle: 'Change map', 
+              dialogMessage: 'Open in google map', 
+              cancelText: 'Cancel', 
+              
+              naverCallerName: 'com.EnviableRider',  
+              appTitles: { 'google-maps': "Delivery location" } 
+              
             })
             } }
           ],
-          //{ cancelable: false }
+          
         );
         return true
       
@@ -180,7 +180,7 @@ export class MerchantOrderDetails extends Component {
          },
          { text: "Refresh", onPress: () => this.getOrders() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -226,13 +226,13 @@ export class MerchantOrderDetails extends Component {
           this.hideLoader();
           if(res.success){
             this.showAlert("success", res.success);
-            // this.setState(prevState => ({
-            //   orderParam: {
-            //     ...prevState.orderParam,           // copy all other key-value pairs of food object
-            //     payment_status: "Completed",
-            //     payment_method: "Pay with wallet",
-            //   }
-            // }))
+            
+            
+            
+            
+            
+            
+            
             this.getOrderDetails(this.state.orderParam.id)
           }else{
             this.showAlert("Error", res.error)
@@ -262,13 +262,13 @@ payWithCard(){
         this.hideLoader();
         if(res.success){
           this.showAlert("success", res.success);
-          // this.setState(prevState => ({
-          //   orderParam: {
-          //     ...prevState.orderParam,           // copy all other key-value pairs of food object
-          //     payment_status: "Completed",
-          //     payment_method: "Pay with card",
-          //   }
-          // }))
+          
+          
+          
+          
+          
+          
+          
           this.getOrderDetails(this.state.orderParam.id)
         }else{
           this.showAlert("Error", res.error)
@@ -293,7 +293,7 @@ payWithCard(){
           textStyles={styles.addText1}
           btnStyles={styles.addGradient6}
           showPayButton={true}
-           paystackKey="pk_test_b1f00843f8c3d01ee3c16317fc6d72c542e04157"
+           paystackKey="pk_live_6b3b23bc38a669799804cdc53316494a4678dcdb"
            amount={Math.floor(this.state.orderParam.delivery_fee)}
            billingEmail="paystackwebview@something.com"
            billingMobile={this.state.customer.phone1}
@@ -301,11 +301,11 @@ payWithCard(){
            refNumber={this.state.trn_ref}
           ActivityIndicatorColor="green"
           handleWebViewMessage={(e) => {
-            // handle the message
+            
             console.log(e);
           }}
           onCancel={(e) => {
-            // handle response here
+            
             console.log(e);
           }}
           onSuccess={(e) => {
@@ -357,7 +357,7 @@ payWithCard(){
        if(res.success){
          this.showAlert("Success", res.success);
          this.getOrderDetails(this.state.orderParam.id)
-          //this.gotoOrderDetails(order);
+          
        }else{
          Alert.alert('Error', res.error);
        }
@@ -403,7 +403,7 @@ payWithCard(){
         this.showAlert("Info", res.success);
         this.getOrderDetails(this.state.orderParam.id)
       }else{
-        //Alert.alert('Error', res.error);
+        
       }
   })
   .catch((error) => {
@@ -424,7 +424,7 @@ payWithCard(){
        this.scroll.scrollTo({x: 0, y: 0, animated: true});
        if(res.success){
          this.showAlert("Success", res.success);
-          //this.gotoOrderDetails(order);
+          
           this.getOrderDetails(this.state.orderParam.id)
        }else{
          Alert.alert('Error', res.error);
@@ -454,14 +454,14 @@ payWithCard(){
        })
        if(res.success){
          this.showAlert("Success", res.success);
-        //  this.setState(prevState => ({
-        //   orderParam: {
-        //     ...prevState.orderParam,           // copy all other key-value pairs of food object
-        //     status: "Order delivered",
-        //   }
-        // }))
+        
+        
+        
+        
+        
+        
         this.getOrderDetails(this.state.orderParam.id)
-          //this.gotoOrderDetails(order);
+          
        }else{
          Alert.alert('Error', res.error);
        }
@@ -483,14 +483,14 @@ payWithCard(){
        this.hideLoader();
        if(res.success){
          this.showAlert("Success", res.success);
-        //  this.setState(prevState => ({
-        //   orderParam: {
-        //     ...prevState.orderParam,           // copy all other key-value pairs of food object
-        //     status: "In transit",
-        //   }
-        // }))
+        
+        
+        
+        
+        
+        
         this.getOrderDetails(this.state.orderParam.id)
-          //this.gotoOrderDetails(order);
+          
        }else{
          Alert.alert('Error', res.error);
        }
@@ -816,8 +816,8 @@ const styles = StyleSheet.create ({
     alignContent: 'center',
     alignSelf: 'center', 
     padding: 10,
-    //marginRight: 20,
-    //flexDirection: 'row',
+    
+    
     backgroundColor: '#fff',
   },
   itemView4: {
@@ -829,7 +829,7 @@ const styles = StyleSheet.create ({
     alignSelf: 'center',
     marginRight: 25,
     marginLeft: 30,
-    //flexDirection: 'row',
+    
   },
   itemView1: {
     width: '95%',
@@ -838,17 +838,17 @@ const styles = StyleSheet.create ({
     alignSelf: 'center',
     backgroundColor: '#fff',
     padding: 10,
-    //marginRight: 25,
-    //marginLeft: 30,
     
-    //flexDirection: 'row',
+    
+    
+    
   },
   center: {
     alignSelf: 'center',
     alignContent: 'center',
     marginBottom: 5,
     flexDirection: 'row',
-    //marginRight: 10,
+    
   },
   wait: {
     
@@ -898,7 +898,7 @@ const styles = StyleSheet.create ({
     borderWidth: 1,
     borderColor: '#0B277F',
     borderRadius: 8,
-    //backgroundColor: 'green',
+    
     paddingTop: 7,
     marginTop: 40,
   },
@@ -917,8 +917,8 @@ const styles = StyleSheet.create ({
     marginLeft: 30,
     alignSelf: 'center',
     marginBottom: 10,
-    //padding: 10,
-    //flexDirection: 'row'
+    
+    
   },
   item22: {
     flexDirection: 'row',
@@ -964,7 +964,7 @@ const styles = StyleSheet.create ({
     fontWeight: 'bold',
   },
   itemPriceText: {
-    //paddingTop: 4,
+    
     fontWeight: 'bold',
     color: '#585757',
   },
@@ -991,24 +991,24 @@ const styles = StyleSheet.create ({
     marginTop: 20,
   },
   col1: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   },
   col2: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   
   },
   
   col3: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   },
   col4: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   },
@@ -1018,7 +1018,7 @@ const styles = StyleSheet.create ({
   bImage1: {
     width: '100%',
     height: 220,
-    //opacity: 0.6,
+    
     overflow: 'hidden',
     borderBottomEndRadius: 20, 
     borderBottomStartRadius: 20, 
@@ -1082,7 +1082,7 @@ const styles = StyleSheet.create ({
 
   },
   card: {
-    //flexDirection: 'row',
+    
     width: '100%',
     marginBottom: 4,
     
@@ -1113,7 +1113,7 @@ const styles = StyleSheet.create ({
     marginTop: 5,
   },
   segmentText: {
-    //textAlign: 'center',
+    
     paddingRight: 10,
     marginRight: 10,
   },
@@ -1141,7 +1141,7 @@ const styles = StyleSheet.create ({
     marginTop: 1,
     fontSize: 14,
     paddingBottom: 3,
-    //fontWeight: 'bold',
+    
   },
   label50:{
     color: '#454A65',
@@ -1160,7 +1160,7 @@ const styles = StyleSheet.create ({
     width: '40%',
   },
   label88:{
-    //color: '#454A65',
+    
     fontWeight: 'bold',
     marginTop: 1,
     fontSize: 12,
@@ -1175,7 +1175,7 @@ const styles = StyleSheet.create ({
   labelZ:{
     color: '#454A65',
     width: '50%',
-    //fontWeight: 'bold',
+    
     marginTop: 1,
     fontSize: 13,
   },
@@ -1266,7 +1266,7 @@ const styles = StyleSheet.create ({
     marginTop: -14,
   },
   locImage: {
-    //marginTop: -7,
+    
     width: 10,
     height: 10,
     width: 10,
@@ -1378,9 +1378,9 @@ modal: {
   padding: 0
 },
 modalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 50,
   width: 100,
@@ -1394,9 +1394,9 @@ label1: {
   paddingLeft: 20,
 },
 forgotModalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 280,
   width: '90%',
@@ -1411,7 +1411,7 @@ loading: {
   top: 0,
   bottom: 0,
   zIndex: 9999999999999999999999999,
-  //height: '100vh',
+  
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'rgba(0,0,0,0.5)'

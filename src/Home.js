@@ -37,7 +37,7 @@ export class Home extends Component {
       orderAvailable: true,
       refreshing: false,
     }
-    //AsyncStorage.clear();
+    
   }
 
   async componentWillMount() {
@@ -64,10 +64,10 @@ export class Home extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "Leave", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
     return true
   }
@@ -124,7 +124,7 @@ export class Home extends Component {
          },
          { text: "Refresh", onPress: () => this.getAvailableOrders() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -136,7 +136,7 @@ export class Home extends Component {
         
         { text: "Check back later", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
   }
 
@@ -184,13 +184,13 @@ export class Home extends Component {
                 this.showAlert("Info", "You must provide a guarantor to use this app");
                 this.props.navigation.push('Guarantor');
               }else if(this.state.user.guarantor_status != "Approved"){
-                // this.showAlert("Info", "Your guarantor is yet to be approved. Kindly check back soon.");
-                // this.props.navigation.push('Guarantor');
+                
+                
                 this.showExit();
               }
               else if(this.state.user.status == "Inactive"){
-                // this.showAlert("Info", "Your guarantor is yet to be approved. Kindly check back soon.");
-                // this.props.navigation.push('Guarantor');
+                
+                
                 this.showAlert("Info", "Your acount has been disabled");
                 this.showExit();
               }
@@ -213,7 +213,7 @@ export class Home extends Component {
          },
          { text: "Refresh", onPress: () => this.getRider() }
        ],
-       //{ cancelable: false }
+       
      );
     });
     
@@ -222,14 +222,14 @@ export class Home extends Component {
   async getLoggedInUser(){
     await AsyncStorage.getItem('user').then((value) => {
       if(value){
-        //this.props.navigation.navigate('Home')
+        
         this.setState({
           user: JSON.parse(value),
           refreshing: false,
         }, () => {
-          //else{
+          
           this.getRider();
-          //}
+          
           this.setState({
             user_id: this.state.user.id
           }, ()=> {
@@ -243,9 +243,9 @@ export class Home extends Component {
     });
   }
   getLocation(){
-    //this.showLoader();
+    
     var that =this;
-    //Checking for the permission just after component loaded
+    
     if(Platform.OS === 'ios'){
       this.callLocation(that);
     }else{
@@ -258,7 +258,7 @@ export class Home extends Component {
               }
             )
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-              //To Check, If Permission is granted
+              
               that.callLocation(that);
             } else {
               alert("Permission Denied");
@@ -273,9 +273,9 @@ export class Home extends Component {
     }
 
     callLocation(that){
-    //alert("callLocation Called");
+    
       navigator.geolocation.getCurrentPosition(
-        //Will give you the current location
+        
          (position) => {
             const currentLongitude = position.coords.longitude;
             console.log(currentLongitude);
@@ -294,8 +294,8 @@ export class Home extends Component {
          (error) => console.log(error)
       );
       that.watchID = navigator.geolocation.watchPosition((position) => {
-        //Will give you the location on location change
-        // alert("jidm")
+        
+        
           const currentLongitude = position.coords.longitude;
           const currentLatitude = position.coords.latitude;
           
@@ -304,7 +304,7 @@ export class Home extends Component {
            longitude: currentLongitude,
          }
          that.setState({ 
-           //origin:origin,
+           
            latitude:currentLatitude,
            longitude:currentLongitude
          }, ()=> {
@@ -360,7 +360,7 @@ export class Home extends Component {
    .then((res) => {
      
        console.log(res, "orders");
-       //this.hideLoader();
+       
        if(res.success){
           this.setState({
             productsCount:  res.products_count,
@@ -385,7 +385,7 @@ export class Home extends Component {
          },
          { text: "Refresh", onPress: () => this.getDashboardInfo() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -515,7 +515,7 @@ export class Home extends Component {
               },
               { text: "Refresh", onPress: () => this.changeStatus() }
             ],
-            //{ cancelable: false }
+            
           );
         }
       })
@@ -532,7 +532,7 @@ export class Home extends Component {
             },
             { text: "Refresh", onPress: () => this.changeStatus() }
           ],
-          //{ cancelable: false }
+          
         );
     });
   }
@@ -549,7 +549,7 @@ export class Home extends Component {
         },
         { text: "Yes I am", onPress: () => this.logDanger() }
       ],
-      //{ cancelable: false }
+      
     );
   }
 
@@ -576,7 +576,7 @@ export class Home extends Component {
               },
               { text: "Refresh", onPress: () => this.logDanger() }
             ],
-            //{ cancelable: false }
+            
           );
         }
       })
@@ -593,7 +593,7 @@ export class Home extends Component {
             },
             { text: "Refresh", onPress: () => this.changeStatus() }
           ],
-          //{ cancelable: false }
+          
         );
     });
   }
@@ -602,7 +602,7 @@ export class Home extends Component {
     if(this.state.orders < 1){
       return(
           <View  style={styles.noView}> 
-                  <Image source = {require('./imgs/no.png')} style = {styles.noImage} ></Image>
+                  <Image source = {require('@images/no.png')} style = {styles.noImage} ></Image>
                   <Text style = {styles.ndt}>There is no available request at the moment...</Text>
           </View>
       )
@@ -730,7 +730,7 @@ export class Home extends Component {
             <TouchableOpacity onPress={this.navigateToScreen('Profile')}  style={styles.topRow}>
               <View style = {styles.topImageView}>
                 <TouchableOpacity  onPress={this.navigateToScreen('Profile')}>
-                <Image source = {require('./imgs/round-profile.png')}  style = {styles.userImage} />
+                <Image source = {require('@images/round-profile.png')}  style = {styles.userImage} />
                 </TouchableOpacity>
               </View>
               <View style = {styles.topTextView}>
@@ -837,7 +837,7 @@ const styles = StyleSheet.create ({
     width: '100%',
     height: 220,
     zIndex:0,
-    //opacity: 0.6,
+    
     overflow: 'hidden',
     borderBottomEndRadius: 30, 
     borderBottomStartRadius: 30, 
@@ -874,7 +874,7 @@ const styles = StyleSheet.create ({
     borderColor: '#0B277F',
     borderRadius: 18,
     flexDirection: 'row',
-    //marginTop: 20,
+    
   },
   card: {
     width: '100%',
@@ -995,21 +995,21 @@ const styles = StyleSheet.create ({
   menuImage: {
     width: 40,
 
-    //marginLeft: 20,
-    //marginTop: 59,
+    
+    
   },
   menuImageView: {
     zIndex: 999999999999999,
     width: '100%',
     flexDirection: 'row',
     paddingLeft: 20,
-    //backgroundColor: '#000',
+    
     height: 55,
-    //paddingLeft: 20,
-    //paddingRight: 20,
-    //marginLeft: 20,
+    
+    
+    
     marginTop: 50,
-    //elevation: 2,
+    
   },
   bottomView: {
     width: '90%',
@@ -1017,18 +1017,18 @@ const styles = StyleSheet.create ({
     marginBottom: 250,
     minHeight: '100%',
     flex: 1,
-    //marginTop: 10,
-    //paddingLeft: 20,
-    //paddingRight: 20,
+    
+    
+    
   },
   headerText: {
     fontSize: 17,
     paddingLeft: 10,
     color: '#000',
-    //width: '50%',
+    
     paddingRight: 10,
     marginTop: 5,
-    //alignSelf: 'center',
+    
   },
   headerText1: {
     fontSize: 20,
@@ -1038,7 +1038,7 @@ const styles = StyleSheet.create ({
 
   },
   card1: {
-    //flexDirection: 'row',
+    
     width: '50%',
     height: 100,
     marginBottom: 13,
@@ -1067,13 +1067,13 @@ const styles = StyleSheet.create ({
     marginTop: 5,
   },
   card2: {
-    //flexDirection: 'row',
+    
     width: '50%',
     height: 100,
     marginBottom: 13,
     
     borderRadius: 10,
-    //marginLeft: 5,
+    
     backgroundColor: '#F59159',
     padding: 15,
   },
@@ -1091,7 +1091,7 @@ const styles = StyleSheet.create ({
   },
 
   card3: {
-    //flexDirection: 'row',
+    
     width: '50%',
     height: 100,
     marginBottom: 13,
@@ -1114,13 +1114,13 @@ const styles = StyleSheet.create ({
     marginTop: 5,
   },
   card4: {
-    //flexDirection: 'row',
+    
     width: '50%',
     height: 100,
     marginBottom: 13,
     
     borderRadius: 10,
-    //marginLeft: 5,
+    
     backgroundColor: '#FFCD3A',
     padding: 15,
   },
@@ -1183,7 +1183,7 @@ const styles = StyleSheet.create ({
   c: {
     alignSelf: 'center',
    width: '700%',
-    //alignContent: 'center',
+    
   },
   forgotText: {
     textAlign: 'right',
@@ -1240,9 +1240,9 @@ modal: {
   padding: 0
 },
 modalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 50,
   width: 100,
@@ -1256,9 +1256,9 @@ label1: {
   paddingLeft: 20,
 },
 forgotModalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 280,
   width: '90%',
@@ -1283,8 +1283,8 @@ userImage: {
   width: 60,
   height: 60,
   borderRadius: 30,
-  //borderColor: '#9c77b1',
-  //borderWidth: 6,
+  
+  
 },
 topTextView: {
   paddingLeft: 20,
@@ -1310,7 +1310,7 @@ linkBodyBottom: {
 },
 linkItemBottom: {
   width: '100%',
-  //paddingLeft: 20,
+  
   flexDirection: 'row',
   marginBottom: 5,
 },
@@ -1342,7 +1342,7 @@ textView: {
 linkIcon: {
   width: 20,
   height: 20,
-  //paddingRi: 20,
+  
 },
 
 profilePix: {
@@ -1379,7 +1379,7 @@ loading: {
   top: 0,
   bottom: 0,
   zIndex: 9999999999999999999999999,
-  //height: '100vh',
+  
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'rgba(0,0,0,0.5)'

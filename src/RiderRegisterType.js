@@ -1,5 +1,5 @@
 import React, { Component  } from 'react';
-import { AppState, View, Text, Alert, Image, Platform, PermissionsAndroid, Picker, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
+import { AppState, View, Text, Alert, Image, Platform, PermissionsAndroid, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -8,6 +8,8 @@ import { SERVER_URL } from './config/server';
 import ModalFilterPicker from 'react-native-modal-filter-picker';
 import ImagePicker from 'react-native-image-crop-picker';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import RNPickerSelect from 'react-native-picker-select';
+
 navigator.geolocation = require('@react-native-community/geolocation');
 
 export class RegisterType extends Component {
@@ -49,9 +51,9 @@ export class RegisterType extends Component {
       vehicleTypeId: '',
     }
     this.getLoggedInUser();
-    // this.getCategories();
-    // this.getCities();
-    // this.getVehicleTypes();
+    
+    
+    
   }
 
   async componentDidMount() {
@@ -72,16 +74,16 @@ export class RegisterType extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "Leave", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
     return true
   }
 
   componentDidMount() {
-    //this.getLocation();
+    
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
   }
 
@@ -171,7 +173,7 @@ export class RegisterType extends Component {
          },
          { text: "Refresh", onPress: () => this.getCategories() }
        ],
-       //{ cancelable: false }
+       
      );
     });
     
@@ -185,7 +187,7 @@ export class RegisterType extends Component {
    .then((res) => {
      
        console.log(res, "cities");
-       //this.hideLoader();
+       
        if(res.success){
           this.setState({
             cities:  res.cities
@@ -207,7 +209,7 @@ export class RegisterType extends Component {
          },
          { text: "Refresh", onPress: () => this.getCities() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -241,7 +243,7 @@ export class RegisterType extends Component {
          },
          { text: "Refresh", onPress: () => this.getVehicleType() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -251,10 +253,10 @@ export class RegisterType extends Component {
     
     fetch(`${SERVER_URL}/mobile/riderRegister`, {
       method: 'POST',
-      // headers: {
-      //     'Accept': 'application/json',
-      //     'Content-Type': 'application/json'
-      // },
+      
+      
+      
+      
       body: data
     }).then((response) => response.json())
         .then((res) => {
@@ -310,7 +312,7 @@ export class RegisterType extends Component {
           imageUri: this.state.image.path
         })
       });
-      //this.prepareImage();
+      
     });
   }
 
@@ -386,10 +388,10 @@ export class RegisterType extends Component {
                 <Text style = {styles.tText}>This category is best for people with only one vehicle.</Text>
               </TouchableOpacity>
 
-              {/* <TouchableOpacity style = {styles.card2} onPress={() => this.props.navigation.navigate('RegisterCompany')}>
-                <Text style = {styles.hText2}>Fleet</Text>
-                <Text style = {styles.tText2}>  is best for people with more than one vehicle.</Text>
-              </TouchableOpacity> */}
+              <TouchableOpacity style = {styles.card2} onPress={() => this.props.navigation.navigate('RegisterCompany')}>
+                <Text style = {styles.hText2}>Enviable Rider</Text>
+                <Text style = {styles.tText2}>This is best for people with more than one vehicle.</Text>
+              </TouchableOpacity>
             
             </View>
 
@@ -417,8 +419,8 @@ const styles = StyleSheet.create ({
     marginBottom: 50,
   },
   backImage: {
-    // width: 18,
-    // height: 12,
+    
+    
     marginLeft: 20,
     marginTop: 60,
   },
@@ -496,14 +498,14 @@ const styles = StyleSheet.create ({
   },
   forgotText: {
     textAlign: 'center',
-    //marginRight: 30,
+    
     color: '#5B5B5B',
     fontSize: 12,
     marginTop: 10,
   },
   forgotText1: {
     textAlign: 'center',
-    //marginRight: 30,
+    
     color: '#0B277F',
     fontSize: 12,
   },
@@ -568,9 +570,9 @@ modal: {
   padding: 0
 },
 modalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 50,
   width: 100,
@@ -593,11 +595,11 @@ hText: {
 tText: {
   color: '#fff',
   fontSize: 14,
-  //textAlign: 'justify',
+  
 },
 card2: {
   elevation: 1,
-  //borderWidth: 1,
+  
   borderColor: '#fff',
   width: '100%',
   padding: 20,
@@ -613,13 +615,13 @@ hText2: {
 tText2: {
   color: '#7B7E8F',
   fontSize: 14,
-  //textAlign: 'justify'
+  
 },
 
 forgotModalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 280,
   width: '90%',
@@ -632,7 +634,7 @@ loading: {
   right: 0,
   top: 0,
   bottom: 0,
-  //height: '100vh',
+  
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'rgba(0,0,0,0.5)'

@@ -1,5 +1,5 @@
 import React, { Component  } from 'react';
-import { AppState, View, Text, Alert, Image, Platform, PermissionsAndroid, Picker, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
+import { AppState, View, Text, Alert, Image, Platform, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -7,7 +7,9 @@ import Modal from 'react-native-modal';
 import { SERVER_URL } from './config/server';
 import ModalFilterPicker from 'react-native-modal-filter-picker';
 import ImagePicker from 'react-native-image-crop-picker';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+
+import RNPickerSelect from 'react-native-picker-select';
+
 navigator.geolocation = require('@react-native-community/geolocation');
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
@@ -16,6 +18,9 @@ export class Register extends Component {
     super();
     this.handleBackPress = this.handleBackPress.bind(this);
     this.state = {
+      pickerOpacity: 0,
+    opacityOfOtherItems: 1, 
+    label: 'Firstvalue',
       radioButtons: ['Option1', 'Option2', 'Option3'],
       checked: 0,
       toggleUpdate: false,
@@ -85,16 +90,10 @@ export class Register extends Component {
       bankAccountNumber: '',
       bankAccountType: '',
     }
-    this.getLoggedInUser();
-    this.getCategories();
-    this.getCities();
-    this.getVehicleTypes();
-  }
-
-  async componentDidMount() {
     
   }
 
+  
   componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
   }
@@ -109,16 +108,20 @@ export class Register extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "Leave", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
     return true
   }
 
   componentDidMount() {
-    //this.getLocation();
+    
+    this.getLoggedInUser();
+    this.getCategories();
+    this.getCities();
+    this.getVehicleTypes();
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
   }
 
@@ -213,7 +216,7 @@ export class Register extends Component {
          },
          { text: "Refresh", onPress: () => this.getCategories() }
        ],
-       //{ cancelable: false }
+       
      );
     });
     
@@ -250,7 +253,7 @@ export class Register extends Component {
          },
          { text: "Refresh", onPress: () => this.getCities() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -289,7 +292,7 @@ export class Register extends Component {
          },
          { text: "Refresh", onPress: () => this.getVehicleType() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -316,10 +319,10 @@ export class Register extends Component {
     
     fetch(`${SERVER_URL}/mobile/riderRegister`, {
       method: 'POST',
-      // headers: {
-      //     'Accept': 'application/json',
-      //     'Content-Type': 'application/json'
-      // },
+      
+      
+      
+      
       body: data
     }).then((response) => response.json())
         .then((res) => {
@@ -335,7 +338,7 @@ export class Register extends Component {
                   if(res.user.vehicle_type_id == 13 || res.user.vehicle_type_id == 14 || res.user.vehicle_type_id == 15){
                     this.props.navigation.navigate('RideShareHome')
                   }else{
-                  //this.props.navigation.push('Home')
+                  
                   this.props.navigation.navigate('ActiveOrders')
                   }
                 });
@@ -370,32 +373,32 @@ export class Register extends Component {
   }
 
   openImagePicker(){
-    // ImagePicker.openPicker({
-    //    width: 400,
-    //    height: 400,
-    //    cropping: true
-    // }).then(image => {
-    //   this.setState({ image: image }, ()=> {
-    //     this.setState({
-    //       imageUri: this.state.image.path
-    //     })
-    //   });
-    //   //this.prepareImage();
-    // });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     var options = {
       mediaType: 'photo',
-      //includeBase64: true,
+      
       quality: 0.5,
       cameraType: 'front' 
     }
-    launchCamera(options, (response)  => {
-      // Response data
+
+    launchImageLibrary(options, (response)  => {
+      
       console.log(response, 'rre')
-      //return;
+      
+      if(response.didCancel === true) return;
       this.setState({
         image: response.assets[0]
-      }, ()=>{
-        //this.prepareImage();
       }) 
     });
   }
@@ -438,6 +441,38 @@ export class Register extends Component {
     this.register(data);
   }
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   onCancel = () => {
     this.setState({
       visible: false
@@ -476,7 +511,7 @@ export class Register extends Component {
             <View style = {styles.bottomView}>
             <TouchableOpacity  onPress={() => this.openImagePicker()}>
               {!this.state.image.uri && 
-            <Image source = {require('./imgs/img-bg.png')} style = {styles.imgBg} />
+            <Image source = {require('@images/img-bg.png')} style = {styles.imgBg} />
               }
               {this.state.image && 
                 <Image source = {{uri: this.state.image.uri}} style = {styles.imgBg1} />
@@ -494,7 +529,7 @@ export class Register extends Component {
                                     underlineColorAndroid="transparent"
                                     placeholderTextColor="#ccc" 
                                     value={this.state.firstName}
-                                    //keyboardType={'email-address'}
+                                    
                                   />
                 </View>
                 <View style= {styles.col50}>
@@ -506,7 +541,7 @@ export class Register extends Component {
                                     underlineColorAndroid="transparent"
                                     placeholderTextColor="#ccc" 
                                     value={this.state.lastName}
-                                    //keyboardType={'email-address'}
+                                    
                                   />
                 </View>
               </View>
@@ -533,33 +568,59 @@ export class Register extends Component {
             <TouchableOpacity onPress={() => this.setState({visible: true})}  >
               <Text style={styles.locSelect}>{this.state.locationPlaceholder}</Text>
             </TouchableOpacity>
-            <Text style = {styles.label}>Marital status</Text>
-              <TouchableOpacity style={[styles.input]}>
-              <Picker
-                //selectedValue={selectedValue}
-                selectedValue={this.state.marital_status}  
-                //style={{ height: 100, width: 200 }}
-                style={styles.input}
-                onValueChange={(itemValue, itemIndex) => this.setState({marital_status: itemValue})}
-              >
-                <Picker.Item color="#444" label={"Single"} value={"Single"} />
-                <Picker.Item color="#444" label={"Married"} value={"Married"} />
-              </Picker>
-              </TouchableOpacity>
+            {/* <Text style = {styles.label}>Marital status</Text>
+            Hide this here by Abdulmalik to solve store issues          
+
+        <RNPickerSelect
+          placeholder="Marital Status"
+          
+          selectedValue={'Single'}
+          onValueChange={(itemValue, itemIndex) =>
+            this.setState({marital_status: itemValue})
+          }
+          style={{
+            inputIOSContainer:styles.input,
+            inputAndroid: styles.input,
+            placeholder:{color:'black'}
+          }}
+          items={[
+            { label: 'Single', value: 'Single' },
+            { label: 'Married', value: 'Married' },
+        ]}
+          returnKeyType={'done'}
+        /> */}
+
+              {/* </View> */}
               <Text style = {styles.label}>Vehicle type</Text>
-              <TouchableOpacity style={[styles.input]}>
-              <Picker
-                //selectedValue={selectedValue}
+              {/* <TouchableOpacity style={[styles.input]}> */}
+              {/* <Picker
+                
                 selectedValue={this.state.vehicleTypeId}  
-                //style={{ height: 100, width: 200 }}
+                
                 style={styles.input}
                 onValueChange={(itemValue, itemIndex) => this.setState({vehicleTypeId: itemValue})}
               >
                 {this.state.vehicleTypes && this.state.vehicleTypes.map(vehicleType => (
                 <Picker.Item color="#444" label={vehicleType.name} value={vehicleType.id} />
                 ))}
-              </Picker>
-              </TouchableOpacity>
+              </Picker> */}
+
+<RNPickerSelect
+          placeholder="Vehicle Type"
+          
+          
+          onValueChange={(itemValue, itemIndex) =>
+            this.setState({vehicleTypeId: itemValue})
+          }
+          style={{
+            inputIOSContainer:styles.input,
+            inputAndroid: styles.input,
+            placeholder:{color:'black'}
+          }}
+          items={this.state.vehicleTypes && this.state.vehicleTypes.map(vehicleType => ( {label: vehicleType.name, value:vehicleType.id }))}
+          returnKeyType={'done'}
+        />
+              {/* </TouchableOpacity> */}
  
               <Text style = {styles.label}>Plate no.</Text>
               <TextInput
@@ -601,31 +662,48 @@ export class Register extends Component {
                                 autoCapitalize = "none"
                                 secureTextEntry={true} 
                               />
-              <Text style = {styles.label}>Bank</Text>
-              <View style={styles.input}>
-                <Picker
-                  //selectedValue={selectedValue}
-                  selectedValue={this.state.bankName}  
-                  style={styles.input5}
-                  onValueChange={(itemValue, itemIndex) => this.setBankSelectValue(itemValue)}
-                >
-                  {this.state.banks && this.state.banks.map(bank => (
-                <Picker.Item label={bank.name} value={bank.name} />
-                ))}
-                </Picker>
-              </View>
+              {/* <Text style = {styles.label}>Bank</Text>
+              Commented out by Abdulmalik based on feedback from iOS Store
+           
+
+<RNPickerSelect
+          placeholder="Bank Name"
+          
+          selectedValue={this.state.bankName}  
+          onValueChange={(itemValue, itemIndex) => this.setBankSelectValue(itemValue)}
+          style={{
+            inputIOSContainer:styles.input,
+            placeholder:{color:'black'},
+            inputAndroid: styles.input,
+
+          }}
+          items={this.state.banks && this.state.banks.map(bank => ( {label: bank.name, value:bank.id }))}
+          returnKeyType={'done'}
+        />
+
               <Text style = {styles.label}>Account type</Text>
-              <View style={styles.input}>
-                <Picker
-                  //selectedValue={selectedValue}
-                  selectedValue={this.state.bankAccountType}  
-                  style={styles.input5}
-                  onValueChange={(itemValue, itemIndex) => this.setTypeSelectValue(itemValue)}
-                >
-                  <Picker.Item label="Savings" value="Savings" />
-                  <Picker.Item label="Current" value="Current" />
-                </Picker>
-              </View>
+                
+                 <RNPickerSelect
+          placeholder="Account Type"
+          style={{backgroundColor:'RED'}}
+          selectedValue={this.state.bankAccountType}  
+          onValueChange={(itemValue, itemIndex) => this.setTypeSelectValue(itemValue)}
+
+          style={{
+            inputIOSContainer:styles.input,
+            
+           
+            inputAndroid: styles.input,
+
+            placeholder:{color:'black'}
+          }}
+          items={[
+            { label: 'Savings', value: 'Savings' },
+            { label: 'Current', value: 'Current' },
+        ]}
+          returnKeyType={'done'}
+        />
+
               <Text style = {styles.label}>Account name.</Text>
               <TextInput
                                 style={styles.input}
@@ -646,7 +724,7 @@ export class Register extends Component {
                                 value={this.state.bankAccountNumber}
                                 keyboardType={'numeric'}
                                 autoCapitalize = "none"
-                              />
+                              /> */}
               <TouchableOpacity style = {styles.forgotView}  >
                 <Text style = {styles.forgotText}>By tapping continue, you agree to Enviable's{`\n`}<Text style = {styles.forgotText1}>Terms of Service</Text></Text>
               </TouchableOpacity>
@@ -683,8 +761,8 @@ const styles = StyleSheet.create ({
     marginBottom: 50,
   },
   backImage: {
-    // width: 18,
-    // height: 12,
+    
+    
     marginLeft: 20,
     marginTop: 40,
   },
@@ -764,14 +842,14 @@ const styles = StyleSheet.create ({
      paddingLeft: 20,
     paddingRight: 20,
     marginTop: 10,
-    //marginRight: 30,
+    
     color: '#5B5B5B',
     fontSize: 12,
     marginTop: 10,
   },
   forgotText1: {
     textAlign: 'center',
-    //marginRight: 30,
+    
     color: '#0B277F',
     fontSize: 12,
   },
@@ -836,9 +914,9 @@ modal: {
   padding: 0
 },
 modalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 50,
   width: 100,
@@ -848,9 +926,9 @@ modalView: {
 
 
 forgotModalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 280,
   width: '90%',
@@ -863,7 +941,7 @@ loading: {
   right: 0,
   top: 0,
   bottom: 0,
-  //height: '100vh',
+  
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'rgba(0,0,0,0.5)'

@@ -57,10 +57,10 @@ export class Transactions extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "Leave", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
     return true
   }
@@ -80,7 +80,7 @@ export class Transactions extends Component {
    .then((res) => {
      
        console.log(res, "Transactions");
-       //this.hideLoader();
+       
        if(res.success){
           this.setState({
             transactions:  res.transactions,
@@ -106,7 +106,7 @@ export class Transactions extends Component {
          },
          { text: "Refresh", onPress: () => this.getTransactions() }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -216,7 +216,7 @@ gotoOrderDetails(order){
           </TouchableOpacity>
             <Text style = {styles.headerText}>Wallet</Text>
         </View> 
-        <ImageBackground source = {require('./imgs/eclipse.png')} style = {styles.bImage} >
+        <ImageBackground source = {require('@images/eclipse.png')} style = {styles.bImage} >
           <LinearGradient start={{x: 0, y: 0}} end={{x:0, y: 1}}  colors={['rgba(206,126,251,0.6)', 'rgba(126,83,191,0.6)']} style={styles.bImage1}>
           
             <Text style = {styles.headerText0}>Current Balance </Text>
@@ -283,8 +283,8 @@ const styles = StyleSheet.create ({
   },
   header: {
     width: '100%',
-    //height: 110,
-    //backgroundColor: '#0B277F',
+    
+    
     flexDirection: 'row',
   },
   cartImage: {
@@ -338,7 +338,7 @@ const styles = StyleSheet.create ({
     backgroundColor: '#fff',
     alignContent: 'center',
     alignSelf: 'center',
-    //marginRight: 20,
+    
     flexDirection: 'row',
   },
   itemView4: {
@@ -357,7 +357,7 @@ const styles = StyleSheet.create ({
     alignSelf: 'center',
     marginRight: 25,
     marginLeft: 30,
-    //flexDirection: 'row',
+    
   },
   orderNumber: {
     color: '#000'
@@ -426,7 +426,7 @@ const styles = StyleSheet.create ({
     fontWeight: 'bold',
   },
   itemPriceText: {
-    //paddingTop: 4,
+    
     fontWeight: 'bold',
     color: '#585757',
   },
@@ -459,30 +459,30 @@ const styles = StyleSheet.create ({
     width: '100%',
     height: 160,
     zIndex:0,
-    //opacity: 0.6,
+    
     overflow: 'hidden',
     borderRadius: 20, 
     borderRadius: 20, 
   },
   
   col1: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   },
   col2: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   
   },
   col3: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   },
   col4: {
-    //width: '20%',
+    
     borderRadius: 18,
     textAlign: 'center',
   },
@@ -550,7 +550,7 @@ const styles = StyleSheet.create ({
   },
   headerText0: {
     fontSize: 17,
-    //paddingLeft: 10,
+    
     color: '#fff',
     marginTop: 29,
     textAlign: 'center',
@@ -564,7 +564,7 @@ const styles = StyleSheet.create ({
 
   },
   card: {
-    //flexDirection: 'row',
+    
     width: '100%',
     marginBottom: 4,
     
@@ -607,7 +607,7 @@ const styles = StyleSheet.create ({
     color: '#454A65',
     marginTop: 1,
     fontSize: 12,
-    //width: '50%',
+    
     textAlign: 'right'
   },
   labelZ:{
@@ -675,7 +675,7 @@ const styles = StyleSheet.create ({
     marginTop: -14,
   },
   locImage: {
-    //marginTop: -7,
+    
     width: 10,
     height: 10,
     width: 10,
@@ -715,9 +715,9 @@ modal: {
   padding: 0
 },
 modalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 50,
   width: 100,
@@ -731,9 +731,9 @@ label1: {
   paddingLeft: 20,
 },
 forgotModalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 280,
   width: '90%',
@@ -748,7 +748,7 @@ loading: {
   top: 0,
   bottom: 0,
   zIndex: 9999999999999999999999999,
-  //height: '100vh',
+  
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'rgba(0,0,0,0.5)'

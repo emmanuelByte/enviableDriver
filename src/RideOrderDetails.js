@@ -1,5 +1,5 @@
 import React, { Component  } from 'react';
-import { AppState, View, PermissionsAndroid, Linking,  Text, Alert, Picker, Image, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
+import { AppState, View, PermissionsAndroid, Linking,  Text, Alert, Image, Button, TextInput, StyleSheet, ScrollView,BackHandler, ActivityIndicator, ImageBackground, StatusBar, TouchableOpacity, AsyncStorage } from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import LinearGradient from 'react-native-linear-gradient';
 import Modal from 'react-native-modal';
@@ -9,10 +9,13 @@ navigator.geolocation = require('@react-native-community/geolocation');
 import MapViewDirections from 'react-native-maps-directions';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { showLocation } from 'react-native-map-link';
-
+import RNPicker from 'react-native-picker-select';
 import { SERVER_URL } from './config/server';
+import { OpenMapDirections } from 'react-native-navigation-directions';
 
 export class RideOrderDetails extends Component {
+  
+
   constructor(props) {
     super();
     this.handleBackPress = this.handleBackPress.bind(this);
@@ -23,7 +26,7 @@ export class RideOrderDetails extends Component {
       rider: false,
       origin: false,
       destination: false,
-      customer: false
+      customer: false,
       
     }
     this.getLoggedInUser();
@@ -31,6 +34,7 @@ export class RideOrderDetails extends Component {
 
   componentWillUnmount() {
     this.subs.forEach(sub => sub.remove());
+    clearInterval(this.timer);
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
   }
 
@@ -44,15 +48,18 @@ export class RideOrderDetails extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "Leave", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
     return true
   }
 
   componentDidMount() {
+    this.timer = setInterval(()=>{
+      this.getOrder(this.props.navigation.state.params.orderId);
+    }, 20000);
     this.subs = [
       this.props.navigation.addListener('didFocus', (payload) => this.componentDidFocus(payload)),
     ];
@@ -77,7 +84,7 @@ export class RideOrderDetails extends Component {
     );
   }
   componentDidFocus = () => {
-    //this.getLocation();
+    
     this.getOrder(this.props.navigation.state.params.orderId);    
   }
 
@@ -128,7 +135,7 @@ export class RideOrderDetails extends Component {
          },
          { text: "Refresh", onPress: () => this.getOrder(orderId) }
        ],
-       //{ cancelable: false }
+       
      );
     });
   }
@@ -173,7 +180,7 @@ export class RideOrderDetails extends Component {
        if(res.success){
          this.getOrder(this.props.navigation.state.params.orderId)
          this.showAlert("Success", res.success);
-          //this.gotoOrderDetails(order);
+          
        }else{
          Alert.alert('Error', res.error);
        }
@@ -235,45 +242,72 @@ export class RideOrderDetails extends Component {
         </TouchableOpacity>
       )
     }
+    else if(this.state.order.status == "Cancelled"){
+      return(
+        
+          <Text style={{textAlign:'center', color:'grey'}}>Ride has been cancelled by user</Text>
+        
+      )
+    }
   }
   use(){
-    if(this.state.order.status == "Rider accepted"){
-      showLocation({
-        latitude: this.state.order.pickup_latitude,
-        longitude: this.state.order.pickup_longitude,
-        //sourceLatitude: this.state.origin.latitude,  // optionally specify starting location for directions
-        //sourceLongitude: this.state.origin.longitude,  // not optional if sourceLatitude is specified
-        title: this.state.order.pickup_address,  // optional
-        //googleForceLatLon: false,  // optionally force GoogleMaps to use the latlon for the query instead of the title
-        //googlePlaceId: 'ChIJGVtI4by3t4kRr51d_Qm_x58',  // optionally specify the google-place-id
-        //alwaysIncludeGoogle: true, // optional, true will always add Google Maps to iOS and open in Safari, even if app is not installed (default: false)
-        dialogTitle: 'Change map', // optional (default: 'Open in Maps')
-        dialogMessage: 'Open in google map', // optional (default: 'What app would you like to use?')
-        cancelText: 'Cancel', // optional (default: 'Cancel')
-        appsWhiteList: ['google-maps'], // optionally you can set which apps to show (default: will show all supported apps installed on device)
-        naverCallerName: 'com.Enviable',  // to link into Naver Map You should provide your appname which is the bundle ID in iOS and applicationId in android.
-        appTitles: { 'google-maps': "Direction to client pickup location" } // optionally you can override default app titles
-        // app: 'uber'  // optionally specify specific app to use
-      })
-    }else{
-      showLocation({
-        latitude: this.state.order.delivery_latitude,
-        longitude: this.state.order.delivery_longitude,
-        //sourceLatitude: this.state.origin.latitude,  // optionally specify starting location for directions
-        //sourceLongitude: this.state.origin.longitude,  // not optional if sourceLatitude is specified
-        title: this.state.order.delivery_address,  // optional
-        //googleForceLatLon: false,  // optionally force GoogleMaps to use the latlon for the query instead of the title
-        //googlePlaceId: 'ChIJGVtI4by3t4kRr51d_Qm_x58',  // optionally specify the google-place-id
-        //alwaysIncludeGoogle: true, // optional, true will always add Google Maps to iOS and open in Safari, even if app is not installed (default: false)
-        dialogTitle: 'Change map', // optional (default: 'Open in Maps')
-        dialogMessage: 'Open in google map', // optional (default: 'What app would you like to use?')
-        cancelText: 'Cancel', // optional (default: 'Cancel')
-        // appsWhiteList: ['google-maps'], // optionally you can set which apps to show (default: will show all supported apps installed on device)
-        naverCallerName: 'com.Enviable',  // to link into Naver Map You should provide your appname which is the bundle ID in iOS and applicationId in android.
-        appTitles: { 'google-maps': "Direction to your destination" } // optionally you can override default app titles
-        // app: 'uber'  // optionally specify specific app to use
-      })
+    const startPoint = {
+      latitude: parseFloat(this.state.order.pickup_latitude),
+      longitude: parseFloat(this.state.order.pickup_longitude),
+    } 
+
+    const endPoint = {
+      latitude: parseFloat(this.state.order.delivery_latitude),
+      longitude: parseFloat(this.state.order.delivery_longitude),
     }
+
+		const transportPlan = 'w';
+    if(this.state.order.status == "Rider accepted"){
+    OpenMapDirections(startPoint, endPoint, transportPlan).then(res => {
+      console.log(res)
+    });
+  }
+  else {
+    
+  }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
       
   }
   displayRatingButton(){
@@ -341,7 +375,7 @@ export class RideOrderDetails extends Component {
       <View style={StyleSheet.absoluteFillObject}>
         { this.state.origin && this.state.destination &&
           <MapView
-            provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+            provider={PROVIDER_GOOGLE} 
             style={[StyleSheet.absoluteFill, styles.map]}
             origin={this.state.origin}
             region={this.state.origin}
@@ -349,8 +383,8 @@ export class RideOrderDetails extends Component {
             ref={ref => (this.mapView = ref)}
             zoomEnabled={true}
             showsUserLocation={true}
-            //onMapReady={this.goToInitialRegion.bind(this)}
-            //initialRegion={this.state.initialRegion}
+            
+            
           >
                   <Marker 
                       coordinate={this.state.origin}
@@ -376,24 +410,31 @@ export class RideOrderDetails extends Component {
           <View style= {styles.infoView}>
             <ScrollView showsVerticalScrollIndicator={false}>
               <TouchableOpacity  onPress={() => this.use()}>
-                < Text style = {styles.use}>Use google map </Text>
+                < Text style = {styles.use}>Use google navigations </Text>
               </TouchableOpacity>
               {this.state.order &&
               <View>
                 <View style= {styles.row}>
                   <View style= {styles.col1}>
-                  <Image source = {require('./imgs/round-profile.png')} style = {styles.carImage} />
+                  <Image source = {require('@images/round-profile.png')} style = {styles.carImage} />
                   </View>
+                  {this.state.customer ?
+                  
                   <View style= {styles.col2}>
                   < Text style = {styles.price}>{this.state.customer.first_name} {this.state.customer.last_name}</Text>
                   < Text style = {styles.plate}>{this.state.customer.email}</Text>
                   </View>
+                
+                :
+                null
+                }
+                  
                 </View>
                 
 
                 <TouchableOpacity onPress={() => {}} style= {styles.row1}>
                 <View style= {styles.col11}>
-                  <Image source = {require('./imgs/pho.png')} style = {styles.cardImage} />
+                  <Image source = {require('@images/pho.png')} style = {styles.cardImage} />
                 </View>
                 <TouchableOpacity onPress={()=> Linking.openURL('tel:'+this.state.customer.phone1)} style= {styles.col21}>
                   < Text style = {styles.price1}>Call customer</Text>
@@ -430,11 +471,11 @@ export class RideOrderDetails extends Component {
             <Text style = {styles.headerText8}>Kindly rate this rider</Text>
 
               <Text style = {styles.label1}>Rating</Text>
-              <TouchableOpacity style={[styles.input]}>
+              {/* <TouchableOpacity style={[styles.input]}>
               <Picker
-                //selectedValue={selectedValue}
+                
                 selectedValue={this.state.rating}  
-                //style={{ height: 100, width: 200 }}
+                
                 style={styles.input}
                 onValueChange={(itemValue, itemIndex) => this.setState({rating: itemValue})}
               >
@@ -444,14 +485,38 @@ export class RideOrderDetails extends Component {
                 <Picker.Item color="#444" label={"2*"} value={"2"} />
                 <Picker.Item color="#444" label={"1*"} value={"1"} />
               </Picker>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
+
+
+<RNPicker
+          placeholder="Account Type"
+          
+          selectedValue={this.state.rating}  
+          onValueChange={(itemValue, itemIndex) => this.setState({rating: itemValue})}
+
+          style={{
+            inputIOSContainer:styles.input,
+            placeholder:{color:'black'},
+            inputAndroid: styles.input,
+
+          }}
+          items={[
+            { label: '5*', value: '5' },
+            { label: '4*', value: '4' },
+            { label: '3*', value: '3' },
+            { label: '2*', value: '2' },
+            { label: '1*', value: '1' },
+
+        ]}          
+        returnKeyType={'done'}
+        />
               <Text style = {styles.label1}>Review</Text>
               <TextInput
                 style={styles.input}
                 onChangeText={(text) => {this.setState({review: text}) }}
                 underlineColorAndroid="transparent"
-                //keyboardType={'numeric'}
-                //min={1}
+                
+                
                 value={this.state.review}
               />
               
@@ -495,8 +560,8 @@ const styles = StyleSheet.create ({
     flexDirection: 'row',
   },
   menuImage: {
-    //width: 21,
-    //height: 15,
+    
+    
     marginLeft: 20,
     marginTop: 39,
   },
@@ -560,14 +625,14 @@ const styles = StyleSheet.create ({
   plate: {
     fontSize: 12,
     color: '#848484',
-    //fontWeight: 'bold',
-    //marginTop: 20,
+    
+    
   },
   est: {
     width: '80%',
     alignSelf: 'center',
     marginTop: 15,
-    //textAlign: 'center',
+    
   },
   submitButton: {elevation: 2,
     marginTop: 20,
@@ -588,7 +653,7 @@ const styles = StyleSheet.create ({
     width: '90%',
     alignSelf: 'center',
     flexDirection: 'row',
-   //paddingLeft: 20,
+   
     
     marginTop: 5,
     paddingTop: 15,
@@ -607,8 +672,8 @@ const styles = StyleSheet.create ({
     fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'right',
-    //paddingRight: 20,
-    //width: 
+    
+    
     marginTop: 2,
   },
   label1: {
@@ -617,9 +682,9 @@ const styles = StyleSheet.create ({
     paddingLeft: 20,
   },
   forgotModalView: {
-    // width: '100%',
-    // height: '100%',
-    // opacity: 0.9,
+    
+    
+    
     alignSelf: 'center',
     height: 340,
     width: '90%',
@@ -661,14 +726,14 @@ const styles = StyleSheet.create ({
   },
   price1: {
     fontSize: 14,
-    //fontWeight: 'bold',
+    
     marginTop: 3,
     paddingLeft: 10,
   },
   cardImage: {
     width: 20,
     height: 20,
-    //alignSelf: 'center',
+    
     marginTop: 3,
   },
   use: {
@@ -684,7 +749,7 @@ loading: {
   top: 0,
   bottom: 0,
   zIndex: 9999999999999999999999999,
-  //height: '100vh',
+  
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'rgba(0,0,0,0.5)'

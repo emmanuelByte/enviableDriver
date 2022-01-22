@@ -6,7 +6,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Modal from 'react-native-modal';
 import { SERVER_URL } from './config/server';
 import ImageSlider from 'react-native-image-slider';
-//import RNDrawOverlay from 'react-native-draw-overlay';
+
 
 export class Welcome extends Component {
   constructor(props) {
@@ -22,7 +22,6 @@ export class Welcome extends Component {
       password: '',
       email1: '',
     }
-    this.getLoggedInUser();
   }
 
  
@@ -40,10 +39,10 @@ export class Welcome extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "Leave", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
     return true
   }
@@ -52,13 +51,18 @@ export class Welcome extends Component {
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
     RNDrawOverlay.askForDispalayOverOtherAppsPermission()
 	     .then(res => {
-		 // res will be true if permission was granted 
+		 
 	     })
 	     .catch(e => {
-		 // permission was declined
+		 
 	     })
   }
 */
+async componentDidMount(){
+  await this.getLoggedInUser();
+  
+
+}
   toggleUpdate(){
     if(this.state.toggleUpdate == true){
       this.setState({
@@ -81,13 +85,13 @@ export class Welcome extends Component {
     await AsyncStorage.getItem('customer').then((value) => {
       if(value){
         this.props.navigation.navigate('Home')
-        // this.setState({
-        //   customer: JSON.parse(value)
-        // }, () => {
-        //   this.setState({
-        //     customer_id: this.state.customer.id
-        //   })
-        // });
+        
+        
+        
+        
+        
+        
+        
           
       }else{
         AsyncStorage.getItem('loginvalue').then((value) => {
@@ -123,7 +127,7 @@ export class Welcome extends Component {
 
   /*
   displayText(index){
-    //if(index == 2){
+    
       
       return(
         <TouchableHighlight
@@ -137,7 +141,7 @@ export class Welcome extends Component {
           </Text>
         </TouchableHighlight>
       )
-    //}
+    
   } 
   */
  displayText(position, index){
@@ -218,20 +222,20 @@ export class Welcome extends Component {
   render() {
     const { visible } = this.state;
     const images = [
-      require('./imgs/a1.png'),
-      require('./imgs/a2.png'),
-      require('./imgs/a0.png'),
-      //require('./imgs/a4.png'),
+      require('@images/a1.png'),
+      require('@images/a2.png'),
+      require('@images/a0.png'),
+      
     ];
     return (
       <View style = {styles.body}>
           <StatusBar translucent={true}  backgroundColor={'#0B277F'}  />
           <ImageSlider
-            //loopBothSides
-            //autoPlayWithInterval={3000}
+            
+            
             images={images}
             customSlide={({ index, item, style, width }) => (
-              // It's important to put style here because it's got offset inside
+              
               <LinearGradient start={{x: 0, y: 0}} end={{x:0, y: 1}}  colors={['#0B277F', '#0B277F']} key={index} style={[style, styles.customSlide]}>
                 <Image source = {item} style={styles.customImage} />
               </LinearGradient>
@@ -242,7 +246,7 @@ export class Welcome extends Component {
                   return (
                     <TouchableOpacity
                       key={index}
-                      //underlayColor="#ccc"
+                      
                       onPress={() => { if(position != 2) {displayText(position + 1, index + 1)}}}
                       style={styles.button}
                     >
@@ -270,8 +274,8 @@ const styles = StyleSheet.create ({
   body: {
     height: '100%',
     width: '100%',
-    //backgroundColor: "#fff",
-    //paddingTop: 80,
+    
+    
   },
   customSlide: {
     backgroundColor: "transparent",
@@ -285,9 +289,9 @@ const styles = StyleSheet.create ({
     bottom: 290,
     width: 300,
     height: 220,
-    //backgroundColor: "#fff",
+    
     alignSelf: 'center',
-    //marginTop: 40,
+    
     zIndex: 0,
   },
   button: {
@@ -296,7 +300,7 @@ const styles = StyleSheet.create ({
     zIndex: 99999999,
     width: '90%',
     alignSelf: 'center',
-    //backgroundColor: '#000',
+    
   },
   buttonSelected: {
     zIndex: 99999999,
@@ -304,7 +308,7 @@ const styles = StyleSheet.create ({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    //marginBottom: 10,
+    
   },
   buttonSelected1: {
     zIndex: 99999999,

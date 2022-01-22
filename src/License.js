@@ -45,16 +45,16 @@ export class License extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        //{ text: "Go to home", onPress: () => this.props.navigation.navigate('Home') },
+        
         { text: "Leave", onPress: () => BackHandler.exitApp() }
       ],
-      //{ cancelable: false }
+      
     );
     return true
   }
 
   componentDidMount() {
-    //this.getLocation();
+    
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
   }
 
@@ -115,10 +115,10 @@ export class License extends Component {
     
     fetch(`${SERVER_URL}/mobile/riderUploadLicense`, {
       method: 'POST',
-      // headers: {
-      //     'Accept': 'application/json',
-      //     'Content-Type': 'application/json'
-      // },
+      
+      
+      
+      
       body: data
     }).then((response) => response.json())
         .then((res) => {
@@ -181,7 +181,7 @@ export class License extends Component {
     }else{
       return(
         <View>
-          <Image source = {require('./imgs/img-bg.png')} style = {styles.imgBg} />
+          <Image source = {require('@images/img-bg.png')} style = {styles.imgBg} />
           <Text style = {styles.logoText}>Photo of your rider's/driver's license</Text>
           
         </View>
@@ -247,8 +247,8 @@ const styles = StyleSheet.create ({
     marginBottom: 50,
   },
   backImage: {
-    // width: 18,
-    // height: 12,
+    
+    
     marginLeft: 20,
     marginTop: 40,
   },
@@ -289,7 +289,7 @@ const styles = StyleSheet.create ({
   logoText1: {
     textAlign: 'center',
     marginBottom: 10,
-    //marginTop: 10,
+    
     color: 'brown',
     width: '80%',
     alignSelf: 'center',
@@ -335,14 +335,14 @@ const styles = StyleSheet.create ({
   },
   forgotText: {
     textAlign: 'center',
-    //marginRight: 30,
+    
     color: '#5B5B5B',
     fontSize: 12,
     marginTop: 10,
   },
   forgotText1: {
     textAlign: 'center',
-    //marginRight: 30,
+    
     color: '#0B277F',
     fontSize: 12,
   },
@@ -407,9 +407,9 @@ modal: {
   padding: 0
 },
 modalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 50,
   width: 100,
@@ -419,9 +419,9 @@ modalView: {
 
 
 forgotModalView: {
-  // width: '100%',
-  // height: '100%',
-  // opacity: 0.9,
+  
+  
+  
   alignSelf: 'center',
   height: 280,
   width: '90%',
@@ -434,7 +434,7 @@ loading: {
   right: 0,
   top: 0,
   bottom: 0,
-  //height: '100vh',
+  
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'rgba(0,0,0,0.5)'
