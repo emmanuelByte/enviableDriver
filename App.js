@@ -1,8 +1,13 @@
-import React, { Component } from 'react';
-import { AppRegistry, Dimensions } from 'react-native';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import { Button, Platform, StyleSheet, Text, View, TouchableOpacity,PermissionsAndroid,AsyncStorage } from 'react-native';
+import React, {Component} from 'react';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
+import {
+  Platform,
+  PermissionsAndroid,
+  AsyncStorage,
+  View,
+  Text,
+} from 'react-native';
 
 import Initial from './src/Initial';
 import Login from './src/Login';
@@ -46,15 +51,12 @@ import AddRider from './src/AddRider';
 navigator.geolocation = require('@react-native-community/geolocation');
 import Geolocation from '@react-native-community/geolocation';
 
-import { SERVER_URL } from './src/config/server';
-import { EditPassword } from './src/EditPassword';
+import {SERVER_URL} from './src/config/server';
+import {EditPassword} from './src/EditPassword';
 
 console.disableYellowBox = true;
 
-
-
 const MainNavigator = createStackNavigator({
-  
   Initial: {screen: Initial},
   Welcome: {screen: Welcome},
   Home: {screen: Home},
@@ -94,134 +96,97 @@ const MainNavigator = createStackNavigator({
   RideShareHome: {screen: RideShareHome},
   RideOrderDetails: {screen: RideOrderDetails},
   RideOrders: {screen: RideOrders},
-  EditPassword:{screen:EditPassword}
-  
-  
-   
+  EditPassword: {screen: EditPassword},
 });
 
 const AppContainer = createAppContainer(MainNavigator);
 
 export default class App extends Component {
-  
-  state ={
-    id:null,
-  }
-  constructor(props){
+  state = {
+    id: null,
+  };
+  constructor(props) {
     super(props);
-    
   }
-   getLocation(){
-
-    var that =this;
+  getLocation() {
+    var that = this;
     //Checking for the permission just after component loaded
-    if(Platform.OS === 'ios'){
+    if (Platform.OS === 'ios') {
       this.callLocation(that);
-    }else{
-        async function requestLocationPermission() {
-
-          try {
-            const granted = await PermissionsAndroid.request(
-              PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,{
-                'title': 'Location Access Required',
-                'message': 'This App needs to Access your location'
-              }
-            )
-            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-               
-              that.callLocation(that);
-            } else {
-              alert("Permission Denied");
-            }
-          } catch (err) {
-            alert("err",err);
-            console.log(err)
+    } else {
+      async function requestLocationPermission() {
+        try {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            {
+              title: 'Location Access Required',
+              message: 'This App needs to Access your location',
+            },
+          );
+          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            that.callLocation(that);
+          } else {
+            alert('Permission Denied');
           }
+        } catch (err) {
+          alert('err', err);
+          console.log(err);
         }
-        requestLocationPermission();
       }
+      requestLocationPermission();
     }
-  
-     callLocation(that){
- 
-       
-      setInterval(()=>{
+  }
 
-        Geolocation.getCurrentPosition(async (position)=>{
-          var currentLongitude = position.coords.longitude;
-          var currentLatitude = position.coords.latitude;
-           
-          await this.getLoggedInUser();
-          await this.saveLocation(currentLatitude, currentLongitude)
-        })
-        }, 10000)
-      
-      
-       
+  callLocation(that) {
+    setInterval(() => {
+      Geolocation.getCurrentPosition(async position => {
+        var currentLongitude = position.coords.longitude;
+        var currentLatitude = position.coords.latitude;
 
-       
-       
-       
-       
-       
+        await this.getLoggedInUser();
+        await this.saveLocation(currentLatitude, currentLongitude);
+      });
+    }, 10000);
+  }
 
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-      
-   }
-  
-  
-   async getLoggedInUser(){
-    await AsyncStorage.getItem('user').then((value) => {
-      if(value){
-         
-         
-        this.setState({id:JSON.parse(value).id})
-      }else{
-         
+  async getLoggedInUser() {
+    await AsyncStorage.getItem('user').then(value => {
+      if (value) {
+        this.setState({id: JSON.parse(value).id});
+      } else {
       }
     });
   }
 
-     saveLocation(origin_latitude, origin_longitude){
+  saveLocation(origin_latitude, origin_longitude) {
     console.log(origin_latitude, origin_longitude);
-    if(this.state.id){
+    if (this.state.id) {
       fetch(`${SERVER_URL}/mobile/save_rider_location`, {
         method: 'POST',
         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            latitude: origin_latitude,
-            longitude: origin_longitude,
-            user_id: this.state.id, 
-        })
-      }).then((response) => response.json())
-          .then((res) => res)
-          .catch(e=> alert('This is a startup error'));
+          latitude: origin_latitude,
+          longitude: origin_longitude,
+          user_id: this.state.id,
+        }),
+      })
+        .then(response => response.json())
+        .then(res => res)
+        .catch(e => alert('This is a startup error'));
     }
-
   }
-  async componentDidMount(){
-     
-    await this.getLocation()
+  async componentDidMount() {
+    await this.getLocation();
   }
-  render () {
+  render() {
     return (
-        /*<Provider store={store}>*/
-          <AppContainer/>
-        /*</Provider>*/
-    )
+      // <Provider store={store}>
+      <AppContainer />
+
+      // </Provider>
+    );
   }
 }
